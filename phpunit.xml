@@ -1,0 +1,20 @@
+<phpunit
+        bootstrap="vendor/autoload.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">tests</directory>
+            <exclude>tests/TestCase.php</exclude>
+        </testsuite>
+    </testsuites>
+    <php>
+        <const name="API_KEY" value="key"/>
+        <const name="API_SECRET" value="secret"/>
+        <const name="API_PASSPHRASE" value="passphrase"/>
+    </php>
+</phpunit>
