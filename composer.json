@@ -1,5 +1,6 @@
 {
   "name": "kucoin/kucoin-php-sdk",
+  "version": "1.0.0",
   "type": "library",
   "license": "MIT",
   "description": "PHP SDK for KuCoin API",
