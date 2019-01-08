@@ -2,8 +2,6 @@
 
 namespace KuCoin\SDK;
 
-use KuCoin\SDK\PrivateApi\IAuth;
-
 class Auth implements IAuth
 {
     private $key;

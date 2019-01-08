@@ -1,6 +1,6 @@
 
 # PHP SDK for KuCoin API
-> The detailed document address [https://docs.kucoin.com](https://docs.kucoin.com).
+> The detailed document [https://docs.kucoin.com](https://docs.kucoin.com).
 
 ## Requirements
 
@@ -13,8 +13,7 @@
 > Install package via [Composer](https://getcomposer.org/).
 
 ```shell
-# TODO: Hide key & secret and then publish this package to github & packagist.
-composer require "kucoin/kucoin-php-sdk"
+composer require "kucoin/kucoin-php-sdk:~1.0.0"
 ```
 
 ## Usage

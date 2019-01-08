@@ -1,6 +1,6 @@
 <?php
 
-namespace KuCoin\SDK\PrivateApi;
+namespace KuCoin\SDK;
 
 interface IAuth
 {

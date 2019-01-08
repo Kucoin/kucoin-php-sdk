@@ -9,10 +9,10 @@
     "api",
     "sdk"
   ],
-  "homepage": "https://github.com/kucoin/kucoin-php-sdk",
+  "homepage": "https://github.com/Kucoin/kucoin-php-sdk",
   "support": {
-    "source": "https://github.com/kucoin/kucoin-php-sdk",
-    "issues": "https://github.com/kucoin/kucoin-php-sdk/issues"
+    "source": "https://github.com/Kucoin/kucoin-php-sdk",
+    "issues": "https://github.com/Kucoin/kucoin-php-sdk/issues"
   },
   "authors": [
     {
