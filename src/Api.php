@@ -6,7 +6,6 @@ use KuCoin\SDK\Http\GuzzleHttp;
 use KuCoin\SDK\Http\IHttp;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\Http\Response;
-use KuCoin\SDK\PrivateApi\IAuth;
 
 abstract class Api
 {
