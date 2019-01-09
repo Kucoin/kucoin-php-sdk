@@ -67,7 +67,7 @@ class Account extends KuCoinApi
      */
     public function getHistory($accountId, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/ledger', compact('accountId') + $pagination);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/ledgers', $pagination);
         return $response->getApiData();
     }
 
@@ -81,7 +81,7 @@ class Account extends KuCoinApi
      */
     public function getHolds($accountId, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/holds/' . $accountId, $pagination);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/holds', $pagination);
         return $response->getApiData();
     }
 
