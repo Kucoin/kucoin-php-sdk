@@ -20,9 +20,13 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 
 - Choose environment
 
+| Environment | BaseUri |
+| -------- | -------- |
+| Production `DEFAULT` | *https://openapi-v2.kucoin.com* |
+| SandBox | *https://openapi-sandbox.kucoin.com* |
+
 ```php
-// Set the base uri, default "https://openapi-v2.kucoin.com" for production environment.
-// KuCoinApi::setBaseUri('https://openapi-v2.kucoin.com');
+KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
 - API `without` authentication
