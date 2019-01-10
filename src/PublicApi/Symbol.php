@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Symbol
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/?json#symbols
+ * @see https://docs.kucoin.com/#symbols
  */
 class Symbol extends KuCoinApi
 {

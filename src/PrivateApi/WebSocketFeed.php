@@ -14,7 +14,7 @@ use Ratchet\RFC6455\Messaging\MessageInterface;
 /**
  * Class WebSocketFeed
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/?json#websocket-feed
+ * @see https://docs.kucoin.com/#websocket-feed
  */
 class WebSocketFeed extends KuCoinApi
 {

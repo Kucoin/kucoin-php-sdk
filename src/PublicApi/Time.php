@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Time
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/?json#time
+ * @see https://docs.kucoin.com/#time
  */
 class Time extends KuCoinApi
 {

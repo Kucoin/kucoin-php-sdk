@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Deposits
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/?json#deposits
+ * @see https://docs.kucoin.com/#deposits
  */
 class Deposits extends KuCoinApi
 {

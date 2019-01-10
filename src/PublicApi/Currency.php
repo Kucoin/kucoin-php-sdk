@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Currency
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/?json#currencies
+ * @see https://docs.kucoin.com/#currencies
  */
 class Currency extends KuCoinApi
 {

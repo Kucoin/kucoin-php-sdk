@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Withdrawal
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/?json#withdrawal
+ * @see https://docs.kucoin.com/#withdrawals
  */
 class Withdrawal extends KuCoinApi
 {
@@ -22,7 +22,7 @@ class Withdrawal extends KuCoinApi
      */
     public function getQuotas($currency)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/withdraw/quotas', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, '/api/v1/withdrawals/quotas', compact('currency'));
         return $response->getApiData();
     }
 
@@ -37,22 +37,7 @@ class Withdrawal extends KuCoinApi
      */
     public function getList(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/withdraws', $params + $pagination);
-        return $response->getApiData();
-    }
-
-
-    /**
-     * Get a withdrawal
-     * @param string $withdrawId
-     * @return array
-     * @throws \KuCoin\SDK\Exceptions\BusinessException
-     * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     */
-    public function getDetail($withdrawId)
-    {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/withdraws/' . $withdrawId);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/withdrawals', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -66,7 +51,7 @@ class Withdrawal extends KuCoinApi
      */
     public function apply(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/withdraws', $params);
+        $response = $this->call(Request::METHOD_POST, '/api/v1/withdrawals', $params);
         return $response->getApiData();
     }
 
@@ -80,21 +65,7 @@ class Withdrawal extends KuCoinApi
      */
     public function cancel($withdrawId)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/withdraws/' . $withdrawId);
-        return $response->getApiData();
-    }
-
-    /**
-     * Cancel some withdrawals
-     * @param array $params
-     * @return array
-     * @throws \KuCoin\SDK\Exceptions\BusinessException
-     * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     */
-    public function cancelMany(array $params)
-    {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/withdraws', $params);
+        $response = $this->call(Request::METHOD_DELETE, '/api/v1/withdrawals/' . $withdrawId);
         return $response->getApiData();
     }
 }

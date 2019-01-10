@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Fill
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/?json#fills
+ * @see https://docs.kucoin.com/#fills
  */
 class Fill extends KuCoinApi
 {

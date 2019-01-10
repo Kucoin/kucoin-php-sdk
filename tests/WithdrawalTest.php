@@ -111,36 +111,6 @@ class WithdrawalTest extends TestCase
 
     /**
      * @depends testNewWithdrawal
-     * @depends testGetList
-     * @param Withdrawal $api
-     * @param array $withdraws
-     * @throws \KuCoin\SDK\Exceptions\BusinessException
-     * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     */
-    public function testGetDetail(Withdrawal $api, array $withdraws)
-    {
-        if (isset($withdraws[0])) {
-            $item = $api->getDetail($withdraws[0]['id']);
-            var_dump($item);
-            $this->assertInternalType('array', $item);
-            $this->assertArrayHasKey('address', $item);
-            $this->assertArrayHasKey('amount', $item);
-            $this->assertArrayHasKey('createdAt', $item);
-            $this->assertArrayHasKey('currency', $item);
-            $this->assertArrayHasKey('currencyName', $item);
-            $this->assertArrayHasKey('fee', $item);
-            $this->assertArrayHasKey('id', $item);
-            $this->assertArrayHasKey('isInner', $item);
-            $this->assertArrayHasKey('remark', $item);
-            $this->assertArrayHasKey('status', $item);
-            $this->assertArrayHasKey('updatedAt', $item);
-            $this->assertArrayHasKey('walletTxId', $item);
-        }
-    }
-
-    /**
-     * @depends testNewWithdrawal
      * @param Withdrawal $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -149,24 +119,6 @@ class WithdrawalTest extends TestCase
     public function testCancel(Withdrawal $api)
     {
         $data = $api->cancel('5c1cb7bb03aa6774239b772c');
-        $this->assertInternalType('array', $data);
-        $this->assertArrayHasKey('cancelledWithdrawIds', $data);
-        var_dump($data);
-    }
-
-    /**
-     * @depends testNewWithdrawal
-     * @param Withdrawal $api
-     * @throws \KuCoin\SDK\Exceptions\BusinessException
-     * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     */
-    public function testCancelMany(Withdrawal $api)
-    {
-        $params = [
-            'currency' => 'BTC',
-        ];
-        $data = $api->cancelMany($params);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('cancelledWithdrawIds', $data);
         var_dump($data);

@@ -2,9 +2,13 @@
 include '../vendor/autoload.php';
 
 use KuCoin\SDK\Auth;
+use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\LoopInterface;
+
+// Set base uri for other environments, default https://openapi-v2.kucoin.com
+// KuCoinApi::setBaseUri('https://openapi-v2.kucoin.com');
 
 $auth = new Auth('key', 'secret', 'passphrase');
 $api = new WebSocketFeed($auth);

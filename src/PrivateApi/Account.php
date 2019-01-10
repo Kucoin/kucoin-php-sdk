@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Account
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/?json#accounts
+ * @see https://docs.kucoin.com/#accounts
  */
 class Account extends KuCoinApi
 {
