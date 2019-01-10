@@ -7,7 +7,7 @@ use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\LoopInterface;
 
-// Set base uri for other environments, default https://openapi-v2.kucoin.com
+// Set the base uri, default "https://openapi-v2.kucoin.com" for production environment.
 // KuCoinApi::setBaseUri('https://openapi-v2.kucoin.com');
 
 $auth = new Auth('key', 'secret', 'passphrase');

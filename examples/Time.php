@@ -4,7 +4,7 @@ include '../vendor/autoload.php';
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PublicApi\Time;
 
-// Set base uri for other environments, default https://openapi-v2.kucoin.com
+// Set the base uri, default "https://openapi-v2.kucoin.com" for production environment.
 // KuCoinApi::setBaseUri('https://openapi-v2.kucoin.com');
 
 $api = new Time();
