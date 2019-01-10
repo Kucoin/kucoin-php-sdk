@@ -14,7 +14,7 @@ $auth = new Auth('key', 'secret', 'passphrase');
 $api = new Account($auth);
 
 try {
-    $result = $api->getList('main');
+    $result = $api->getList(['type' => 'main']);
     var_dump($result);
 } catch (HttpException $e) {
     var_dump($e->getMessage());
