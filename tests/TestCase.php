@@ -2,6 +2,8 @@
 
 namespace KuCoin\SDK\Tests;
 
+use KuCoin\SDK\KuCoinApi;
+
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     protected $apiKey;
@@ -15,6 +17,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->apiKey = constant('API_KEY');
         $this->apiSecret = constant('API_SECRET');
         $this->apiPassPhrase = constant('API_PASSPHRASE');
+        KuCoinApi::setBaseUri(constant('API_BASE_URI'));
     }
 
     protected function assertPagination($data)
