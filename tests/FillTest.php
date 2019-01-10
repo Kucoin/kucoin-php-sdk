@@ -35,7 +35,7 @@ class FillTest extends TestCase
      */
     public function testGetList(Fill $api)
     {
-        $data = $api->getList('5c1b409c03aa6732f1f89ed3', 'BTC-USDT', ['pageSize' => 2]);
+        $data = $api->getList('5c1b409c03aa6732f1f89ed3', 'BTC-USDT', ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
             $this->assertArrayHasKey('symbol', $item);

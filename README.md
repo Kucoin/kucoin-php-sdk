@@ -95,7 +95,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 | API | Authentication |
 | -------- | -------- |
 | KuCoin\SDK\PrivateApi\Account | YES |
-| KuCoin\SDK\PrivateApi\Deposits | YES |
+| KuCoin\SDK\PrivateApi\Deposit | YES |
 | KuCoin\SDK\PrivateApi\Fill | YES |
 | KuCoin\SDK\PrivateApi\Order | YES |
 | KuCoin\SDK\PrivateApi\WebSocketFeed | YES |
