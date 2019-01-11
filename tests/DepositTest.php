@@ -53,9 +53,11 @@ class DepositTest extends TestCase
     public function testGetAddresses(Deposit $api)
     {
         $address = $api->getAddresses('EOS');
-        $this->assertInternalType('array', $address);
-        $this->assertArrayHasKey('address', $address);
-        $this->assertArrayHasKey('memo', $address);
+        if ($address !== null) {
+            $this->assertInternalType('array', $address);
+            $this->assertArrayHasKey('address', $address);
+            $this->assertArrayHasKey('memo', $address);
+        }
     }
 
     /**

@@ -29,7 +29,7 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 | *Sandbox* | https://openapi-sandbox.kucoin.com |
 
 ```php
-// Switch to the Sandbox environment
+// Switch to the sandbox environment
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
