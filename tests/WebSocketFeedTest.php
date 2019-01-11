@@ -82,6 +82,7 @@ class WebSocketFeedTest extends TestCase
     /**
      * @depends testNewWebSocketFeed
      * @param WebSocketFeed $api
+     * @throws \Exception|\Throwable
      */
     public function testSubscribePublicChannel(WebSocketFeed $api)
     {
@@ -117,6 +118,7 @@ class WebSocketFeedTest extends TestCase
     /**
      * @depends testNewWebSocketFeed
      * @param WebSocketFeed $api
+     * @throws \Exception|\Throwable
      */
     public function testSubscribePrivateChannel(WebSocketFeed $api)
     {

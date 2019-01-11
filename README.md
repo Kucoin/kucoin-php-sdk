@@ -30,7 +30,7 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
-- API `without` authentication
+- Example of API `without` authentication
 
 ```php
 use KuCoin\SDK\PublicApi\Time;
@@ -40,7 +40,7 @@ $timestamp = $api->timestamp();
 var_dump($timestamp);
 ```
 
-- API `with` authentication
+- Example of API `with` authentication
 
 ```php
 use KuCoin\SDK\Auth;
@@ -52,7 +52,7 @@ $auth = new Auth('key', 'secret', 'passphrase');
 $api = new Account($auth);
 
 try {
-    $result = $api->getList('main');
+    $result = $api->getList(['type' => 'main']);
     var_dump($result);
 } catch (HttpException $e) {
     var_dump($e->getMessage());
@@ -61,7 +61,7 @@ try {
 }
 ```
 
-- WebSocket Feed
+- Example of WebSocket feed
 
 ```php
 use KuCoin\SDK\Auth;
@@ -78,11 +78,6 @@ $channel = [
     'topic' => '/market/snapshot:BTC-USDT',
 ];
 
-$options = [
-    'tls' => [
-        'verify_peer' => false,
-    ],
-];
 $api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     // ping
     // $ws->send(json_encode($api->createPingMessage()));
@@ -92,7 +87,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
     // $loop->stop();
 }, function ($code, $reason) {
     echo "OnClose: {$code} {$reason}\n";
-}, $options);
+});
 ```
 
 - API list

@@ -94,12 +94,17 @@ class WebSocketFeed extends KuCoinApi
      * @param callable $onMessage
      * @param callable|null $onClose
      * @param array $options
+     * @throws \Exception|\Throwable
      */
     public function subscribeChannel($url, array $channel, callable $onMessage, callable $onClose = null, array $options = [])
     {
         $loop = Factory::create();
         $reactConnector = new SocketConnector($loop, $options);
         $connector = new RatchetConnector($loop, $reactConnector);
+        /**
+         * @var \Exception|\Throwable $exception
+         */
+        $exception = null;
         $connector($url)->then(function (WebSocket $ws) use ($channel, $onMessage, $onClose, $loop) {
             $ws->on('message', function (MessageInterface $msg) use ($ws, $channel, $onMessage, $loop) {
                 $msgStr = $msg->__toString();
@@ -132,11 +137,15 @@ class WebSocketFeed extends KuCoinApi
                     call_user_func($onClose, $code, $reason);
                 }
             });
-        }, function (\Exception $e) use ($loop) {
-            $loop->stop();
-            throw new BusinessException($e->getMessage(), $e->getCode(), $e);
+        }, function ($e) use ($loop, &$exception) {
+            $exception = $e;
         });
+
         $loop->run();
+
+        if ($exception !== null) {
+            throw $exception;
+        }
     }
 
     /**
@@ -146,6 +155,7 @@ class WebSocketFeed extends KuCoinApi
      * @param callable $onMessage
      * @param callable|null $onClose
      * @param array $options
+     * @throws \Exception|\Throwable
      */
     public function subscribePublicChannel(array $query, array $channel, callable $onMessage, callable $onClose = null, array $options = [])
     {
@@ -163,6 +173,7 @@ class WebSocketFeed extends KuCoinApi
      * @param callable $onMessage
      * @param callable|null $onClose
      * @param array $options
+     * @throws \Exception|\Throwable
      */
     public function subscribePrivateChannel(array $query, array $channel, callable $onMessage, callable $onClose = null, array $options = [])
     {
