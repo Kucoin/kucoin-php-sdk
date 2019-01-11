@@ -13,9 +13,9 @@
         </testsuite>
     </testsuites>
     <php>
-        <const name="API_KEY" value="key"/>
-        <const name="API_SECRET" value="secret"/>
-        <const name="API_PASSPHRASE" value="passphrase"/>
-        <const name="API_BASE_URI" value="https://openapi-v2.kucoin.com"/>
+        <const name="API_KEY" value="key" force="false"/>
+        <const name="API_SECRET" value="secret" force="false"/>
+        <const name="API_PASSPHRASE" value="passphrase" force="false"/>
+        <const name="API_BASE_URI" value="https://openapi-v2.kucoin.com" force="false"/>
     </php>
 </phpunit>
