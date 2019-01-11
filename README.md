@@ -1,8 +1,9 @@
 
 # PHP SDK for KuCoin API
-[![Build Status](https://travis-ci.org/hhxsv5/kucoin-php-sdk.svg?branch=master)](https://travis-ci.org/hhxsv5/kucoin-php-sdk)
-
 > The detailed document [https://docs.kucoin.com](https://docs.kucoin.com).
+
+[![Latest Version](https://img.shields.io/github/release/hhxsv5/kucoin-php-sdk.svg?style=flat-square)](https://github.com/hhxsv5/kucoin-php-sdk/releases)
+[![Build Status](https://travis-ci.org/hhxsv5/kucoin-php-sdk.svg?branch=master)](https://travis-ci.org/hhxsv5/kucoin-php-sdk)
 
 ## Requirements
 
