@@ -10,7 +10,7 @@ php:
   - '7.3'
 
 install:
-  - composer install --dev
+  - composer install
 
 before_script:
 

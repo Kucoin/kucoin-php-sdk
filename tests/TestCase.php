@@ -9,6 +9,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected $apiKey;
     protected $apiSecret;
     protected $apiPassPhrase;
+    protected $apiBaseUri;
 
     protected function setUp()
     {
@@ -17,7 +18,10 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->apiKey = getenv('API_KEY');
         $this->apiSecret = getenv('API_SECRET');
         $this->apiPassPhrase = getenv('API_PASSPHRASE');
-        KuCoinApi::setBaseUri(getenv('API_BASE_URI'));
+        $this->apiBaseUri = getenv('API_BASE_URI');
+        if ($this->apiBaseUri) {
+            KuCoinApi::setBaseUri($this->apiBaseUri);
+        }
     }
 
     protected function assertPagination($data)
