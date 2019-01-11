@@ -27,6 +27,5 @@ class TimeTest extends TestCase
     {
         $timestamp = $api->timestamp();
         $this->assertInternalType('int', $timestamp);
-        $this->assertLessThan(3000, abs($timestamp - intval(microtime(true) * 1000)));
     }
 }

@@ -118,7 +118,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('cancelExist', $item);
             $this->assertArrayHasKey('clientOid', $item);
         }
-        var_dump($data['items']);
         return $data['items'];
     }
 

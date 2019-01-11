@@ -43,5 +43,8 @@
   "config": {
     "optimize-autoloader": true,
     "secure-http": false
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit --configuration phpunit.xml --filter '/::test(New|Get)\\w+$/'"
   }
 }

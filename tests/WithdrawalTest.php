@@ -105,7 +105,6 @@ class WithdrawalTest extends TestCase
             $this->assertArrayHasKey('updatedAt', $item);
             $this->assertArrayHasKey('walletTxId', $item);
         }
-        var_dump($data['items']);
         return $data['items'];
     }
 

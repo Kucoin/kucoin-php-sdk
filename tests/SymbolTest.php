@@ -28,7 +28,6 @@ class SymbolTest extends TestCase
         $data = $api->getList();
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
-            var_dump($item);
             $this->assertArrayHasKey('quoteCurrency', $item);
             $this->assertArrayHasKey('symbol', $item);
             $this->assertArrayHasKey('quoteMaxSize', $item);
@@ -54,7 +53,6 @@ class SymbolTest extends TestCase
     public function testGetTicker(Symbol $api)
     {
         $data = $api->getTicker('BTC-USDT');
-        var_dump($data);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('size', $data);
@@ -75,7 +73,6 @@ class SymbolTest extends TestCase
     public function testGetPartOrderBook(Symbol $api)
     {
         $data = $api->getPartOrderBook('BTC-USDT');
-        var_dump($data);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
@@ -153,7 +150,6 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @todo 404
      * @depends testNewSymbol
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException

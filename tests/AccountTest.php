@@ -48,7 +48,6 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('holds', $item);
             $this->assertArrayHasKey('type', $item);
         }
-        var_dump($accounts);
         return $accounts;
     }
 
@@ -72,7 +71,6 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('holds', $item);
             $this->assertArrayHasKey('type', $item);
         }
-        var_dump($accounts);
         return $accounts;
     }
 
@@ -113,7 +111,6 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('balance', $account);
             $this->assertArrayHasKey('available', $account);
             $this->assertArrayHasKey('holds', $account);
-            var_dump($account);
         }
     }
 

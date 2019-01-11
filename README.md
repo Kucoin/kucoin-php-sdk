@@ -111,9 +111,10 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 
 
 ## Run tests
+> Modify your API key in `phpunit.xml` first.
 
 ```shell
-phpunit
+composer test
 ```
 
 ## License

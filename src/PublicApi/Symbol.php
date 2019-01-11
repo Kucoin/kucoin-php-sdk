@@ -123,11 +123,10 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     * @todo 404
      */
     public function get24HStats($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/stats', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/stats/' . $symbol);
         return $response->getApiData();
     }
 }
