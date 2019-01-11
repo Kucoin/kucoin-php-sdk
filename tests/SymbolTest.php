@@ -52,7 +52,7 @@ class SymbolTest extends TestCase
      */
     public function testGetTicker(Symbol $api)
     {
-        $data = $api->getTicker('BTC-USDT');
+        $data = $api->getTicker('ETH-BTC');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('size', $data);
@@ -72,7 +72,7 @@ class SymbolTest extends TestCase
      */
     public function testGetPartOrderBook(Symbol $api)
     {
-        $data = $api->getPartOrderBook('BTC-USDT');
+        $data = $api->getPartOrderBook('ETH-BTC');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
@@ -88,7 +88,7 @@ class SymbolTest extends TestCase
      */
     public function testGetAggregatedFullOrderBook(Symbol $api)
     {
-        $data = $api->getAggregatedFullOrderBook('BTC-USDT');
+        $data = $api->getAggregatedFullOrderBook('ETH-BTC');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
@@ -104,7 +104,7 @@ class SymbolTest extends TestCase
      */
     public function testGetAtomicFullOrderBook(Symbol $api)
     {
-        $data = $api->getAtomicFullOrderBook('BTC-USDT');
+        $data = $api->getAtomicFullOrderBook('ETH-BTC');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
@@ -121,7 +121,7 @@ class SymbolTest extends TestCase
      */
     public function testGetHistories(Symbol $api)
     {
-        $data = $api->getTradeHistories('BTC-USDT');
+        $data = $api->getTradeHistories('ETH-BTC');
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
             $this->assertArrayHasKey('sequence', $item);
@@ -141,7 +141,7 @@ class SymbolTest extends TestCase
      */
     public function testGetHistoricRates(Symbol $api)
     {
-        $data = $api->getHistoricRates('BTC-USDT', time() - 24 * 3600 * 7 * 3, time(), '8hour');
+        $data = $api->getHistoricRates('ETH-BTC', time() - 24 * 3600 * 7 * 3, time(), '8hour');
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
             //[ "time","open","close","high","low","volume","turnover"]
@@ -158,7 +158,7 @@ class SymbolTest extends TestCase
      */
     public function testGet24HStats(Symbol $api)
     {
-        $data = $api->get24HStats('BTC-USDT');
+        $data = $api->get24HStats('ETH-BTC');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('symbol', $data);
 //        $this->assertArrayHasKey('changeRate', $data);

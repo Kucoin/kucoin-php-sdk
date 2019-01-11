@@ -2,6 +2,9 @@
 # PHP SDK for KuCoin API
 > The detailed document [https://docs.kucoin.com](https://docs.kucoin.com).
 
+[![Latest Version](https://img.shields.io/github/release/Kucoin/kucoin-php-sdk.svg?style=flat-square)](https://github.com/Kucoin/kucoin-php-sdk/releases)
+[![Build Status](https://travis-ci.org/Kucoin/kucoin-php-sdk.svg?branch=master)](https://travis-ci.org/Kucoin/kucoin-php-sdk)
+
 ## Requirements
 
 | Dependency | Requirement |
@@ -26,7 +29,7 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 | *Sandbox* | https://openapi-sandbox.kucoin.com |
 
 ```php
-// Switch to the Sandbox environment
+// Switch to the sandbox environment
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
