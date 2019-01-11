@@ -1,5 +1,7 @@
 
 # PHP SDK for KuCoin API
+[![Build Status](https://travis-ci.org/hhxsv5/kucoin-php-sdk.svg?branch=master)](https://travis-ci.org/hhxsv5/kucoin-php-sdk)
+
 > The detailed document [https://docs.kucoin.com](https://docs.kucoin.com).
 
 ## Requirements
