@@ -28,7 +28,6 @@ class SymbolTest extends TestCase
         $data = $api->getList();
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
-            $this->assertArrayHasKey('id', $item);
             $this->assertArrayHasKey('quoteCurrency', $item);
             $this->assertArrayHasKey('symbol', $item);
             $this->assertArrayHasKey('quoteMaxSize', $item);
@@ -37,6 +36,7 @@ class SymbolTest extends TestCase
             $this->assertArrayHasKey('quoteMinSize', $item);
             $this->assertArrayHasKey('enableTrading', $item);
             $this->assertArrayHasKey('priceIncrement', $item);
+            $this->assertArrayHasKey('name', $item);
             $this->assertArrayHasKey('baseIncrement', $item);
             $this->assertArrayHasKey('baseMaxSize', $item);
             $this->assertArrayHasKey('baseCurrency', $item);
@@ -50,9 +50,9 @@ class SymbolTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetOrderBookLevel1(Symbol $api)
+    public function testGetTicker(Symbol $api)
     {
-        $data = $api->getOrderBookLevel1('BTC-USDT');
+        $data = $api->getTicker('BTC-USDT');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('size', $data);
@@ -70,9 +70,9 @@ class SymbolTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetOrderBookLevel2(Symbol $api)
+    public function testGetPartOrderBook(Symbol $api)
     {
-        $data = $api->getOrderBookLevel2('BTC-USDT');
+        $data = $api->getPartOrderBook('BTC-USDT');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
@@ -86,9 +86,25 @@ class SymbolTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetOrderBookLevel3(Symbol $api)
+    public function testGetAggregatedFullOrderBook(Symbol $api)
     {
-        $data = $api->getOrderBookLevel3('BTC-USDT');
+        $data = $api->getAggregatedFullOrderBook('BTC-USDT');
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('sequence', $data);
+        $this->assertArrayHasKey('bids', $data);
+        $this->assertArrayHasKey('asks', $data);
+    }
+
+    /**
+     * @depends testNewSymbol
+     * @param Symbol $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetAtomicFullOrderBook(Symbol $api)
+    {
+        $data = $api->getAtomicFullOrderBook('BTC-USDT');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
@@ -105,7 +121,7 @@ class SymbolTest extends TestCase
      */
     public function testGetHistories(Symbol $api)
     {
-        $data = $api->getHistories('BTC-USDT');
+        $data = $api->getTradeHistories('BTC-USDT');
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
             $this->assertArrayHasKey('sequence', $item);
@@ -131,5 +147,27 @@ class SymbolTest extends TestCase
             //[ "time","open","close","high","low","volume","turnover"]
             $this->assertCount(7, $item);
         }
+    }
+
+    /**
+     * @depends testNewSymbol
+     * @param Symbol $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGet24HStats(Symbol $api)
+    {
+        $data = $api->get24HStats('BTC-USDT');
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('symbol', $data);
+//        $this->assertArrayHasKey('changeRate', $data);
+//        $this->assertArrayHasKey('changePrice', $data);
+//        $this->assertArrayHasKey('open', $data);
+//        $this->assertArrayHasKey('close', $data);
+//        $this->assertArrayHasKey('high', $data);
+//        $this->assertArrayHasKey('low', $data);
+//        $this->assertArrayHasKey('vol', $data);
+//        $this->assertArrayHasKey('volValue', $data);
     }
 }

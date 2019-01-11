@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Order
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/?json#orders
+ * @see https://docs.kucoin.com/#orders
  */
 class Order extends KuCoinApi
 {

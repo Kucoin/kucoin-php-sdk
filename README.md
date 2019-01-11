@@ -18,7 +18,19 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 
 ## Usage
 
-- API `without` authentication
+- Choose environment
+
+| Environment | BaseUri |
+| -------- | -------- |
+| *Production* `DEFAULT` | https://openapi-v2.kucoin.com |
+| *Sandbox* | https://openapi-sandbox.kucoin.com |
+
+```php
+// Switch to the Sandbox environment
+KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
+```
+
+- Example of API `without` authentication
 
 ```php
 use KuCoin\SDK\PublicApi\Time;
@@ -28,7 +40,7 @@ $timestamp = $api->timestamp();
 var_dump($timestamp);
 ```
 
-- API `with` authentication
+- Example of API `with` authentication
 
 ```php
 use KuCoin\SDK\Auth;
@@ -40,7 +52,7 @@ $auth = new Auth('key', 'secret', 'passphrase');
 $api = new Account($auth);
 
 try {
-    $result = $api->getList('main');
+    $result = $api->getList(['type' => 'main']);
     var_dump($result);
 } catch (HttpException $e) {
     var_dump($e->getMessage());
@@ -49,7 +61,7 @@ try {
 }
 ```
 
-- WebSocket Feed
+- Example of WebSocket feed
 
 ```php
 use KuCoin\SDK\Auth;
@@ -66,11 +78,6 @@ $channel = [
     'topic' => '/market/snapshot:BTC-USDT',
 ];
 
-$options = [
-    'tls' => [
-        'verify_peer' => false,
-    ],
-];
 $api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     // ping
     // $ws->send(json_encode($api->createPingMessage()));
@@ -80,7 +87,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
     // $loop->stop();
 }, function ($code, $reason) {
     echo "OnClose: {$code} {$reason}\n";
-}, $options);
+});
 ```
 
 - API list
@@ -88,7 +95,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 | API | Authentication |
 | -------- | -------- |
 | KuCoin\SDK\PrivateApi\Account | YES |
-| KuCoin\SDK\PrivateApi\Deposits | YES |
+| KuCoin\SDK\PrivateApi\Deposit | YES |
 | KuCoin\SDK\PrivateApi\Fill | YES |
 | KuCoin\SDK\PrivateApi\Order | YES |
 | KuCoin\SDK\PrivateApi\WebSocketFeed | YES |
@@ -99,9 +106,10 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 
 
 ## Run tests
+> Modify your API key in `phpunit.xml` first.
 
 ```shell
-phpunit
+composer test
 ```
 
 ## License

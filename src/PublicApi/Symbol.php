@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Symbol
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/?json#symbols
+ * @see https://docs.kucoin.com/#symbols
  */
 class Symbol extends KuCoinApi
 {
@@ -26,63 +26,77 @@ class Symbol extends KuCoinApi
     }
 
     /**
-     * Get the level-1 data of order book
+     * Get ticker
      * @param string $symbol
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getOrderBookLevel1($symbol)
+    public function getTicker($symbol)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level1', compact('symbol'));
         return $response->getApiData();
     }
 
     /**
-     * Get the level-2 data of order book
+     * Get part order book(aggregated)
      * @param string $symbol
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getOrderBookLevel2($symbol)
+    public function getPartOrderBook($symbol)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_100', compact('symbol'));
+        return $response->getApiData();
+    }
+
+    /**
+     * Get full order book(aggregated)
+     * @param string $symbol
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getAggregatedFullOrderBook($symbol)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2', compact('symbol'));
         return $response->getApiData();
     }
 
     /**
-     * Get the level-3 data of order book
+     * Get full order book(atomic)
      * @param string $symbol
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getOrderBookLevel3($symbol)
+    public function getAtomicFullOrderBook($symbol)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level3', compact('symbol'));
         return $response->getApiData();
     }
 
     /**
-     * Get a list of the latest trades for a symbol
+     * Get trade histories
      * @param string $symbol
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getHistories($symbol)
+    public function getTradeHistories($symbol)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/market/histories', compact('symbol'));
         return $response->getApiData();
     }
 
     /**
-     * Get historic rates for a symbol
+     * Get historic rates
      * @param string $symbol
      * @param int $begin
      * @param int $end
@@ -99,6 +113,20 @@ class Symbol extends KuCoinApi
             '/api/v1/market/candles',
             compact('symbol', 'begin', 'end', 'type')
         );
+        return $response->getApiData();
+    }
+
+    /**
+     * Get 24hr stats
+     * @param string $symbol
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function get24HStats($symbol)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/stats/' . $symbol);
         return $response->getApiData();
     }
 }

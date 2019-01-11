@@ -38,7 +38,6 @@ class WebSocketFeedTest extends TestCase
     public function testGetPublicBullet(WebSocketFeed $api)
     {
         $data = $api->getPublicBullet();
-        var_dump($data);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('token', $data);
         $this->assertArrayHasKey('instanceServers', $data);
@@ -62,7 +61,6 @@ class WebSocketFeedTest extends TestCase
     public function testGetPrivateBullet(WebSocketFeed $api)
     {
         $data = $api->getPrivateBullet();
-        var_dump($data);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('token', $data);
         $this->assertArrayHasKey('instanceServers', $data);
@@ -84,6 +82,7 @@ class WebSocketFeedTest extends TestCase
     /**
      * @depends testNewWebSocketFeed
      * @param WebSocketFeed $api
+     * @throws \Exception|\Throwable
      */
     public function testSubscribePublicChannel(WebSocketFeed $api)
     {
@@ -119,6 +118,7 @@ class WebSocketFeedTest extends TestCase
     /**
      * @depends testNewWebSocketFeed
      * @param WebSocketFeed $api
+     * @throws \Exception|\Throwable
      */
     public function testSubscribePrivateChannel(WebSocketFeed $api)
     {

@@ -8,28 +8,13 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Account
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/?json#accounts
+ * @see https://docs.kucoin.com/#accounts
  */
 class Account extends KuCoinApi
 {
     /**
-     * Get a list of accounts
-     * @param string $type "main" or "trade"
-     * @return array
-     * @throws \KuCoin\SDK\Exceptions\BusinessException
-     * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     */
-    public function getList($type)
-    {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts', compact('type'));
-        return $response->getApiData();
-    }
-
-
-    /**
      * Create an account
-     * @param string $type
+     * @param string $type "main" or "trade"
      * @param string $currency
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -39,6 +24,20 @@ class Account extends KuCoinApi
     public function create($type, $currency)
     {
         $response = $this->call(Request::METHOD_POST, '/api/v1/accounts', compact('type', 'currency'));
+        return $response->getApiData();
+    }
+
+    /**
+     * Get a list of accounts
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getList(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts', $params);
         return $response->getApiData();
     }
 
@@ -59,15 +58,16 @@ class Account extends KuCoinApi
     /**
      * Get account history
      * @param string $accountId
+     * @param array $params
      * @param array $pagination
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getHistory($accountId, array $pagination = [])
+    public function getHistory($accountId, array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/ledger', compact('accountId') + $pagination);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/ledgers', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -81,7 +81,7 @@ class Account extends KuCoinApi
      */
     public function getHolds($accountId, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/holds/' . $accountId, $pagination);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/holds', $pagination);
         return $response->getApiData();
     }
 

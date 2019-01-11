@@ -3,9 +3,9 @@
 namespace KuCoin\SDK\Tests;
 
 use KuCoin\SDK\Auth;
-use KuCoin\SDK\PrivateApi\Deposits;
+use KuCoin\SDK\PrivateApi\Deposit;
 
-class DepositsTest extends TestCase
+class DepositTest extends TestCase
 {
     public function testNewAuth()
     {
@@ -17,82 +17,75 @@ class DepositsTest extends TestCase
     /**
      * @depends testNewAuth
      * @param Auth $auth
-     * @return Deposits
+     * @return Deposit
      */
     public function testNewDeposits(Auth $auth)
     {
-        $api = new Deposits($auth);
-        $this->assertInstanceOf(Deposits::class, $api);
+        $api = new Deposit($auth);
+        $this->assertInstanceOf(Deposit::class, $api);
         return $api;
     }
 
     /**
      * @depends testNewDeposits
-     * @param Deposits $api
+     * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testCreateAddress(Deposits $api)
+    public function testCreateAddress(Deposit $api)
     {
-        $address = $api->createAddress('EOS', false, 'test address');
+        $address = $api->createAddress('EOS');
         $this->assertInternalType('array', $address);
         $this->assertArrayHasKey('address', $address);
-        $this->assertArrayHasKey('currency', $address);
-        $this->assertArrayHasKey('remark', $address);
-        $this->assertArrayHasKey('addressId', $address);
+        $this->assertArrayHasKey('memo', $address);
     }
 
     /**
      * @depends testNewDeposits
-     * @param Deposits $api
+     * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetAddresses(Deposits $api)
+    public function testGetAddresses(Deposit $api)
     {
-        $address = $api->getAddresses('ETH');
+        $address = $api->getAddresses('EOS');
         $this->assertInternalType('array', $address);
         $this->assertArrayHasKey('address', $address);
-        $this->assertArrayHasKey('addressId', $address);
-        $this->assertArrayHasKey('currency', $address);
-        $this->assertArrayHasKey('isAutoTransfer', $address);
-        $this->assertArrayHasKey('remark', $address);
+        $this->assertArrayHasKey('memo', $address);
     }
 
     /**
      * @depends testNewDeposits
-     * @param Deposits $api
+     * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetDeposits(Deposits $api)
+    public function testGetDeposits(Deposit $api)
     {
         $params = [
-            'currency' => 'ETH',
-            'pageNum'  => 1,
-            'pageSize' => 10,
+            'currency'    => 'EOS',
+            'currentPage' => 1,
+            'pageSize'    => 10,
         ];
         $data = $api->getDeposits($params);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
             $this->assertArrayHasKey('address', $item);
+            $this->assertArrayHasKey('memo', $item);
             $this->assertArrayHasKey('amount', $item);
-            $this->assertArrayHasKey('confirmation', $item);
-            $this->assertArrayHasKey('createdAt', $item);
-            $this->assertArrayHasKey('currency', $item);
-            $this->assertArrayHasKey('currencyName', $item);
             $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('currency', $item);
             $this->assertArrayHasKey('isInner', $item);
-            $this->assertArrayHasKey('remark', $item);
-            $this->assertArrayHasKey('status', $item);
-            $this->assertArrayHasKey('updatedAt', $item);
             $this->assertArrayHasKey('walletTxId', $item);
+            $this->assertArrayHasKey('status', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('updatedAt', $item);
         }
     }
 }

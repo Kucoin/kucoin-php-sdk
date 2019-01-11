@@ -38,16 +38,16 @@ class AccountTest extends TestCase
      */
     public function testGetMainList(Account $api)
     {
-        $accounts = $api->getList('main');
+        $accounts = $api->getList(['type' => 'main']);
         $this->assertInternalType('array', $accounts);
         foreach ($accounts as $item) {
             $this->assertArrayHasKey('id', $item);
             $this->assertArrayHasKey('currency', $item);
-            $this->assertArrayHasKey('totalBalance', $item);
-            $this->assertArrayHasKey('availableBalance', $item);
-            $this->assertArrayHasKey('holdBalance', $item);
+            $this->assertArrayHasKey('balance', $item);
+            $this->assertArrayHasKey('available', $item);
+            $this->assertArrayHasKey('holds', $item);
+            $this->assertArrayHasKey('type', $item);
         }
-        var_dump($accounts);
         return $accounts;
     }
 
@@ -61,16 +61,16 @@ class AccountTest extends TestCase
      */
     public function testGetTradeList(Account $api)
     {
-        $accounts = $api->getList('trade');
+        $accounts = $api->getList(['type' => 'trade']);
         $this->assertInternalType('array', $accounts);
         foreach ($accounts as $item) {
             $this->assertArrayHasKey('id', $item);
             $this->assertArrayHasKey('currency', $item);
-            $this->assertArrayHasKey('totalBalance', $item);
-            $this->assertArrayHasKey('availableBalance', $item);
-            $this->assertArrayHasKey('holdBalance', $item);
+            $this->assertArrayHasKey('balance', $item);
+            $this->assertArrayHasKey('available', $item);
+            $this->assertArrayHasKey('holds', $item);
+            $this->assertArrayHasKey('type', $item);
         }
-        var_dump($accounts);
         return $accounts;
     }
 
@@ -108,9 +108,9 @@ class AccountTest extends TestCase
         if (isset($accounts[0])) {
             $account = $api->getDetail($accounts[0]['id']);
             $this->assertArrayHasKey('currency', $account);
-            $this->assertArrayHasKey('totalBalance', $account);
-            $this->assertArrayHasKey('availableBalance', $account);
-            $this->assertArrayHasKey('holdBalance', $account);
+            $this->assertArrayHasKey('balance', $account);
+            $this->assertArrayHasKey('available', $account);
+            $this->assertArrayHasKey('holds', $account);
         }
     }
 
@@ -126,7 +126,7 @@ class AccountTest extends TestCase
     public function testGetHistory(Account $api, array $accounts)
     {
         if (isset($accounts[0])) {
-            $data = $api->getHistory($accounts[0]['id'], ['limit' => 10]);
+            $data = $api->getHistory($accounts[0]['id'], ['currentPage' => 1, 'pageSize' => 10]);
             $this->assertPagination($data);
             foreach ($data['items'] as $item) {
                 $this->assertArrayHasKey('currency', $item);
@@ -150,8 +150,8 @@ class AccountTest extends TestCase
      */
     public function testInnerTransfer(Account $api)
     {
-        $main = $api->getList('main');
-        $trade = $api->getList('trade');
+        $main = $api->getList(['type' => 'main']);
+        $trade = $api->getList(['type' => 'trade']);
 
         $mainUsdt = null;
         foreach ($main as $item) {

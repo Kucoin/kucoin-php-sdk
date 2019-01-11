@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Currency
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/?json#currencies
+ * @see https://docs.kucoin.com/#currencies
  */
 class Currency extends KuCoinApi
 {
@@ -35,7 +35,7 @@ class Currency extends KuCoinApi
      */
     public function getDetail($currencyId)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/currency/' . $currencyId);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/currencies/' . $currencyId);
         return $response->getApiData();
     }
 }
