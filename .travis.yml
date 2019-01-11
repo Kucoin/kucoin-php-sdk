@@ -12,6 +12,4 @@ php:
 install:
   - composer install
 
-before_script:
-
 script: composer test
