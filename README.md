@@ -23,10 +23,10 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 | Environment | BaseUri |
 | -------- | -------- |
 | *Production* `DEFAULT` | https://openapi-v2.kucoin.com |
-| *SandBox* | https://openapi-sandbox.kucoin.com |
+| *Sandbox* | https://openapi-sandbox.kucoin.com |
 
 ```php
-// Switch to the SandBox environment
+// Switch to the Sandbox environment
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
