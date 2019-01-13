@@ -12,4 +12,8 @@ php:
 install:
   - composer install
 
-script: composer test
+script:
+  - composer test
+
+after_script:
+  - composer coverage
