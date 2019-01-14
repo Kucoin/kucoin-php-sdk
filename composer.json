@@ -45,7 +45,6 @@
     "secure-http": false
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit -c phpunit.xml --filter '/::test(New|Get)\\w+$/' --verbose",
-    "coverage": "./vendor/bin/phpunit -c phpunit.xml --filter '/::test(New|Get)\\w+$/' --coverage-text --verbose"
+    "test": "./vendor/bin/phpunit -c phpunit.xml --filter '/::test(New|Get)\\w+$/' --coverage-text --verbose"
   }
 }
