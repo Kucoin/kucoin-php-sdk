@@ -36,7 +36,7 @@ class DepositTest extends TestCase
      */
     public function testCreateAddress(Deposit $api)
     {
-        $address = $api->createAddress('EOS');
+        $address = $api->createAddress('BTC');
         $this->assertInternalType('array', $address);
         $this->assertArrayHasKey('address', $address);
         $this->assertArrayHasKey('memo', $address);
@@ -52,7 +52,7 @@ class DepositTest extends TestCase
      */
     public function testGetAddresses(Deposit $api)
     {
-        $address = $api->getAddresses('EOS');
+        $address = $api->getAddresses('BTC');
         if ($address !== null) {
             $this->assertInternalType('array', $address);
             $this->assertArrayHasKey('address', $address);
@@ -71,7 +71,7 @@ class DepositTest extends TestCase
     public function testGetDeposits(Deposit $api)
     {
         $params = [
-            'currency'    => 'EOS',
+            'currency'    => 'BTC',
             'currentPage' => 1,
             'pageSize'    => 10,
         ];
