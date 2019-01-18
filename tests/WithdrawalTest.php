@@ -92,18 +92,17 @@ class WithdrawalTest extends TestCase
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
             $this->assertInternalType('array', $item);
-            $this->assertArrayHasKey('address', $item);
-            $this->assertArrayHasKey('amount', $item);
-            $this->assertArrayHasKey('createdAt', $item);
-            $this->assertArrayHasKey('currency', $item);
-            $this->assertArrayHasKey('currencyName', $item);
-            $this->assertArrayHasKey('fee', $item);
             $this->assertArrayHasKey('id', $item);
-            $this->assertArrayHasKey('isInner', $item);
-            $this->assertArrayHasKey('remark', $item);
-            $this->assertArrayHasKey('status', $item);
-            $this->assertArrayHasKey('updatedAt', $item);
+            $this->assertArrayHasKey('address', $item);
+            $this->assertArrayHasKey('memo', $item);
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('fee', $item);
             $this->assertArrayHasKey('walletTxId', $item);
+            $this->assertArrayHasKey('isInner', $item);
+            $this->assertArrayHasKey('status', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('updatedAt', $item);
         }
         return $data['items'];
     }
