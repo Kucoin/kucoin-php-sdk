@@ -27,7 +27,7 @@ class WebSocketFeed extends KuCoinApi
      */
     public function getPublicBullet()
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/bullet-public?source=api');
+        $response = $this->call(Request::METHOD_POST, '/api/v1/bullet-public');
         return $response->getApiData();
     }
 
@@ -40,7 +40,7 @@ class WebSocketFeed extends KuCoinApi
      */
     public function getPrivateBullet()
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/bullet-private?source=api');
+        $response = $this->call(Request::METHOD_POST, '/api/v1/bullet-private');
         return $response->getApiData();
     }
 
