@@ -123,8 +123,7 @@ class WebSocketFeedTest extends TestCase
     public function testSubscribePrivateChannel(WebSocketFeed $api)
     {
         $query = [
-            'connectId'         => uniqid('', true),
-            'acceptUserMessage' => true,
+            'connectId' => uniqid('', true),
         ];
         $channel = [
             'type'           => 'subscribe',

@@ -40,11 +40,10 @@ class WithdrawalTest extends TestCase
         $this->assertArrayHasKey('limitBTCAmount', $data);
         $this->assertArrayHasKey('withdrawMinFee', $data);
         $this->assertArrayHasKey('innerWithdrawMinFee', $data);
+        $this->assertArrayHasKey('usedBTCAmount', $data);
         $this->assertArrayHasKey('availableAmount', $data);
         $this->assertArrayHasKey('remainAmount', $data);
-//        $this->assertArrayHasKey('usedAmount', $data);
         $this->assertArrayHasKey('precision', $data);
-//        $this->assertArrayHasKey('limitAmount', $data);
         $this->assertArrayHasKey('currency', $data);
         $this->assertArrayHasKey('isWithdrawEnabled', $data);
         $this->assertArrayHasKey('withdrawMinSize', $data);
