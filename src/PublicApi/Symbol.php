@@ -126,7 +126,7 @@ class Symbol extends KuCoinApi
      */
     public function get24HStats($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/stats/' . $symbol);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/stats', compact('symbol'));
         return $response->getApiData();
     }
 
