@@ -170,4 +170,18 @@ class SymbolTest extends TestCase
 //        $this->assertArrayHasKey('vol', $data);
 //        $this->assertArrayHasKey('volValue', $data);
     }
+
+    /**
+     * @depends testNewSymbol
+     * @param Symbol $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarkets(Symbol $api)
+    {
+        $data = $api->getMarkets();
+        $this->assertInternalType('array', $data);
+        $this->assertNotEmpty($data, 'Empty markets');
+    }
 }
