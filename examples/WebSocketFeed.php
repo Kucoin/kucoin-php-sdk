@@ -28,7 +28,6 @@ $options = [
 ];
 $api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     var_dump($message);
-    
     // Stop loop
     // $loop->stop();
 }, function ($code, $reason) {
