@@ -90,8 +90,7 @@ class WebSocketFeedTest extends TestCase
             'connectId' => uniqid('', true),
         ];
         $channel = [
-            'type'  => 'subscribe',
-            'topic' => '/market/snapshot:BTC-USDT',
+            'topic' => '/market/ticker:KCS-BTC',
             //'response' => true,
         ];
 
@@ -104,11 +103,11 @@ class WebSocketFeedTest extends TestCase
             $this->assertInternalType('array', $message);
             $this->assertArrayHasKey('type', $message);
             $this->assertEquals('message', $message['type']);
-            // ping
-            //$ws->send(json_encode($api->createPingMessage()));
-            var_dump($message);
 
-            // stop for phpunit
+            // Dynamic output
+            fputs(STDIN, print_r($message, true));
+
+            // Stop for phpunit
             $loop->stop();
         }, function ($code, $reason) {
             echo "OnClose: {$code} {$reason}\n";
@@ -123,14 +122,11 @@ class WebSocketFeedTest extends TestCase
     public function testSubscribePrivateChannel(WebSocketFeed $api)
     {
         $query = [
-            'connectId'         => uniqid('', true),
-            'acceptUserMessage' => true,
+            'connectId' => uniqid('', true),
         ];
         $channel = [
-            'type'           => 'subscribe',
-            'topic'          => '/market/ticker:BTC-USDT',
-            'privateChannel' => true,
-            //'response'       => true,
+            'topic' => '/market/match:KCS-BTC',
+            //'response' => true,
         ];
 
         $options = [
@@ -142,11 +138,10 @@ class WebSocketFeedTest extends TestCase
             $this->assertInternalType('array', $message);
             $this->assertArrayHasKey('type', $message);
             $this->assertEquals('message', $message['type']);
-            var_dump($message);
-            // ping
-            //$ws->send(json_encode($api->createPingMessage()));
+            // Dynamic output
+            fputs(STDIN, print_r($message, true));
 
-            // stop for phpunit
+            // Stop for phpunit
             $loop->stop();
         }, function ($code, $reason) {
             echo "OnClose: {$code} {$reason}\n";
