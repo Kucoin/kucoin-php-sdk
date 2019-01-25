@@ -77,16 +77,14 @@ $api = new WebSocketFeed($auth);
 
 $query = ['connectId' => uniqid('', true)];
 $channel = [
-    'type'  => 'subscribe',
-    'topic' => '/market/snapshot:BTC-USDT',
+    'topic' => '/market/ticker:KCS-BTC',
+    //'response' => true,
 ];
 
 $api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
-    // ping
-    // $ws->send(json_encode($api->createPingMessage()));
     var_dump($message);
 
-    // stop loop
+    // Stop loop
     // $loop->stop();
 }, function ($code, $reason) {
     echo "OnClose: {$code} {$reason}\n";
