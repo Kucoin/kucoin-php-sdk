@@ -98,7 +98,7 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('feeCurrency', $item);
             $this->assertArrayHasKey('remark', $item);
             $this->assertArrayHasKey('type', $item);
-            $this->assertArrayHasKey('iceberge', $item);
+            $this->assertArrayHasKey('iceberg', $item);
             $this->assertArrayHasKey('createdAt', $item);
             $this->assertArrayHasKey('visibleSize', $item);
             $this->assertArrayHasKey('price', $item);

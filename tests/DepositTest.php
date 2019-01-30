@@ -3,6 +3,7 @@
 namespace KuCoin\SDK\Tests;
 
 use KuCoin\SDK\Auth;
+use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\PrivateApi\Deposit;
 
 class DepositTest extends TestCase
@@ -52,11 +53,19 @@ class DepositTest extends TestCase
      */
     public function testGetAddresses(Deposit $api)
     {
-        $address = $api->getAddresses('BTC');
-        if ($address !== null) {
-            $this->assertInternalType('array', $address);
-            $this->assertArrayHasKey('address', $address);
-            $this->assertArrayHasKey('memo', $address);
+        try {
+            $address = $api->getAddresses('BTC');
+            if ($address !== null) {
+                $this->assertInternalType('array', $address);
+                $this->assertArrayHasKey('address', $address);
+                $this->assertArrayHasKey('memo', $address);
+            }
+        } catch (BusinessException $e) {
+            // deposit.disabled
+            if ($e->getResponse()->getApiCode() == '260200') {
+                return;
+            }
+            throw $e;
         }
     }
 

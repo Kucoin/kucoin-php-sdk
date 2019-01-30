@@ -139,7 +139,7 @@ class Symbol extends KuCoinApi
      */
     public function getMarkets()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market');
+        $response = $this->call(Request::METHOD_GET, '/api/v1/markets');
         return $response->getApiData();
     }
 }

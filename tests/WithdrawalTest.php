@@ -84,8 +84,8 @@ class WithdrawalTest extends TestCase
             'currency' => 'BTC',
         ];
         $pagination = [
-            'pageNum'  => 1,
-            'pageSize' => 5,
+            'currentPage' => 1,
+            'pageSize'    => 10,
         ];
         $data = $api->getList($params, $pagination);
         $this->assertPagination($data);
