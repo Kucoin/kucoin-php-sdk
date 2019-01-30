@@ -66,7 +66,7 @@ class ApiResponse
                 $this->httpResponse->getStatusCode(),
                 $this->httpResponse->getBody()
             );
-            $exception = new HttpException($msg);
+            $exception = new HttpException($msg, $this->httpResponse->getStatusCode());
             $exception->setRequest($this->httpResponse->getRequest());
             $exception->setResponse($this->httpResponse);
             throw $exception;
@@ -83,7 +83,7 @@ class ApiResponse
                 $this->getApiMessage(),
                 $this->httpResponse->getBody()
             );
-            $exception = new BusinessException($msg);
+            $exception = new BusinessException($msg, is_numeric($this->getApiCode()) ? $this->getApiCode() : 110);
             $exception->setResponse($this);
             throw $exception;
         }
