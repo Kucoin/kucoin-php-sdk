@@ -15,6 +15,11 @@ abstract class Api
     protected static $baseUri = 'https://openapi-v2.kucoin.com';
 
     /**
+     * @var bool
+     */
+    protected static $skipVerifyTls = false;
+
+    /**
      * @var IAuth $auth
      */
     protected $auth;
@@ -27,7 +32,7 @@ abstract class Api
     public function __construct(IAuth $auth = null, IHttp $http = null)
     {
         if (is_null($http)) {
-            $http = new GuzzleHttp();
+            $http = new GuzzleHttp($this);
         }
         $this->auth = $auth;
         $this->http = $http;
@@ -47,6 +52,22 @@ abstract class Api
     public static function setBaseUri($baseUri)
     {
         static::$baseUri = $baseUri;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isSkipVerifyTls()
+    {
+        return static::$skipVerifyTls;
+    }
+
+    /**
+     * @param bool $skipVerifyTls
+     */
+    public static function setSkipVerifyTls($skipVerifyTls)
+    {
+        static::$skipVerifyTls = $skipVerifyTls;
     }
 
     /**

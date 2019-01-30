@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\InvalidApiUriException;
 
-class GuzzleHttp implements IHttp
+class GuzzleHttp extends BaseHttp
 {
     protected static $clients = [];
 
@@ -46,6 +46,7 @@ class GuzzleHttp implements IHttp
             'timeout'         => $timeout,
             'http_errors'     => false,
             'connect_timeout' => 30,
+            'verify'          => !$this->api->isSkipVerifyTls(),
         ];
         $client = static::getClient($config);
         $options = [
