@@ -10,6 +10,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected $apiSecret;
     protected $apiPassPhrase;
     protected $apiBaseUri;
+    protected $apiSkipVerifyTls;
 
     protected function setUp()
     {
@@ -19,6 +20,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->apiSecret = getenv('API_SECRET');
         $this->apiPassPhrase = getenv('API_PASSPHRASE');
         $this->apiBaseUri = getenv('API_BASE_URI');
+        $this->apiSkipVerifyTls = (bool)getenv('API_SKIP_VERIFY_TLS');
+        KuCoinApi::setSkipVerifyTls($this->apiSkipVerifyTls);
         if ($this->apiBaseUri) {
             KuCoinApi::setBaseUri($this->apiBaseUri);
         }

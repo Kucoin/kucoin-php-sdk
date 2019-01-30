@@ -95,9 +95,9 @@ class WebSocketFeedTest extends TestCase
         ];
 
         $options = [
-            'tls' => [
-                'verify_peer' => false,
-            ],
+//            'tls' => [
+//                'verify_peer' => false,
+//            ],
         ];
         $api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
             $this->assertInternalType('array', $message);
@@ -130,9 +130,9 @@ class WebSocketFeedTest extends TestCase
         ];
 
         $options = [
-            'tls' => [
-                'verify_peer' => false,
-            ],
+//            'tls' => [
+//                'verify_peer' => false,
+//            ],
         ];
         $api->subscribePrivateChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
             $this->assertInternalType('array', $message);

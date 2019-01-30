@@ -8,7 +8,6 @@ use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\Factory;
-use React\EventLoop\TimerInterface;
 use React\Socket\Connector as SocketConnector;
 use Ratchet\Client\Connector as RatchetConnector;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -101,6 +100,9 @@ class WebSocketFeed extends KuCoinApi
     public function subscribeChannel(array $server, array $channel, callable $onMessage, callable $onClose = null, array $options = [])
     {
         $channel['type'] = 'subscribe';
+        if (!isset($options['tls']['verify_peer'])) {
+            $options['tls']['verify_peer'] = !static::isSkipVerifyTls();
+        }
 
         $loop = Factory::create();
         $reactConnector = new SocketConnector($loop, $options);
