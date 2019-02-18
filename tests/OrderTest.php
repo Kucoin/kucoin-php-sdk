@@ -200,8 +200,8 @@ class OrderTest extends TestCase
      */
     public function testGetLimitFills(Order $api)
     {
-        $fills = $api->getLimitFills();
-        foreach ($fills as $item) {
+        $items = $api->getLimitFills();
+        foreach ($items as $item) {
             $this->assertArrayHasKey('symbol', $item);
             $this->assertArrayHasKey('hidden', $item);
             $this->assertArrayHasKey('opType', $item);
@@ -241,8 +241,8 @@ class OrderTest extends TestCase
      */
     public function testGetLimitOrders(Order $api)
     {
-        $fills = $api->getLimitOrders();
-        foreach ($fills as $item) {
+        $items = $api->getLimitOrders();
+        foreach ($items as $item) {
             $this->assertArrayHasKey('symbol', $item);
             $this->assertArrayHasKey('hidden', $item);
             $this->assertArrayHasKey('opType', $item);
