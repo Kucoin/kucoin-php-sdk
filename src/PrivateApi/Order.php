@@ -84,4 +84,30 @@ class Order extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/orders/' . $orderId, []);
         return $response->getApiData();
     }
+
+    /**
+     * Get the limited fills of the latest transactions within 24 hours.
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getLimitFills()
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/limit/fills');
+        return $response->getApiData();
+    }
+
+    /**
+     * Get the limited orders of the latest transactions within 24 hours.
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getLimitOrders()
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/limit/orders');
+        return $response->getApiData();
+    }
 }
