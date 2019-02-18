@@ -87,7 +87,7 @@ class OrderTest extends TestCase
      */
     public function testGetList(Order $api)
     {
-        $data = $api->getList(null, 'BTC-USDT', ['currentPage' => 1, 'pageSize' => 10]);
+        $data = $api->getList(['symbol' => 'BTC-USDT'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
             $this->assertArrayHasKey('symbol', $item);
