@@ -190,4 +190,86 @@ class OrderTest extends TestCase
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('cancelledOrderIds', $result);
     }
+
+    /**
+     * @depends testNewOrder
+     * @param Order $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetLimitFills(Order $api)
+    {
+        $fills = $api->getLimitFills();
+        foreach ($fills as $item) {
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('hidden', $item);
+            $this->assertArrayHasKey('opType', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('channel', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('remark', $item);
+            $this->assertArrayHasKey('type', $item);
+            $this->assertArrayHasKey('iceberg', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('visibleSize', $item);
+            $this->assertArrayHasKey('price', $item);
+            $this->assertArrayHasKey('stopTriggered', $item);
+            $this->assertArrayHasKey('funds', $item);
+            $this->assertArrayHasKey('id', $item);
+            $this->assertArrayHasKey('timeInForce', $item);
+            $this->assertArrayHasKey('side', $item);
+            $this->assertArrayHasKey('dealSize', $item);
+            $this->assertArrayHasKey('cancelAfter', $item);
+            $this->assertArrayHasKey('dealFunds', $item);
+            $this->assertArrayHasKey('stp', $item);
+            $this->assertArrayHasKey('postOnly', $item);
+            $this->assertArrayHasKey('stopPrice', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('stop', $item);
+            $this->assertArrayHasKey('cancelExist', $item);
+            $this->assertArrayHasKey('clientOid', $item);
+        }
+    }
+
+    /**
+     * @depends testNewOrder
+     * @param Order $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetLimitOrders(Order $api)
+    {
+        $fills = $api->getLimitOrders();
+        foreach ($fills as $item) {
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('hidden', $item);
+            $this->assertArrayHasKey('opType', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('channel', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('remark', $item);
+            $this->assertArrayHasKey('type', $item);
+            $this->assertArrayHasKey('iceberg', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('visibleSize', $item);
+            $this->assertArrayHasKey('price', $item);
+            $this->assertArrayHasKey('stopTriggered', $item);
+            $this->assertArrayHasKey('funds', $item);
+            $this->assertArrayHasKey('id', $item);
+            $this->assertArrayHasKey('timeInForce', $item);
+            $this->assertArrayHasKey('side', $item);
+            $this->assertArrayHasKey('dealSize', $item);
+            $this->assertArrayHasKey('cancelAfter', $item);
+            $this->assertArrayHasKey('dealFunds', $item);
+            $this->assertArrayHasKey('stp', $item);
+            $this->assertArrayHasKey('postOnly', $item);
+            $this->assertArrayHasKey('stopPrice', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('stop', $item);
+            $this->assertArrayHasKey('cancelExist', $item);
+            $this->assertArrayHasKey('clientOid', $item);
+        }
+    }
 }
