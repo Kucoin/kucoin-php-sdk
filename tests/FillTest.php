@@ -57,4 +57,35 @@ class FillTest extends TestCase
             $this->assertArrayHasKey('tradeId', $item);
         }
     }
+
+    /**
+     * @depends testNewFill
+     * @param Fill $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetRecentList(Fill $api)
+    {
+        $items = $api->getRecentList();
+        foreach ($items as $item) {
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('side', $item);
+            $this->assertArrayHasKey('forceTaker', $item);
+            $this->assertArrayHasKey('orderId', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('liquidity', $item);
+            $this->assertArrayHasKey('type', $item);
+            $this->assertArrayHasKey('feeRate', $item);
+            $this->assertArrayHasKey('counterOrderId', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('displayType', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('stop', $item);
+            $this->assertArrayHasKey('price', $item);
+            $this->assertArrayHasKey('funds', $item);
+            $this->assertArrayHasKey('tradeId', $item);
+        }
+    }
 }
