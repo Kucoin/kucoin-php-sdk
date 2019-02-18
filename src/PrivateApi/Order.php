@@ -57,17 +57,16 @@ class Order extends KuCoinApi
 
     /**
      * List orders
-     * @param string|null $status
-     * @param string|null $symbol
+     * @param array $params
      * @param array $pagination
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getList($status = null, $symbol = null, array $pagination = [])
+    public function getList(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/orders', compact('status', 'symbol') + $pagination);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/orders', $params + $pagination);
         return $response->getApiData();
     }
 
