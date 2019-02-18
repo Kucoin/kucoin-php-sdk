@@ -98,8 +98,11 @@ class Request
 
         // GET/DELETE: move parameters into query
         if ($this->isGetOrDeleteMethod() && !empty($this->params)) {
-            $this->uri .= strpos($this->uri, '?') === false ? '?' : '&';
-            $this->uri .= http_build_query($this->params);
+            $query = http_build_query($this->params);
+            if ($query !== '') {
+                $this->uri .= strpos($this->uri, '?') === false ? '?' : '&';
+                $this->uri .= $query;
+            }
         }
 
         $url = $this->baseUri . $this->uri;
