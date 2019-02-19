@@ -40,6 +40,19 @@ class Symbol extends KuCoinApi
     }
 
     /**
+     * Get all tickers
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getAllTickers()
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/allTickers');
+        return $response->getApiData();
+    }
+
+    /**
      * Get part order book(aggregated)
      * @param string $symbol
      * @return array

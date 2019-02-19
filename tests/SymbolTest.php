@@ -70,6 +70,30 @@ class SymbolTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
+    public function testGetAllTickers(Symbol $api)
+    {
+        $tickers = $api->getAllTickers();
+        $this->assertInternalType('array', $tickers);
+        foreach ($tickers as $ticker) {
+            $this->assertArrayHasKey('symbol', $ticker);
+            $this->assertArrayHasKey('high', $ticker);
+            $this->assertArrayHasKey('vol', $ticker);
+            $this->assertArrayHasKey('low', $ticker);
+//            $this->assertArrayHasKey('changePrice', $ticker);
+            $this->assertArrayHasKey('changeRate', $ticker);
+            $this->assertArrayHasKey('close', $ticker);
+            $this->assertArrayHasKey('volValue', $ticker);
+            $this->assertArrayHasKey('open', $ticker);
+        }
+    }
+
+    /**
+     * @depends testNewSymbol
+     * @param Symbol $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
     public function testGetPartOrderBook(Symbol $api)
     {
         $data = $api->getPartOrderBook('ETH-BTC');
