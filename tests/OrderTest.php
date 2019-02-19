@@ -96,7 +96,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('fee', $item);
             $this->assertArrayHasKey('channel', $item);
             $this->assertArrayHasKey('feeCurrency', $item);
-            $this->assertArrayHasKey('remark', $item);
             $this->assertArrayHasKey('type', $item);
             $this->assertArrayHasKey('iceberg', $item);
             $this->assertArrayHasKey('createdAt', $item);
@@ -116,7 +115,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('size', $item);
             $this->assertArrayHasKey('stop', $item);
             $this->assertArrayHasKey('cancelExist', $item);
-            $this->assertArrayHasKey('clientOid', $item);
         }
         return $data['items'];
     }
@@ -140,7 +138,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('fee', $order);
             $this->assertArrayHasKey('channel', $order);
             $this->assertArrayHasKey('feeCurrency', $order);
-            $this->assertArrayHasKey('remark', $order);
             $this->assertArrayHasKey('type', $order);
             $this->assertArrayHasKey('iceberg', $order);
             $this->assertArrayHasKey('createdAt', $order);
@@ -160,7 +157,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('size', $order);
             $this->assertArrayHasKey('stop', $order);
             $this->assertArrayHasKey('cancelExist', $order);
-            $this->assertArrayHasKey('clientOid', $order);
         }
     }
 
@@ -208,7 +204,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('fee', $item);
             $this->assertArrayHasKey('channel', $item);
             $this->assertArrayHasKey('feeCurrency', $item);
-            $this->assertArrayHasKey('remark', $item);
             $this->assertArrayHasKey('type', $item);
             $this->assertArrayHasKey('iceberg', $item);
             $this->assertArrayHasKey('createdAt', $item);
@@ -228,7 +223,6 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('size', $item);
             $this->assertArrayHasKey('stop', $item);
             $this->assertArrayHasKey('cancelExist', $item);
-            $this->assertArrayHasKey('clientOid', $item);
         }
     }
 }
