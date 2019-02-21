@@ -119,6 +119,7 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
         $this->assertArrayHasKey('asks', $data);
+        $this->assertArrayHasKey('time', $data);
     }
 
     /**
