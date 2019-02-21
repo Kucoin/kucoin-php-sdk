@@ -59,4 +59,19 @@ class CurrencyTest extends TestCase
         $this->assertArrayHasKey('isWithdrawEnabled', $currency);
         $this->assertArrayHasKey('isDepositEnabled', $currency);
     }
+
+    /**
+     * @depends testNewCurrency
+     * @param Currency $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetFiatPrice(Currency $api)
+    {
+        $price = $api->getFiatPrice();
+        $this->assertInternalType('array', $price);
+        $this->assertNotEmpty($price);
+
+    }
 }
