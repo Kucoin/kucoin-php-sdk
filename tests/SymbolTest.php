@@ -25,7 +25,7 @@ class SymbolTest extends TestCase
      */
     public function testGetList(Symbol $api)
     {
-        $data = $api->getList();
+        $data = $api->getList('BTC');
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
             $this->assertArrayHasKey('quoteCurrency', $item);
@@ -96,9 +96,9 @@ class SymbolTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetPartOrderBook(Symbol $api)
+    public function testGetAggregatedPartOrderBook(Symbol $api)
     {
-        $data = $api->getPartOrderBook('ETH-BTC');
+        $data = $api->getAggregatedPartOrderBook('ETH-BTC', 100);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);

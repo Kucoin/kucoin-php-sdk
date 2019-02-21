@@ -20,7 +20,7 @@ class DepositTest extends TestCase
      * @param Auth $auth
      * @return Deposit
      */
-    public function testNewDeposits(Auth $auth)
+    public function testNewDeposit(Auth $auth)
     {
         $api = new Deposit($auth);
         $this->assertInstanceOf(Deposit::class, $api);
@@ -28,7 +28,7 @@ class DepositTest extends TestCase
     }
 
     /**
-     * @depends testNewDeposits
+     * @depends testNewDeposit
      * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -44,17 +44,17 @@ class DepositTest extends TestCase
     }
 
     /**
-     * @depends testNewDeposits
+     * @depends testNewDeposit
      * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetAddresses(Deposit $api)
+    public function testGetAddress(Deposit $api)
     {
         try {
-            $address = $api->getAddresses('BTC');
+            $address = $api->getAddress('BTC');
             if ($address !== null) {
                 $this->assertInternalType('array', $address);
                 $this->assertArrayHasKey('address', $address);
@@ -70,7 +70,7 @@ class DepositTest extends TestCase
     }
 
     /**
-     * @depends testNewDeposits
+     * @depends testNewDeposit
      * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -79,12 +79,7 @@ class DepositTest extends TestCase
      */
     public function testGetDeposits(Deposit $api)
     {
-        $params = [
-            'currency'    => 'BTC',
-            'currentPage' => 1,
-            'pageSize'    => 10,
-        ];
-        $data = $api->getDeposits($params);
+        $data = $api->getDeposits(['currency' => 'BTC'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
             $this->assertArrayHasKey('address', $item);

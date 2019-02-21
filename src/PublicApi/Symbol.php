@@ -14,14 +14,15 @@ class Symbol extends KuCoinApi
 {
     /**
      * Get a list of symbol
+     * @param string|null $market
      * @return array
-     * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getList()
+    public function getList($market = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/symbols');
+        $response = $this->call(Request::METHOD_GET, '/api/v1/symbols', compact('market'));
         return $response->getApiData();
     }
 
@@ -55,14 +56,15 @@ class Symbol extends KuCoinApi
     /**
      * Get part order book(aggregated)
      * @param string $symbol
+     * @param int $depth within 20 or 100, default 20.
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getPartOrderBook($symbol)
+    public function getAggregatedPartOrderBook($symbol, $depth = 20)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_100', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_' . intval($depth), compact('symbol'));
         return $response->getApiData();
     }
 
@@ -111,20 +113,20 @@ class Symbol extends KuCoinApi
     /**
      * Get historic rates
      * @param string $symbol
-     * @param int $begin
-     * @param int $end
+     * @param int $beginAt
+     * @param int $endAt
      * @param string $type
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getHistoricRates($symbol, $begin, $end, $type)
+    public function getHistoricRates($symbol, $beginAt, $endAt, $type)
     {
         $response = $this->call(
             Request::METHOD_GET,
             '/api/v1/market/candles',
-            compact('symbol', 'begin', 'end', 'type')
+            compact('symbol', 'beginAt', 'endAt', 'type')
         );
         return $response->getApiData();
     }
