@@ -98,7 +98,7 @@ class SymbolTest extends TestCase
      */
     public function testGetPartOrderBook(Symbol $api)
     {
-        $data = $api->getPartOrderBook('ETH-BTC');
+        $data = $api->getPartOrderBook('ETH-BTC', 100);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
