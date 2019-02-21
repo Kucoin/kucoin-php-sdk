@@ -62,7 +62,7 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getPartOrderBook($symbol, $depth = 20)
+    public function getAggregatedPartOrderBook($symbol, $depth = 20)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_' . intval($depth), compact('symbol'));
         return $response->getApiData();
