@@ -67,11 +67,10 @@ class CurrencyTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetFiatPrice(Currency $api)
+    public function testGetPrices(Currency $api)
     {
-        $price = $api->getFiatPrice();
+        $price = $api->getPrices();
         $this->assertInternalType('array', $price);
         $this->assertNotEmpty($price);
-
     }
 }
