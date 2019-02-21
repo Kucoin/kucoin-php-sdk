@@ -48,7 +48,7 @@ class Currency extends KuCoinApi
      */
     public function getPrices()
     {
-        $response = $this->call(Request::METHOD_GET, ' /api/v1/prices');
+        $response = $this->call(Request::METHOD_GET, '/api/v1/prices');
         return $response->getApiData();
     }
 }
