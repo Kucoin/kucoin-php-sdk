@@ -56,7 +56,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Get account history
+     * Get account ledgers
      * @param string $accountId
      * @param array $params
      * @param array $pagination
@@ -65,7 +65,7 @@ class Account extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getHistory($accountId, array $params = [], array $pagination = [])
+    public function getLedgers($accountId, array $params = [], array $pagination = [])
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/ledgers', $params + $pagination);
         return $response->getApiData();
