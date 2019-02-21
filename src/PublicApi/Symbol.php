@@ -113,20 +113,20 @@ class Symbol extends KuCoinApi
     /**
      * Get historic rates
      * @param string $symbol
-     * @param int $begin
-     * @param int $end
+     * @param int $beginAt
+     * @param int $endAt
      * @param string $type
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getHistoricRates($symbol, $begin, $end, $type)
+    public function getHistoricRates($symbol, $beginAt, $endAt, $type)
     {
         $response = $this->call(
             Request::METHOD_GET,
             '/api/v1/market/candles',
-            compact('symbol', 'begin', 'end', 'type')
+            compact('symbol', 'beginAt', 'endAt', 'type')
         );
         return $response->getApiData();
     }
