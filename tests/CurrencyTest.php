@@ -69,8 +69,8 @@ class CurrencyTest extends TestCase
      */
     public function testGetPrices(Currency $api)
     {
-        $price = $api->getPrices();
-        $this->assertInternalType('array', $price);
-        $this->assertNotEmpty($price);
+        $prices = $api->getPrices('USD', 'BTC,KCS');
+        $this->assertInternalType('array', $prices);
+        $this->assertNotEmpty($prices);
     }
 }

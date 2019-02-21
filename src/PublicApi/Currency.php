@@ -41,14 +41,16 @@ class Currency extends KuCoinApi
 
     /**
      * Get fiat prices for currency
+     * @param string|null $base
+     * @param string|null $currencies
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getPrices()
+    public function getPrices($base = null, $currencies = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/prices');
+        $response = $this->call(Request::METHOD_GET, '/api/v1/prices', compact('base', 'currencies'));
         return $response->getApiData();
     }
 }
