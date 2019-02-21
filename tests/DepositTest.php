@@ -51,7 +51,7 @@ class DepositTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetAddresses(Deposit $api)
+    public function testGetAddress(Deposit $api)
     {
         try {
             $address = $api->getAddress('BTC');
