@@ -72,18 +72,20 @@ class SymbolTest extends TestCase
      */
     public function testGetAllTickers(Symbol $api)
     {
-        $tickers = $api->getAllTickers();
-        $this->assertInternalType('array', $tickers);
-        foreach ($tickers as $ticker) {
+        $data = $api->getAllTickers();
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('time', $data);
+        $this->assertArrayHasKey('ticker', $data);
+        foreach ($data['ticker'] as $ticker) {
             $this->assertArrayHasKey('symbol', $ticker);
-            $this->assertArrayHasKey('high', $ticker);
-            $this->assertArrayHasKey('vol', $ticker);
-            $this->assertArrayHasKey('low', $ticker);
+            $this->assertArrayHasKey('buy', $ticker);
+            $this->assertArrayHasKey('sell', $ticker);
 //            $this->assertArrayHasKey('changePrice', $ticker);
             $this->assertArrayHasKey('changeRate', $ticker);
-            $this->assertArrayHasKey('close', $ticker);
-            $this->assertArrayHasKey('volValue', $ticker);
-            $this->assertArrayHasKey('open', $ticker);
+//            $this->assertArrayHasKey('high', $ticker);
+//            $this->assertArrayHasKey('low', $ticker);
+            $this->assertArrayHasKey('vol', $ticker);
+            $this->assertArrayHasKey('last', $ticker);
         }
     }
 
