@@ -27,11 +27,15 @@ class CurrencyTest extends TestCase
     {
         $currencies = $api->getList();
         $this->assertInternalType('array', $currencies);
-        foreach ($currencies as $item) {
-            $this->assertArrayHasKey('name', $item);
-            $this->assertArrayHasKey('fullName', $item);
-            $this->assertArrayHasKey('currency', $item);
-            $this->assertArrayHasKey('precision', $item);
+        foreach ($currencies as $currency) {
+            $this->assertArrayHasKey('currency', $currency);
+            $this->assertArrayHasKey('name', $currency);
+            $this->assertArrayHasKey('fullName', $currency);
+            $this->assertArrayHasKey('precision', $currency);
+            $this->assertArrayHasKey('withdrawalMinSize', $currency);
+            $this->assertArrayHasKey('withdrawalMinFee', $currency);
+            $this->assertArrayHasKey('isWithdrawEnabled', $currency);
+            $this->assertArrayHasKey('isDepositEnabled', $currency);
         }
     }
 
@@ -46,12 +50,12 @@ class CurrencyTest extends TestCase
     {
         $currency = $api->getDetail('BTC');
         $this->assertInternalType('array', $currency);
-        $this->assertArrayHasKey('withdrawalMinFee', $currency);
-        $this->assertArrayHasKey('precision', $currency);
+        $this->assertArrayHasKey('currency', $currency);
         $this->assertArrayHasKey('name', $currency);
         $this->assertArrayHasKey('fullName', $currency);
-        $this->assertArrayHasKey('currency', $currency);
+        $this->assertArrayHasKey('precision', $currency);
         $this->assertArrayHasKey('withdrawalMinSize', $currency);
+        $this->assertArrayHasKey('withdrawalMinFee', $currency);
         $this->assertArrayHasKey('isWithdrawEnabled', $currency);
         $this->assertArrayHasKey('isDepositEnabled', $currency);
     }
