@@ -13,18 +13,17 @@ use KuCoin\SDK\KuCoinApi;
 class Fill extends KuCoinApi
 {
     /**
-     * Get a list of recent fills
-     * @param string $orderId
-     * @param string $symbolId
+     * Get a list of fills
+     * @param array $params
      * @param array $pagination
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getList($orderId, $symbolId, array $pagination = [])
+    public function getList(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/fills', compact('orderId', 'symbolId') + $pagination);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/fills', $params + $pagination);
         return $response->getApiData();
     }
 
