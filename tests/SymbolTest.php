@@ -61,6 +61,7 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('bestBidSize', $data);
         $this->assertArrayHasKey('bestAsk', $data);
         $this->assertArrayHasKey('bestAskSize', $data);
+        $this->assertArrayHasKey('time', $data);
     }
 
     /**
@@ -78,14 +79,14 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('ticker', $data);
         foreach ($data['ticker'] as $ticker) {
             $this->assertArrayHasKey('symbol', $ticker);
-            $this->assertArrayHasKey('buy', $ticker);
-            $this->assertArrayHasKey('sell', $ticker);
+//            $this->assertArrayHasKey('buy', $ticker);
+//            $this->assertArrayHasKey('sell', $ticker);
 //            $this->assertArrayHasKey('changePrice', $ticker);
             $this->assertArrayHasKey('changeRate', $ticker);
 //            $this->assertArrayHasKey('high', $ticker);
 //            $this->assertArrayHasKey('low', $ticker);
             $this->assertArrayHasKey('vol', $ticker);
-            $this->assertArrayHasKey('last', $ticker);
+//            $this->assertArrayHasKey('last', $ticker);
         }
     }
 
@@ -103,6 +104,7 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
         $this->assertArrayHasKey('asks', $data);
+        $this->assertArrayHasKey('time', $data);
     }
 
     /**
@@ -119,6 +121,7 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
         $this->assertArrayHasKey('asks', $data);
+        $this->assertArrayHasKey('time', $data);
     }
 
     /**
@@ -135,6 +138,7 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('sequence', $data);
         $this->assertArrayHasKey('bids', $data);
         $this->assertArrayHasKey('asks', $data);
+        $this->assertArrayHasKey('time', $data);
     }
 
 
