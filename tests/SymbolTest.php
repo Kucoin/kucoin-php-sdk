@@ -25,7 +25,7 @@ class SymbolTest extends TestCase
      */
     public function testGetList(Symbol $api)
     {
-        $data = $api->getList();
+        $data = $api->getList('BTC');
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
             $this->assertArrayHasKey('quoteCurrency', $item);

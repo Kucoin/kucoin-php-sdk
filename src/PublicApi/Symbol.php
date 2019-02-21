@@ -14,14 +14,15 @@ class Symbol extends KuCoinApi
 {
     /**
      * Get a list of symbol
+     * @param string|null $market
      * @return array
-     * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getList()
+    public function getList($market = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/symbols');
+        $response = $this->call(Request::METHOD_GET, '/api/v1/symbols', compact('market'));
         return $response->getApiData();
     }
 
