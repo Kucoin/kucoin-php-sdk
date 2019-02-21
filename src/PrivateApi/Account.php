@@ -72,6 +72,7 @@ class Account extends KuCoinApi
     }
 
     /**
+     * Get holds
      * @param string $accountId
      * @param array $pagination
      * @return array

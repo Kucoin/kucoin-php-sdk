@@ -54,7 +54,7 @@ class DepositTest extends TestCase
     public function testGetAddresses(Deposit $api)
     {
         try {
-            $address = $api->getAddresses('BTC');
+            $address = $api->getAddress('BTC');
             if ($address !== null) {
                 $this->assertInternalType('array', $address);
                 $this->assertArrayHasKey('address', $address);

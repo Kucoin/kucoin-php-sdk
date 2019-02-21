@@ -27,14 +27,14 @@ class Deposit extends KuCoinApi
     }
 
     /**
-     * Get deposit addresses
+     * Get deposit address of currency for deposit
      * @param string $currency
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getAddresses($currency)
+    public function getAddress($currency)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/deposit-addresses', compact('currency'));
         return $response->getApiData();
