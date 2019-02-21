@@ -116,17 +116,17 @@ class AccountTest extends TestCase
 
     /**
      * @depends testNewAccount
-     * @depends testGetMainList
+     * @depends testGetTradeList
      * @param Account $api
      * @param array $accounts
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetHistory(Account $api, array $accounts)
+    public function testGetLedgers(Account $api, array $accounts)
     {
         if (isset($accounts[0])) {
-            $data = $api->getHistory($accounts[0]['id'], ['currentPage' => 1, 'pageSize' => 10]);
+            $data = $api->getLedgers($accounts[0]['id'], [], ['currentPage' => 1, 'pageSize' => 10]);
             $this->assertPagination($data);
             foreach ($data['items'] as $item) {
                 $this->assertArrayHasKey('currency', $item);
