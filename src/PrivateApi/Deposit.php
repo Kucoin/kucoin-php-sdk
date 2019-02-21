@@ -43,14 +43,15 @@ class Deposit extends KuCoinApi
     /**
      * Get deposit list
      * @param array $params
+     * @param array $pagination
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getDeposits(array $params)
+    public function getDeposits(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/deposits', $params);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/deposits', $params + $pagination);
         return $response->getApiData();
     }
 }
