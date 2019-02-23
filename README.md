@@ -21,7 +21,7 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 
 ## Usage
 
-- Choose environment
+### Choose environment
 
 | Environment | BaseUri |
 | -------- | -------- |
@@ -32,6 +32,9 @@ composer require "kucoin/kucoin-php-sdk:~1.0.0"
 // Switch to the sandbox environment
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
+
+### Examples
+> See the [test case](tests) for more examples.
 
 - Example of API `without` authentication
 
@@ -91,7 +94,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 });
 ```
 
-- API list
+### API list
 
 <details>
 <summary>KuCoin\SDK\PrivateApi\Account</summary>
