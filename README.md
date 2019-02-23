@@ -97,7 +97,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 <summary>KuCoin\SDK\PrivateApi\Account</summary>
 
 | API | Authentication | URL |
-| -------- | -------- |
+| -------- | -------- | -------- |
 | KuCoin\SDK\PrivateApi\Account::create() | YES | https://docs.kucoin.com/#create-an-account |
 | KuCoin\SDK\PrivateApi\Account::getList() | YES | https://docs.kucoin.com/#list-accounts |
 | KuCoin\SDK\PrivateApi\Account::getDetail() | YES | https://docs.kucoin.com/#get-an-account |
