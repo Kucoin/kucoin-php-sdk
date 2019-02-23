@@ -105,6 +105,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 | KuCoin\SDK\PrivateApi\Account::getLedgers() | YES | https://docs.kucoin.com/#get-account-ledgers |
 | KuCoin\SDK\PrivateApi\Account::getHolds() | YES | https://docs.kucoin.com/#get-holds |
 | KuCoin\SDK\PrivateApi\Account::innerTransfer() | YES | https://docs.kucoin.com/#inner-tranfer |
+
 </details>
 
 | API | Authentication |
