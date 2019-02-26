@@ -76,7 +76,7 @@ use Ratchet\Client\WebSocket;
 use React\EventLoop\LoopInterface;
 
 $auth = null;
-// Need to pass parameters when subscribing to a private channel($api->subscribePrivateChannel()).
+// Need to pass the Auth parameter when subscribing to a private channel($api->subscribePrivateChannel()).
 // $auth = new Auth('key', 'secret', 'passphrase');
 $api = new WebSocketFeed($auth);
 
