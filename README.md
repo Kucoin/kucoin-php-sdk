@@ -75,7 +75,9 @@ use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\LoopInterface;
 
-$auth = new Auth('key', 'secret', 'passphrase');
+$auth = null;
+// Need to pass parameters when subscribing to a private channel($api->subscribePrivateChannel()).
+// $auth = new Auth('key', 'secret', 'passphrase');
 $api = new WebSocketFeed($auth);
 
 $query = ['connectId' => uniqid('', true)];
@@ -86,7 +88,6 @@ $channel = [
 
 $api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     var_dump($message);
-    
     // Stop loop
     // $loop->stop();
 }, function ($code, $reason) {
