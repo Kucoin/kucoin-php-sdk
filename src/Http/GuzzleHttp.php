@@ -62,7 +62,10 @@ class GuzzleHttp extends BaseHttp
                 break;
             case Request::METHOD_PUT:
             case Request::METHOD_POST:
-                $hasParam AND $options['json'] = $params;
+                if ($hasParam) {
+                    $options['headers']['Content-Type'] = 'application/json';
+                    $options['body'] = json_encode($params, JSON_UNESCAPED_SLASHES);
+                }
                 break;
             default:
                 $exception = new HttpException('Unsupported method ' . $method, 0);
