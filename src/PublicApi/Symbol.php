@@ -111,9 +111,9 @@ class Symbol extends KuCoinApi
     }
 
     /**
-     * Get historic rates
+     * Get KLines for a symbol. Data are returned in grouped buckets based on requested type.
      * @param string $symbol
-     * @param int $beginAt
+     * @param int $startAt
      * @param int $endAt
      * @param string $type
      * @return array
@@ -121,12 +121,12 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getHistoricRates($symbol, $beginAt, $endAt, $type)
+    public function getKLines($symbol, $startAt, $endAt, $type)
     {
         $response = $this->call(
             Request::METHOD_GET,
             '/api/v1/market/candles',
-            compact('symbol', 'beginAt', 'endAt', 'type')
+            compact('symbol', 'startAt', 'endAt', 'type')
         );
         return $response->getApiData();
     }
