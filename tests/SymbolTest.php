@@ -169,9 +169,9 @@ class SymbolTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetHistoricRates(Symbol $api)
+    public function testGetKLines(Symbol $api)
     {
-        $data = $api->getHistoricRates('ETH-BTC', time() - 24 * 3600 * 7 * 3, time(), '8hour');
+        $data = $api->getKLines('ETH-BTC', time() - 24 * 3600 * 7 * 3, time(), '8hour');
         $this->assertInternalType('array', $data);
         foreach ($data as $item) {
             //[ "time","open","close","high","low","volume","turnover"]
