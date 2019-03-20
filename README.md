@@ -101,7 +101,6 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 - Use Coroutine Http client for asynchronous IO
 
 ```bash
-# Do some preparation
 pecl install swoole
 composer require swlib/saber
 ```
