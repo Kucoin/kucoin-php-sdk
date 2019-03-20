@@ -2,14 +2,12 @@
 
 namespace KuCoin\SDK\Http;
 
-use KuCoin\SDK\Api;
-
 abstract class BaseHttp implements IHttp
 {
-    protected $api;
+    protected $config;
 
-    public function __construct(Api $api)
+    public function __construct(array $config = [])
     {
-        $this->api = $api;
+        $this->config = $config;
     }
 }

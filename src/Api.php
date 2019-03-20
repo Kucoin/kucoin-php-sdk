@@ -31,8 +31,8 @@ abstract class Api
 
     public function __construct(IAuth $auth = null, IHttp $http = null)
     {
-        if (is_null($http)) {
-            $http = new GuzzleHttp($this);
+        if ($http === null) {
+            $http = new GuzzleHttp(['skipVerifyTls' => &self::$skipVerifyTls]);
         }
         $this->auth = $auth;
         $this->http = $http;
