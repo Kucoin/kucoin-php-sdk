@@ -55,6 +55,7 @@ class SwooleHttp extends BaseHttp
             switch ($method) {
                 case Request::METHOD_GET:
                 case Request::METHOD_DELETE:
+                    /**@var \Swlib\Saber\Response $saberResponse */
                     $saberResponse = $client->{strtolower($method)}($requestUri);
                     break;
                 case Request::METHOD_PUT:
@@ -64,6 +65,7 @@ class SwooleHttp extends BaseHttp
                     if (!empty($params)) {
                         $data = json_encode($params, JSON_UNESCAPED_SLASHES);
                     }
+                    /**@var \Swlib\Saber\Response $saberResponse */
                     $saberResponse = $client->{strtolower($method)}($requestUri, $data);
                     break;
                 default:
