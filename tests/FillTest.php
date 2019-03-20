@@ -49,7 +49,6 @@ class FillTest extends TestCase
             $this->assertArrayHasKey('feeRate', $item);
             $this->assertArrayHasKey('counterOrderId', $item);
             $this->assertArrayHasKey('createdAt', $item);
-            $this->assertArrayHasKey('displayType', $item);
             $this->assertArrayHasKey('size', $item);
             $this->assertArrayHasKey('stop', $item);
             $this->assertArrayHasKey('price', $item);
@@ -80,7 +79,6 @@ class FillTest extends TestCase
             $this->assertArrayHasKey('feeRate', $item);
             $this->assertArrayHasKey('counterOrderId', $item);
             $this->assertArrayHasKey('createdAt', $item);
-            $this->assertArrayHasKey('displayType', $item);
             $this->assertArrayHasKey('size', $item);
             $this->assertArrayHasKey('stop', $item);
             $this->assertArrayHasKey('price', $item);
