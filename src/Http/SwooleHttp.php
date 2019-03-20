@@ -55,7 +55,7 @@ class SwooleHttp extends BaseHttp
             switch ($method) {
                 case Request::METHOD_GET:
                 case Request::METHOD_DELETE:
-                    $saberResponse = $client->get($requestUri);
+                    $saberResponse = $client->{strtolower($method)}($requestUri);
                     break;
                 case Request::METHOD_PUT:
                 case Request::METHOD_POST:
@@ -64,7 +64,7 @@ class SwooleHttp extends BaseHttp
                     if (!empty($params)) {
                         $data = json_encode($params, JSON_UNESCAPED_SLASHES);
                     }
-                    $saberResponse = $client->post($requestUri, $data);
+                    $saberResponse = $client->{strtolower($method)}($requestUri, $data);
                     break;
                 default:
                     $exception = new HttpException('Unsupported method ' . $method, 0);
