@@ -98,6 +98,27 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 });
 ```
 
+- Use Coroutine Http client for asynchronous IO
+
+```bash
+# Do some preparation
+pecl install swoole
+composer require swlib/saber
+```
+
+```php
+use KuCoin\SDK\PublicApi\Time;
+use KuCoin\SDK\Http\SwooleHttp;
+
+// Require PHP 7.1+ and Swoole 2.1.2+
+// Require running in cli mode
+go(function () {
+    $api = new Time(null, new SwooleHttp());
+    $timestamp = $api->timestamp();
+    var_dump($timestamp);
+});
+```
+
 ### API list
 
 <details>
