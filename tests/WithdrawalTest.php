@@ -97,7 +97,6 @@ class WithdrawalTest extends TestCase
             $this->assertArrayHasKey('currency', $item);
             $this->assertArrayHasKey('amount', $item);
             $this->assertArrayHasKey('fee', $item);
-            $this->assertArrayHasKey('walletTxId', $item);
             $this->assertArrayHasKey('isInner', $item);
             $this->assertArrayHasKey('status', $item);
             $this->assertArrayHasKey('createdAt', $item);

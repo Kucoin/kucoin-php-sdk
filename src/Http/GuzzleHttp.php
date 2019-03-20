@@ -46,7 +46,7 @@ class GuzzleHttp extends BaseHttp
             'timeout'         => $timeout,
             'http_errors'     => false,
             'connect_timeout' => 30,
-            'verify'          => !$this->api->isSkipVerifyTls(),
+            'verify'          => empty($this->config['skipVerifyTls']),
         ];
         $client = static::getClient($config);
         $options = [
