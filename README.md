@@ -98,7 +98,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 });
 ```
 
-- Use Coroutine Http client for asynchronous IO
+- Coroutine HTTP client for asynchronous IO
 
 ```bash
 pecl install swoole
