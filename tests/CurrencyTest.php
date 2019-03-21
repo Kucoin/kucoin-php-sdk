@@ -6,18 +6,11 @@ use KuCoin\SDK\PublicApi\Currency;
 
 class CurrencyTest extends TestCase
 {
-    /**
-     * @return Currency
-     */
-    public function testNewCurrency()
-    {
-        $api = new Currency();
-        $this->assertInstanceOf(Currency::class, $api);
-        return $api;
-    }
+    protected $apiClass    = Currency::class;
+    protected $apiWithAuth = false;
 
     /**
-     * @depends testNewCurrency
+     * @dataProvider apiProvider
      * @param Currency $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -40,7 +33,7 @@ class CurrencyTest extends TestCase
     }
 
     /**
-     * @depends testNewCurrency
+     * @dataProvider apiProvider
      * @param Currency $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -61,7 +54,7 @@ class CurrencyTest extends TestCase
     }
 
     /**
-     * @depends testNewCurrency
+     * @dataProvider apiProvider
      * @param Currency $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException

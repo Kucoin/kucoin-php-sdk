@@ -2,29 +2,34 @@
 
 namespace KuCoin\SDK\Tests;
 
+use KuCoin\SDK\Auth;
+use KuCoin\SDK\Http\GuzzleHttp;
+use KuCoin\SDK\Http\SwooleHttp;
 use KuCoin\SDK\KuCoinApi;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected $apiKey;
-    protected $apiSecret;
-    protected $apiPassPhrase;
-    protected $apiBaseUri;
-    protected $apiSkipVerifyTls;
+    protected $apiClass    = 'Must be declared in the subclass';
+    protected $apiWithAuth = false;
 
-    protected function setUp()
+    public function apiProvider()
     {
-        parent::setUp();
-
-        $this->apiKey = getenv('API_KEY');
-        $this->apiSecret = getenv('API_SECRET');
-        $this->apiPassPhrase = getenv('API_PASSPHRASE');
-        $this->apiBaseUri = getenv('API_BASE_URI');
-        $this->apiSkipVerifyTls = (bool)getenv('API_SKIP_VERIFY_TLS');
-        KuCoinApi::setSkipVerifyTls($this->apiSkipVerifyTls);
-        if ($this->apiBaseUri) {
-            KuCoinApi::setBaseUri($this->apiBaseUri);
+        $apiKey = getenv('API_KEY');
+        $apiSecret = getenv('API_SECRET');
+        $apiPassPhrase = getenv('API_PASSPHRASE');
+        $apiBaseUri = getenv('API_BASE_URI');
+        $apiSkipVerifyTls = (bool)getenv('API_SKIP_VERIFY_TLS');
+        KuCoinApi::setSkipVerifyTls($apiSkipVerifyTls);
+        if ($apiBaseUri) {
+            KuCoinApi::setBaseUri($apiBaseUri);
         }
+
+        $auth = new Auth($apiKey, $apiSecret, $apiPassPhrase);
+        return [
+            [new $this->apiClass($this->apiWithAuth ? $auth : null)],
+            [new $this->apiClass($this->apiWithAuth ? $auth : null, new GuzzleHttp(['skipVerifyTls' => $apiSkipVerifyTls]))],
+            //[new $this->apiClass($this->apiWithAuth ? $auth : null, new SwooleHttp(['skipVerifyTls' => $apiSkipVerifyTls]))],
+        ];
     }
 
     protected function assertPagination($data)

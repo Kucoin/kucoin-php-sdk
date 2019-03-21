@@ -3,35 +3,17 @@
 namespace KuCoin\SDK\Tests;
 
 use KuCoin\SDK\ApiCode;
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\PrivateApi\Account;
 
 class AccountTest extends TestCase
 {
-    public function testNewAuth()
-    {
-        $auth = new Auth($this->apiKey, $this->apiSecret, $this->apiPassPhrase);
-        $this->assertInstanceOf(Auth::class, $auth);
-        return $auth;
-    }
+    protected $apiClass    = Account::class;
+    protected $apiWithAuth = true;
 
     /**
-     * @depends testNewAuth
-     * @param Auth $auth
-     * @return Account
-     */
-    public function testNewAccount(Auth $auth)
-    {
-        $api = new Account($auth);
-        $this->assertInstanceOf(Account::class, $api);
-        return $api;
-    }
-
-    /**
-     * @depends testNewAccount
+     * @dataProvider apiProvider
      * @param Account $api
-     * @return array|string
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
@@ -48,13 +30,11 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('holds', $item);
             $this->assertArrayHasKey('type', $item);
         }
-        return $accounts;
     }
 
     /**
-     * @depends testNewAccount
+     * @dataProvider apiProvider
      * @param Account $api
-     * @return array|string
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
@@ -71,11 +51,29 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('holds', $item);
             $this->assertArrayHasKey('type', $item);
         }
-        return $accounts;
     }
 
     /**
-     * @depends testNewAccount
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetDetail(Account $api)
+    {
+        $accounts = $api->getList(['type' => 'main']);
+        if (isset($accounts[0])) {
+            $account = $api->getDetail($accounts[0]['id']);
+            $this->assertArrayHasKey('currency', $account);
+            $this->assertArrayHasKey('balance', $account);
+            $this->assertArrayHasKey('available', $account);
+            $this->assertArrayHasKey('holds', $account);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
      * @param Account $api
      * @return array|string
      * @throws BusinessException
@@ -95,36 +93,15 @@ class AccountTest extends TestCase
     }
 
     /**
-     * @depends testNewAccount
-     * @depends testGetMainList
+     * @dataProvider apiProvider
      * @param Account $api
-     * @param array $accounts
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetDetail(Account $api, array $accounts)
+    public function testGetLedgers(Account $api)
     {
-        if (isset($accounts[0])) {
-            $account = $api->getDetail($accounts[0]['id']);
-            $this->assertArrayHasKey('currency', $account);
-            $this->assertArrayHasKey('balance', $account);
-            $this->assertArrayHasKey('available', $account);
-            $this->assertArrayHasKey('holds', $account);
-        }
-    }
-
-    /**
-     * @depends testNewAccount
-     * @depends testGetTradeList
-     * @param Account $api
-     * @param array $accounts
-     * @throws BusinessException
-     * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     */
-    public function testGetLedgers(Account $api, array $accounts)
-    {
+        $accounts = $api->getList(['type' => 'trade']);
         if (isset($accounts[0])) {
             $data = $api->getLedgers($accounts[0]['id'], [], ['currentPage' => 1, 'pageSize' => 10]);
             $this->assertPagination($data);
@@ -142,7 +119,7 @@ class AccountTest extends TestCase
     }
 
     /**
-     * @depends testNewAccount
+     * @dataProvider apiProvider
      * @param Account $api
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -175,16 +152,16 @@ class AccountTest extends TestCase
     }
 
     /**
-     * @depends testNewAccount
-     * @depends testGetMainList
+     * @dataProvider apiProvider
+     * @depends      testGetMainList
      * @param Account $api
-     * @param array $accounts
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetHolds(Account $api, array $accounts)
+    public function testGetHolds(Account $api)
     {
+        $accounts = $api->getList(['type' => 'trade']);
         if (isset($accounts[0])) {
             $data = $api->getHolds($accounts[1]['id'], ['currentPage' => 1, 'pageSize' => 10]);
             $this->assertPagination($data);

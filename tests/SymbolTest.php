@@ -6,18 +6,11 @@ use KuCoin\SDK\PublicApi\Symbol;
 
 class SymbolTest extends TestCase
 {
-    /**
-     * @return Symbol
-     */
-    public function testNewSymbol()
-    {
-        $api = new Symbol();
-        $this->assertInstanceOf(Symbol::class, $api);
-        return $api;
-    }
+    protected $apiClass    = Symbol::class;
+    protected $apiWithAuth = false;
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -44,7 +37,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -65,7 +58,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -91,7 +84,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -108,7 +101,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -125,7 +118,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -143,7 +136,7 @@ class SymbolTest extends TestCase
 
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -163,7 +156,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -180,7 +173,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -202,7 +195,7 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * @depends testNewSymbol
+     * @dataProvider apiProvider
      * @param Symbol $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
