@@ -7,7 +7,7 @@ use KuCoin\SDK\PublicApi\Currency;
 class CurrencyTest extends TestCase
 {
     protected $apiClass    = Currency::class;
-    protected $apiWithAuth = true;
+    protected $apiWithAuth = false;
 
     /**
      * @dataProvider apiProvider
