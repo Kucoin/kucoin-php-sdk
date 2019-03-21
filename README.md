@@ -99,6 +99,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 ```
 
 #### ⚡️Coroutine HTTP client for asynchronous IO
+> See the [benchmark](examples/BenchmarkCoroutine.php).
 
 ```bash
 pecl install swoole
