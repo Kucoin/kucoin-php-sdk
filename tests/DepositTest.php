@@ -2,33 +2,16 @@
 
 namespace KuCoin\SDK\Tests;
 
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\PrivateApi\Deposit;
 
 class DepositTest extends TestCase
 {
-    public function testNewAuth()
-    {
-        $auth = new Auth($this->apiKey, $this->apiSecret, $this->apiPassPhrase);
-        $this->assertInstanceOf(Auth::class, $auth);
-        return $auth;
-    }
+    protected $apiClass    = Deposit::class;
+    protected $apiWithAuth = true;
 
     /**
-     * @depends testNewAuth
-     * @param Auth $auth
-     * @return Deposit
-     */
-    public function testNewDeposit(Auth $auth)
-    {
-        $api = new Deposit($auth);
-        $this->assertInstanceOf(Deposit::class, $api);
-        return $api;
-    }
-
-    /**
-     * @depends testNewDeposit
+     * @dataProvider apiProvider
      * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -44,7 +27,7 @@ class DepositTest extends TestCase
     }
 
     /**
-     * @depends testNewDeposit
+     * @dataProvider apiProvider
      * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -70,7 +53,7 @@ class DepositTest extends TestCase
     }
 
     /**
-     * @depends testNewDeposit
+     * @dataProvider apiProvider
      * @param Deposit $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException

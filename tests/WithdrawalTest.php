@@ -2,32 +2,15 @@
 
 namespace KuCoin\SDK\Tests;
 
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\PrivateApi\Withdrawal;
 
 class WithdrawalTest extends TestCase
 {
-    public function testNewAuth()
-    {
-        $auth = new Auth($this->apiKey, $this->apiSecret, $this->apiPassPhrase);
-        $this->assertInstanceOf(Auth::class, $auth);
-        return $auth;
-    }
+    protected $apiClass    = Withdrawal::class;
+    protected $apiWithAuth = true;
 
     /**
-     * @depends testNewAuth
-     * @param Auth $auth
-     * @return Withdrawal
-     */
-    public function testNewWithdrawal(Auth $auth)
-    {
-        $api = new Withdrawal($auth);
-        $this->assertInstanceOf(Withdrawal::class, $api);
-        return $api;
-    }
-
-    /**
-     * @depends testNewWithdrawal
+     * @dataProvider apiProvider
      * @param Withdrawal $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -50,7 +33,7 @@ class WithdrawalTest extends TestCase
     }
 
     /**
-     * @depends testNewWithdrawal
+     * @dataProvider apiProvider
      * @param Withdrawal $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -71,7 +54,7 @@ class WithdrawalTest extends TestCase
 
 
     /**
-     * @depends testNewWithdrawal
+     * @dataProvider apiProvider
      * @param Withdrawal $api
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -106,7 +89,7 @@ class WithdrawalTest extends TestCase
     }
 
     /**
-     * @depends testNewWithdrawal
+     * @dataProvider apiProvider
      * @param Withdrawal $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException

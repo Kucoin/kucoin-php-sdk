@@ -2,32 +2,15 @@
 
 namespace KuCoin\SDK\Tests;
 
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\PrivateApi\Order;
 
 class OrderTest extends TestCase
 {
-    public function testNewAuth()
-    {
-        $auth = new Auth($this->apiKey, $this->apiSecret, $this->apiPassPhrase);
-        $this->assertInstanceOf(Auth::class, $auth);
-        return $auth;
-    }
+    protected $apiClass    = Order::class;
+    protected $apiWithAuth = true;
 
     /**
-     * @depends testNewAuth
-     * @param Auth $auth
-     * @return Order
-     */
-    public function testNewOrder(Auth $auth)
-    {
-        $api = new Order($auth);
-        $this->assertInstanceOf(Order::class, $api);
-        return $api;
-    }
-
-    /**
-     * @depends testNewOrder
+     * @dataProvider apiProvider
      * @param Order $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -53,7 +36,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @depends testNewOrder
+     * @dataProvider apiProvider
      * @param Order $api
      * @return array|string
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -78,9 +61,8 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @depends testNewOrder
+     * @dataProvider apiProvider
      * @param Order $api
-     * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
@@ -116,20 +98,20 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('stop', $item);
             $this->assertArrayHasKey('cancelExist', $item);
         }
-        return $data['items'];
     }
 
     /**
-     * @depends testNewOrder
-     * @depends testGetList
+     * @dataProvider apiProvider
      * @param Order $api
-     * @param array $orders
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetDetail(Order $api, array $orders)
+    public function testGetDetail(Order $api)
     {
+        $data = $api->getList(['symbol' => 'BTC-USDT'], ['currentPage' => 1, 'pageSize' => 10]);
+        $this->assertPagination($data);
+        $orders = $data['items'];
         if (isset($orders[0])) {
             $order = $api->getDetail($orders[0]['id']);
             $this->assertArrayHasKey('symbol', $order);
@@ -161,7 +143,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @depends testNewOrder
+     * @dataProvider apiProvider
      * @param Order $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -174,7 +156,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @depends testNewOrder
+     * @dataProvider apiProvider
      * @param Order $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -188,7 +170,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @depends testNewOrder
+     * @dataProvider apiProvider
      * @param Order $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException

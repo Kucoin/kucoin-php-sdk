@@ -2,32 +2,15 @@
 
 namespace KuCoin\SDK\Tests;
 
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\PrivateApi\Fill;
 
 class FillTest extends TestCase
 {
-    public function testNewAuth()
-    {
-        $auth = new Auth($this->apiKey, $this->apiSecret, $this->apiPassPhrase);
-        $this->assertInstanceOf(Auth::class, $auth);
-        return $auth;
-    }
+    protected $apiClass    = Fill::class;
+    protected $apiWithAuth = true;
 
     /**
-     * @depends testNewAuth
-     * @param Auth $auth
-     * @return Fill
-     */
-    public function testNewFill(Auth $auth)
-    {
-        $api = new Fill($auth);
-        $this->assertInstanceOf(Fill::class, $api);
-        return $api;
-    }
-
-    /**
-     * @depends testNewFill
+     * @dataProvider apiProvider
      * @param Fill $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -58,7 +41,7 @@ class FillTest extends TestCase
     }
 
     /**
-     * @depends testNewFill
+     * @dataProvider apiProvider
      * @param Fill $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException

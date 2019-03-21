@@ -2,34 +2,17 @@
 
 namespace KuCoin\SDK\Tests;
 
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\LoopInterface;
 
 class WebSocketFeedTest extends TestCase
 {
-    public function testNewAuth()
-    {
-        $auth = new Auth($this->apiKey, $this->apiSecret, $this->apiPassPhrase);
-        $this->assertInstanceOf(Auth::class, $auth);
-        return $auth;
-    }
+    protected $apiClass    = WebSocketFeed::class;
+    protected $apiWithAuth = true;
 
     /**
-     * @depends testNewAuth
-     * @param Auth $auth
-     * @return WebSocketFeed
-     */
-    public function testNewWebSocketFeed(Auth $auth)
-    {
-        $api = new WebSocketFeed($auth);
-        $this->assertInstanceOf(WebSocketFeed::class, $api);
-        return $api;
-    }
-
-    /**
-     * @depends testNewWebSocketFeed
+     * @dataProvider apiProvider
      * @param WebSocketFeed $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -51,7 +34,7 @@ class WebSocketFeedTest extends TestCase
     }
 
     /**
-     * @depends testNewWebSocketFeed
+     * @dataProvider apiProvider
      * @param WebSocketFeed $api
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -80,7 +63,7 @@ class WebSocketFeedTest extends TestCase
     }
 
     /**
-     * @depends testNewWebSocketFeed
+     * @dataProvider apiProvider
      * @param WebSocketFeed $api
      * @throws \Exception|\Throwable
      */
@@ -115,7 +98,7 @@ class WebSocketFeedTest extends TestCase
     }
 
     /**
-     * @depends testNewWebSocketFeed
+     * @dataProvider apiProvider
      * @param WebSocketFeed $api
      * @throws \Exception|\Throwable
      */
