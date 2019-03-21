@@ -39,7 +39,7 @@ KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ### Examples
 > See the [test case](tests) for more examples.
 
-- Example of API `without` authentication
+#### Example of API `without` authentication
 
 ```php
 use KuCoin\SDK\PublicApi\Time;
@@ -49,7 +49,7 @@ $timestamp = $api->timestamp();
 var_dump($timestamp);
 ```
 
-- Example of API `with` authentication
+#### Example of API `with` authentication
 
 ```php
 use KuCoin\SDK\Auth;
@@ -70,7 +70,7 @@ try {
 }
 ```
 
-- Example of WebSocket feed
+#### Example of WebSocket feed
 
 ```php
 use KuCoin\SDK\Auth;
@@ -98,7 +98,7 @@ $api->subscribePublicChannel($query, $channel, function (array $message, WebSock
 });
 ```
 
-- Coroutine HTTP client for asynchronous IO
+#### ⚡️Coroutine HTTP client for asynchronous IO
 
 ```bash
 pecl install swoole
@@ -112,7 +112,7 @@ use KuCoin\SDK\Http\SwooleHttp;
 // Require PHP 7.1+ and Swoole 2.1.2+
 // Require running in cli mode
 go(function () {
-    $api = new Time(null, new SwooleHttp());
+    $api = new Time(null, new SwooleHttp));
     $timestamp = $api->timestamp();
     var_dump($timestamp);
 });
