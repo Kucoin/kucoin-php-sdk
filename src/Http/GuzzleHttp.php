@@ -44,8 +44,8 @@ class GuzzleHttp extends BaseHttp
         $config = [
             'base_uri'        => $request->getBaseUri(),
             'timeout'         => $timeout,
-            'http_errors'     => false,
             'connect_timeout' => 30,
+            'http_errors'     => false,
             'verify'          => empty($this->config['skipVerifyTls']),
         ];
         $client = static::getClient($config);
