@@ -46,8 +46,8 @@ class SwooleHttp extends BaseHttp
             'base_uri'        => $request->getBaseUri(),
             'headers'         => $request->getHeaders() + ['Content-Type' => ContentType::JSON],
             'use_pool'        => true,
-            'ssl_verify_peer' => empty($this->config['skipVerifyTls']),
             'timeout'         => $timeout,
+            'ssl_verify_peer' => empty($this->config['skipVerifyTls']),
         ];
         $client = static::getClient($config);
 
