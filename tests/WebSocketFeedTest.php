@@ -69,9 +69,7 @@ class WebSocketFeedTest extends TestCase
      */
     public function testSubscribePublicChannel(WebSocketFeed $api)
     {
-        $query = [
-            'connectId' => uniqid('', true),
-        ];
+        $query = ['connectId' => uniqid('', true),];
         $channel = [
             'topic' => '/market/ticker:KCS-BTC',
             //'response' => true,
@@ -102,11 +100,42 @@ class WebSocketFeedTest extends TestCase
      * @param WebSocketFeed $api
      * @throws \Exception|\Throwable
      */
+    public function testSubscribePublicChannels(WebSocketFeed $api)
+    {
+        $query = ['connectId' => uniqid('', true),];
+        $channels = [
+            ['topic' => '/market/ticker:KCS-BTC',/*'response' => true,*/],
+            ['topic' => '/market/ticker:ETH-BTC',/*'response' => true,*/],
+        ];
+
+        $options = [
+//            'tls' => [
+//                'verify_peer' => false,
+//            ],
+        ];
+        $api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+            $this->assertInternalType('array', $message);
+            $this->assertArrayHasKey('type', $message);
+            $this->assertEquals('message', $message['type']);
+
+            // Dynamic output
+            fputs(STDIN, print_r($message, true));
+
+            // Stop for phpunit
+            $loop->stop();
+        }, function ($code, $reason) {
+            echo "OnClose: {$code} {$reason}\n";
+        }, $options);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param WebSocketFeed $api
+     * @throws \Exception|\Throwable
+     */
     public function testSubscribePrivateChannel(WebSocketFeed $api)
     {
-        $query = [
-            'connectId' => uniqid('', true),
-        ];
+        $query = ['connectId' => uniqid('', true),];
         $channel = [
             'topic' => '/market/match:KCS-BTC',
             //'response' => true,
@@ -118,6 +147,38 @@ class WebSocketFeedTest extends TestCase
 //            ],
         ];
         $api->subscribePrivateChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+            $this->assertInternalType('array', $message);
+            $this->assertArrayHasKey('type', $message);
+            $this->assertEquals('message', $message['type']);
+            // Dynamic output
+            fputs(STDIN, print_r($message, true));
+
+            // Stop for phpunit
+            $loop->stop();
+        }, function ($code, $reason) {
+            echo "OnClose: {$code} {$reason}\n";
+        }, $options);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param WebSocketFeed $api
+     * @throws \Exception|\Throwable
+     */
+    public function testSubscribePrivateChannels(WebSocketFeed $api)
+    {
+        $query = ['connectId' => uniqid('', true),];
+        $channels = [
+            ['topic' => '/market/match:KCS-BTC',/*'response' => true,*/],
+            ['topic' => '/market/match:ETH-BTC',/*'response' => true,*/],
+        ];
+
+        $options = [
+//            'tls' => [
+//                'verify_peer' => false,
+//            ],
+        ];
+        $api->subscribePrivateChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
             $this->assertInternalType('array', $message);
             $this->assertArrayHasKey('type', $message);
             $this->assertEquals('message', $message['type']);

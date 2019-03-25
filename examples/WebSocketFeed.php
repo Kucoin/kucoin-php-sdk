@@ -16,13 +16,17 @@ $auth = null;
 $api = new WebSocketFeed($auth);
 
 $query = ['connectId' => uniqid('', true)];
-$channel = [
-    'topic' => '/market/ticker:KCS-BTC',
-    //'response' => true,
+$channels = [
+    ['topic' => '/market/ticker:KCS-BTC'], // Subscribe multiple channels
+    ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
-$api->subscribePublicChannel($query, $channel, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     var_dump($message);
+
+    // Unsubscribe the channel
+    // $ws->send(json_encode($api->createUnsubscribeMessage('/market/ticker:ETH-BTC')));
+
     // Stop loop
     // $loop->stop();
 }, function ($code, $reason) {
