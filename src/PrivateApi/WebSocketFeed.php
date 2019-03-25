@@ -89,7 +89,7 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Subscribe some channels by url
+     * Subscribe multiple channels by url
      * @param array $server
      * @param array $channels
      * @param callable $onMessage
@@ -168,7 +168,7 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Subscribe some public channels
+     * Subscribe multiple public channels
      * @param array $query The query of websocket url
      * @param array $channels
      * @param callable $onMessage
@@ -197,7 +197,7 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Subscribe some private channels
+     * Subscribe multiple private channels
      * @param array $query The query of websocket url
      * @param array $channels
      * @param callable $onMessage
@@ -226,7 +226,7 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Subscribe a public channel
+     * Subscribe one public channel
      * @param array $query The query of websocket url
      * @param array $channel
      * @param callable $onMessage
@@ -240,7 +240,7 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Subscribe a private channel
+     * Subscribe one private channel
      * @param array $query The query of websocket url
      * @param array $channel
      * @param callable $onMessage

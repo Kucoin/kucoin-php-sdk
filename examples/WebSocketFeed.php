@@ -17,7 +17,7 @@ $api = new WebSocketFeed($auth);
 
 $query = ['connectId' => uniqid('', true)];
 $channels = [
-    ['topic' => '/market/ticker:KCS-BTC'],
+    ['topic' => '/market/ticker:KCS-BTC'], // Subscribe multiple channels
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
