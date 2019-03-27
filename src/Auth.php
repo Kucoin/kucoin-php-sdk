@@ -29,7 +29,7 @@ class Auth implements IAuth
 
     public function getHeaders($method, $requestUri, $body)
     {
-        $timestamp = intval(microtime(true) * 1000);
+        $timestamp = floor(microtime(true) * 1000);
         $headers = [
             'KC-API-KEY'        => $this->key,
             'KC-API-TIMESTAMP'  => $timestamp,
