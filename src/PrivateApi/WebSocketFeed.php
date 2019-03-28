@@ -144,9 +144,11 @@ class WebSocketFeed extends KuCoinApi
                     case 'error':
                         $loop->cancelTimer($pingTimer);
                         throw new BusinessException('Error: ' . $msg);
-                    default:
-                        // 'message' and the others
+                    case 'message':
                         call_user_func($onMessage, $msgArray, $ws, $loop);
+                        break;
+                    default:
+                        throw new BusinessException('Unknown type: ' . $msgArray['type']);
                         break;
                 }
             });
