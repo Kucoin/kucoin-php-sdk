@@ -149,7 +149,6 @@ class WebSocketFeed extends KuCoinApi
                         break;
                     default:
                         throw new BusinessException('Unknown type: ' . $msgArray['type']);
-                        break;
                 }
             });
             $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer) {
