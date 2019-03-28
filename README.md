@@ -103,7 +103,7 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
 ```
 
 #### ⚡️Coroutine HTTP client for asynchronous IO
-> See the [benchmark](examples/BenchmarkCoroutine.php).
+> See the [benchmark](examples/BenchmarkCoroutine.php), almost `20x` faster than `curl`.
 
 ```bash
 pecl install swoole
