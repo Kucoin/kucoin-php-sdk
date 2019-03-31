@@ -5,8 +5,10 @@
 [![Latest Version](https://img.shields.io/github/release/Kucoin/kucoin-php-sdk.svg)](https://github.com/Kucoin/kucoin-php-sdk/releases)
 [![PHP Version](https://img.shields.io/packagist/php-v/kucoin/kucoin-php-sdk.svg?color=green)](https://secure.php.net)
 [![Build Status](https://travis-ci.org/Kucoin/kucoin-php-sdk.svg?branch=master)](https://travis-ci.org/Kucoin/kucoin-php-sdk)
-[![Packagist](https://img.shields.io/packagist/dt/Kucoin/kucoin-php-sdk.svg)](https://packagist.org/packages/kucoin/kucoin-php-sdk)
-[![License](https://img.shields.io/packagist/l/kucoin/kucoin-php-sdk.svg)](LICENSE)
+<!-- [![Packagist](https://img.shields.io/packagist/dt/Kucoin/kucoin-php-sdk.svg)](https://packagist.org/packages/kucoin/kucoin-php-sdk) -->
+<!-- [![License](https://img.shields.io/packagist/l/kucoin/kucoin-php-sdk.svg)](LICENSE) -->
+[![Total Downloads](https://poser.pugx.org/kucoin/kucoin-php-sdk/downloads)](https://packagist.org/packages/kucoin/kucoin-php-sdk)
+[![License](https://poser.pugx.org/kucoin/kucoin-php-sdk/license)](LICENSE)
 
 ## Requirements
 
