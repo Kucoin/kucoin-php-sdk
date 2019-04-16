@@ -64,7 +64,7 @@ class GuzzleHttp extends BaseHttp
             case Request::METHOD_POST:
                 if ($hasParam) {
                     $options['headers']['Content-Type'] = 'application/json';
-                    $options['body'] = json_encode($params, JSON_UNESCAPED_SLASHES);
+                    $options['body'] = json_encode($params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                 }
                 break;
             default:
