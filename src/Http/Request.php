@@ -156,7 +156,7 @@ class Request
             if ($this->isGetOrDeleteMethod()) {
                 $this->bodyParams = '';
             } else {
-                $this->bodyParams = json_encode($this->params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $this->bodyParams = empty($this->params) ? '' : json_encode($this->params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
         }
         return $this->bodyParams;
