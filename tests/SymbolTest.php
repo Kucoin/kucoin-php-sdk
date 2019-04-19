@@ -28,8 +28,10 @@ class SymbolTest extends TestCase
             $this->assertArrayHasKey('baseMinSize', $item);
             $this->assertArrayHasKey('quoteMinSize', $item);
             $this->assertArrayHasKey('enableTrading', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
             $this->assertArrayHasKey('priceIncrement', $item);
             $this->assertArrayHasKey('name', $item);
+            $this->assertArrayHasKey('market', $item);
             $this->assertArrayHasKey('baseIncrement', $item);
             $this->assertArrayHasKey('baseMaxSize', $item);
             $this->assertArrayHasKey('baseCurrency', $item);
