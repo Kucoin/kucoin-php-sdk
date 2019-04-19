@@ -62,11 +62,7 @@ class SwooleHttp extends BaseHttp
                     break;
                 case Request::METHOD_PUT:
                 case Request::METHOD_POST:
-                    $params = $request->getParams();
-                    $data = null;
-                    if (!empty($params)) {
-                        $data = json_encode($params, JSON_UNESCAPED_SLASHES);
-                    }
+                    $data = $request->getBodyParams();
                     /**@var \Swlib\Saber\Response $saberResponse */
                     $saberResponse = $client->{strtolower($method)}($requestUri, $data);
                     break;
