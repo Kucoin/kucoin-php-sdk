@@ -24,7 +24,7 @@ class OrderTest extends TestCase
             'type'      => 'limit',
             'side'      => 'buy',
             'symbol'    => 'BTC-USDT',
-            'remark'    => 'Test Order ' . time(),
+            'remark'    => '\中文备注 ',
 
             'price' => 100,
             'size'  => 0.001,

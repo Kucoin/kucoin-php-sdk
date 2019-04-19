@@ -62,7 +62,7 @@ class ApiResponse
                 '[HTTP]Failure: status code is NOT 200, %s %s with body=%s, respond code=%d body=%s',
                 $this->httpResponse->getRequest()->getMethod(),
                 $this->httpResponse->getRequest()->getRequestUri(),
-                json_encode($this->httpResponse->getRequest()->getBodyParams(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                $this->httpResponse->getRequest()->getBodyParams(),
                 $this->httpResponse->getStatusCode(),
                 $this->httpResponse->getBody()
             );
@@ -78,7 +78,7 @@ class ApiResponse
                 ApiCode::SUCCESS,
                 $this->httpResponse->getRequest()->getMethod(),
                 $this->httpResponse->getRequest()->getRequestUri(),
-                json_encode($this->httpResponse->getRequest()->getBodyParams(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                $this->httpResponse->getRequest()->getBodyParams(),
                 $this->getApiCode(),
                 $this->getApiMessage(),
                 $this->httpResponse->getBody()

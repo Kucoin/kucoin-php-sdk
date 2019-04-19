@@ -40,6 +40,11 @@ class Request
     protected $params = [];
 
     /**
+     * @var string
+     */
+    protected $bodyParams = null;
+
+    /**
      * @return string
      */
     public function getMethod()
@@ -143,14 +148,18 @@ class Request
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getBodyParams()
     {
-        if ($this->isGetOrDeleteMethod()) {
-            return [];
+        if ($this->bodyParams === null) {
+            if ($this->isGetOrDeleteMethod()) {
+                $this->bodyParams = '';
+            } else {
+                $this->bodyParams = json_encode($this->params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            }
         }
-        return $this->params;
+        return $this->bodyParams;
     }
 
     protected function isGetOrDeleteMethod()
