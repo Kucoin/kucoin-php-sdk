@@ -86,17 +86,16 @@ class DepositTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetV1HistoricalDeposits(Deposit $api)
+    public function testGetV1Deposits(Deposit $api)
     {
-        $data = $api->getV1HistoricalDeposits(['currency' => 'BTC'], ['currentPage' => 1, 'pageSize' => 10]);
+        $data = $api->getV1Deposits(['currency' => 'ETH'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
             $this->assertArrayHasKey('amount', $item);
             $this->assertArrayHasKey('currency', $item);
             $this->assertArrayHasKey('isInner', $item);
             $this->assertArrayHasKey('walletTxId', $item);
-            $this->assertArrayHasKey('remark', $item);
-            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('createAt', $item);
             $this->assertArrayHasKey('status', $item);
         }
     }
