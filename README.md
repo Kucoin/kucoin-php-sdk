@@ -153,6 +153,7 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Deposit::createAddress() | YES | https://docs.kucoin.com/#create-deposit-address |
 | KuCoin\SDK\PrivateApi\Deposit::getAddress() | YES | https://docs.kucoin.com/#get-deposit-address |
 | KuCoin\SDK\PrivateApi\Deposit::getDeposits() | YES | https://docs.kucoin.com/#get-deposit-list |
+| KuCoin\SDK\PrivateApi\Deposit::getV1HistoricalDeposits() | YES | https://docs.kucoin.com/#get-v1-historical-deposits-list |
 
 </details>
 
