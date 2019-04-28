@@ -106,4 +106,58 @@ class Account extends KuCoinApi
         );
         return $response->getApiData();
     }
+
+    /**
+     * Get user info of all sub-accounts
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubAccountUsers()
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/sub/user');
+        return $response->getApiData();
+    }
+
+    /**
+     * Get account balance of a sub-account
+     * @param string $subUserId
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubAccountDetail($subUserId)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/sub-accounts/' . $subUserId);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get the aggregated balance of all sub-accounts of the current user
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubAccountList()
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/sub-accounts');
+        return $response->getApiData();
+    }
+
+    /**
+     * Transfer between master account and sub-account
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function subTransfer(array $params)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/accounts/sub-transfer', $params);
+        return $response->getApiData();
+    }
 }

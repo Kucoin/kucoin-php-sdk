@@ -138,6 +138,10 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Account::getLedgers() | YES | https://docs.kucoin.com/#get-account-ledgers |
 | KuCoin\SDK\PrivateApi\Account::getHolds() | YES | https://docs.kucoin.com/#get-holds |
 | KuCoin\SDK\PrivateApi\Account::innerTransfer() | YES | https://docs.kucoin.com/#inner-transfer |
+| KuCoin\SDK\PrivateApi\Account::getSubAccountUsers() | YES | https://docs.kucoin.com/#get-user-info-of-all-sub-accounts |
+| KuCoin\SDK\PrivateApi\Account::getSubAccountDetail() | YES | https://docs.kucoin.com/#get-account-balance-of-a-sub-account |
+| KuCoin\SDK\PrivateApi\Account::getSubAccountList() | YES | https://docs.kucoin.com/#get-the-aggregated-balance-of-all-sub-accounts-of-the-current-user |
+| KuCoin\SDK\PrivateApi\Account::subTransfer() | YES | https://docs.kucoin.com/#transfer-between-master-account-and-sub-account |
 
 </details>
 
@@ -149,6 +153,7 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Deposit::createAddress() | YES | https://docs.kucoin.com/#create-deposit-address |
 | KuCoin\SDK\PrivateApi\Deposit::getAddress() | YES | https://docs.kucoin.com/#get-deposit-address |
 | KuCoin\SDK\PrivateApi\Deposit::getDeposits() | YES | https://docs.kucoin.com/#get-deposit-list |
+| KuCoin\SDK\PrivateApi\Deposit::getV1Deposits() | YES | https://docs.kucoin.com/#get-v1-historical-deposits-list |
 
 </details>
 
@@ -171,6 +176,7 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::cancel() | YES | https://docs.kucoin.com/#cancel-an-order |
 | KuCoin\SDK\PrivateApi\Order::cancelAll() | YES | https://docs.kucoin.com/#cancel-all-orders |
 | KuCoin\SDK\PrivateApi\Order::getList() | YES | https://docs.kucoin.com/#list-orders |
+| KuCoin\SDK\PrivateApi\Order::getV1List() | YES | https://docs.kucoin.com/#get-v1-historical-orders-list |
 | KuCoin\SDK\PrivateApi\Order::getDetail() | YES | https://docs.kucoin.com/#get-an-order |
 | KuCoin\SDK\PrivateApi\Order::getRecentList() | YES | https://docs.kucoin.com/#recent-orders |
 
@@ -197,6 +203,7 @@ go(function () {
 | -------- | -------- | -------- |
 | KuCoin\SDK\PrivateApi\Withdrawal::getQuotas() | YES | https://docs.kucoin.com/#get-withdrawal-quotas |
 | KuCoin\SDK\PrivateApi\Withdrawal::getList() | YES | https://docs.kucoin.com/#get-withdrawals-list |
+| KuCoin\SDK\PrivateApi\Withdrawal::getV1List() | YES | https://docs.kucoin.com/#get-v1-historical-withdrawals-list |
 | KuCoin\SDK\PrivateApi\Withdrawal::apply() | YES | https://docs.kucoin.com/#apply-withdraw |
 | KuCoin\SDK\PrivateApi\Withdrawal::cancel() | YES | https://docs.kucoin.com/#cancel-withdrawal |
 

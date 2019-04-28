@@ -85,7 +85,37 @@ class WithdrawalTest extends TestCase
             $this->assertArrayHasKey('createdAt', $item);
             $this->assertArrayHasKey('updatedAt', $item);
         }
-        return $data['items'];
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Withdrawal $api
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetV1List(Withdrawal $api)
+    {
+        $params = [
+            'currency' => 'BTC',
+        ];
+        $pagination = [
+            'currentPage' => 1,
+            'pageSize'    => 10,
+        ];
+        $data = $api->getV1List($params, $pagination);
+        $this->assertPagination($data);
+        foreach ($data['items'] as $item) {
+            $this->assertInternalType('array', $item);
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('address', $item);
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('isInner', $item);
+            $this->assertArrayHasKey('walletTxId', $item);
+            $this->assertArrayHasKey('createAt', $item);
+            $this->assertArrayHasKey('status', $item);
+        }
     }
 
     /**

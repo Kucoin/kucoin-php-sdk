@@ -153,7 +153,6 @@ class AccountTest extends TestCase
 
     /**
      * @dataProvider apiProvider
-     * @depends      testGetMainList
      * @param Account $api
      * @throws BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -174,6 +173,116 @@ class AccountTest extends TestCase
                 $this->assertArrayHasKey('updatedAt', $item);
             }
         }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @return array
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSubAccountUsers(Account $api)
+    {
+        $users = $api->getSubAccountUsers();
+        $this->assertInternalType('array', $users);
+        foreach ($users as $item) {
+            $this->assertArrayHasKey('userId', $item);
+            $this->assertArrayHasKey('subName', $item);
+            $this->assertArrayHasKey('remarks', $item);
+        }
+        return $users;
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSubAccountList(Account $api)
+    {
+        $accounts = $api->getSubAccountList();
+        $this->assertInternalType('array', $accounts);
+        foreach ($accounts as $account) {
+            $this->assertInternalType('array', $account);
+            $this->assertArrayHasKey('subUserId', $account);
+            $this->assertArrayHasKey('subName', $account);
+            $this->assertArrayHasKey('mainAccounts', $account);
+            $this->assertArrayHasKey('tradeAccounts', $account);
+            $this->assertInternalType('array', $account['mainAccounts']);
+            $this->assertInternalType('array', $account['tradeAccounts']);
+            foreach ($account['mainAccounts'] as $item) {
+                $this->assertArrayHasKey('currency', $item);
+                $this->assertArrayHasKey('balance', $item);
+                $this->assertArrayHasKey('available', $item);
+                $this->assertArrayHasKey('holds', $item);
+            }
+            foreach ($account['tradeAccounts'] as $item) {
+                $this->assertArrayHasKey('currency', $item);
+                $this->assertArrayHasKey('balance', $item);
+                $this->assertArrayHasKey('available', $item);
+                $this->assertArrayHasKey('holds', $item);
+            }
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSubAccountDetail(Account $api)
+    {
+        $users = $api->getSubAccountUsers();
+        if (empty($users)) {
+            return;
+        }
+        $account = $api->getSubAccountDetail($users[0]['userId']);
+        $this->assertInternalType('array', $account);
+        $this->assertArrayHasKey('subUserId', $account);
+        $this->assertArrayHasKey('subName', $account);
+        $this->assertArrayHasKey('mainAccounts', $account);
+        $this->assertArrayHasKey('tradeAccounts', $account);
+        $this->assertInternalType('array', $account['mainAccounts']);
+        $this->assertInternalType('array', $account['tradeAccounts']);
+        foreach ($account['mainAccounts'] as $item) {
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('balance', $item);
+            $this->assertArrayHasKey('available', $item);
+            $this->assertArrayHasKey('holds', $item);
+        }
+        foreach ($account['tradeAccounts'] as $item) {
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('balance', $item);
+            $this->assertArrayHasKey('available', $item);
+            $this->assertArrayHasKey('holds', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testSubTransfer(Account $api)
+    {
+        $transfer = [
+            'clientOid' => uniqid(),
+            'amount'    => 1,
+            'direction' => 'OUT',
+            'currency'  => 'KCS',
+            'subUserId' => '5cc5b31c38300c336230d071',
+        ];
+        $result = $api->subTransfer($transfer);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('orderId', $result);
     }
 
 }
