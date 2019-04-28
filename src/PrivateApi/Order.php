@@ -71,6 +71,21 @@ class Order extends KuCoinApi
     }
 
     /**
+     * Get v1 historical orders list
+     * @param array $params
+     * @param array $pagination
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getV1List(array $params = [], array $pagination = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/hist-orders', $params + $pagination);
+        return $response->getApiData();
+    }
+
+    /**
      * Get an order
      * @param $orderId
      * @return array

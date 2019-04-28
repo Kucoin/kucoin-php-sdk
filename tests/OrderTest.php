@@ -107,6 +107,29 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
+    public function testGetV1List(Order $api)
+    {
+        $data = $api->getV1List(['symbol' => 'BTC-USDT'], ['currentPage' => 1, 'pageSize' => 10]);
+        $this->assertPagination($data);
+        foreach ($data['items'] as $item) {
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('side', $item);
+            $this->assertArrayHasKey('dealValue', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('id', $item);
+            $this->assertArrayHasKey('dealPrice', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
     public function testGetDetail(Order $api)
     {
         $data = $api->getList(['symbol' => 'BTC-USDT'], ['currentPage' => 1, 'pageSize' => 10]);
