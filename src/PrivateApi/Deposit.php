@@ -15,28 +15,30 @@ class Deposit extends KuCoinApi
     /**
      * Create deposit address
      * @param string $currency
+     * @param string|null $chain
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function createAddress($currency)
+    public function createAddress($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/deposit-addresses', compact('currency'));
+        $response = $this->call(Request::METHOD_POST, '/api/v1/deposit-addresses', compact('currency', 'chain'));
         return $response->getApiData();
     }
 
     /**
      * Get deposit address of currency for deposit
      * @param string $currency
+     * @param string|null $chain
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getAddress($currency)
+    public function getAddress($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/deposit-addresses', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, '/api/v1/deposit-addresses', compact('currency', 'chain'));
         return $response->getApiData();
     }
 
