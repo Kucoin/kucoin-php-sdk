@@ -28,14 +28,15 @@ class Currency extends KuCoinApi
     /**
      * Get the details of a currency
      * @param string $currency
+     * @param string|null $chain
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getDetail($currency)
+    public function getDetail($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/currencies/' . $currency);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/currencies/' . $currency, compact('chain'));
         return $response->getApiData();
     }
 

@@ -15,14 +15,15 @@ class Withdrawal extends KuCoinApi
     /**
      * Get withdraw quotas
      * @param string $currency
+     * @param string|null $chain
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getQuotas($currency)
+    public function getQuotas($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/withdrawals/quotas', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, '/api/v1/withdrawals/quotas', compact('currency', 'chain'));
         return $response->getApiData();
     }
 
