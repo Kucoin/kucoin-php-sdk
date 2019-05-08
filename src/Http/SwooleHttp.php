@@ -45,11 +45,11 @@ class SwooleHttp extends BaseHttp
         $config = [
             'base_uri'        => $request->getBaseUri(),
             'timeout'         => $timeout,
-            'headers'         => $request->getHeaders() + ['Content-Type' => ContentType::JSON],
             'use_pool'        => true,
             'ssl_verify_peer' => empty($this->config['skipVerifyTls']),
         ];
         $client = static::getClient($config);
+        $config['headers'] = $request->getHeaders() + ['Content-Type' => ContentType::JSON];
 
         $method = $request->getMethod();
         $requestUri = $request->getRequestUri();
