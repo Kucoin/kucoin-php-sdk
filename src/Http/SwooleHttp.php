@@ -49,7 +49,7 @@ class SwooleHttp extends BaseHttp
             'ssl_verify_peer' => empty($this->config['skipVerifyTls']),
         ];
         $client = static::getClient($config);
-        $config['headers'] = $request->getHeaders() + ['Content-Type' => ContentType::JSON];
+        $options['headers'] = $request->getHeaders() + ['Content-Type' => ContentType::JSON];
 
         $method = $request->getMethod();
         $requestUri = $request->getRequestUri();
@@ -58,13 +58,13 @@ class SwooleHttp extends BaseHttp
                 case Request::METHOD_GET:
                 case Request::METHOD_DELETE:
                     /**@var \Swlib\Saber\Response $saberResponse */
-                    $saberResponse = $client->{strtolower($method)}($requestUri);
+                    $saberResponse = $client->{strtolower($method)}($requestUri, $options);
                     break;
                 case Request::METHOD_PUT:
                 case Request::METHOD_POST:
                     $data = $request->getBodyParams();
                     /**@var \Swlib\Saber\Response $saberResponse */
-                    $saberResponse = $client->{strtolower($method)}($requestUri, $data);
+                    $saberResponse = $client->{strtolower($method)}($requestUri, $data, $options);
                     break;
                 default:
                     $exception = new HttpException('Unsupported method ' . $method, 0);
