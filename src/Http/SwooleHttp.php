@@ -5,6 +5,7 @@ namespace KuCoin\SDK\Http;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\InvalidApiUriException;
 use Swlib\Http\ContentType;
+use Swlib\Http\Exception\RequestException;
 use Swlib\Saber;
 
 class SwooleHttp extends BaseHttp
@@ -75,6 +76,12 @@ class SwooleHttp extends BaseHttp
             $response->setRequest($request);
             return $response;
         } catch (\Exception $e) {
+            if ($e instanceof RequestException && $e->hasResponse()) {
+                $saberResponse = $e->getResponse();
+                $response = new Response($saberResponse->getBody()->__toString(), $saberResponse->getStatusCode(), $saberResponse->getHeaders());
+                $response->setRequest($request);
+                return $response;
+            }
             $exception = new HttpException($e->getMessage(), $e->getCode(), $e);
             $exception->setRequest($request);
             throw $exception;
