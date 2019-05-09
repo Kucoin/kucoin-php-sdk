@@ -14,7 +14,7 @@
 
 | Dependency | Requirement |
 | -------- | -------- |
-| [PHP](https://secure.php.net/manual/en/install.php) | `>=5.5.0` `PHP7+ is better` |
+| [PHP](https://secure.php.net/manual/en/install.php) | `>=5.5.0` `Recommend PHP7+` |
 | [guzzlehttp/guzzle](https://github.com/guzzle/guzzle) | `~6.0` |
 
 ## Install
