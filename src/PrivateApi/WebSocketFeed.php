@@ -117,7 +117,7 @@ class WebSocketFeed extends KuCoinApi
                     $ping = $this->createPingMessage();
                     $pingStr = json_encode($ping);
                     if (self::isDebugMode()) {
-                        $this->getLogger()->debug(sprintf('Sent a WebSocket message: %s', $pingStr));
+                        static::getLogger()->debug(sprintf('Sent a WebSocket message: %s', $pingStr));
                     }
                     // fputs(STDIN, print_r($ping, true));
                     $ws->send($pingStr);
@@ -128,7 +128,7 @@ class WebSocketFeed extends KuCoinApi
             $ws->on('message', function (MessageInterface $msg) use ($server, $ws, $channels, $onMessage, $loop, $pingTimer) {
                 $msgStr = $msg->__toString();
                 if (self::isDebugMode()) {
-                    $this->getLogger()->debug(sprintf('Received a WebSocket message: %s', $msgStr));
+                    static::getLogger()->debug(sprintf('Received a WebSocket message: %s', $msgStr));
                 }
                 $msgArray = json_decode($msgStr, true);
                 if (!isset($msgArray['type'])) {

@@ -29,6 +29,21 @@ abstract class Api
     protected static $debugMode = false;
 
     /**
+     * @var string
+     */
+    protected static $logPath = '/tmp';
+
+    /**
+     * @var LoggerInterface $logger
+     */
+    protected static $logger;
+
+    /**
+     * @var int
+     */
+    protected static $logLevel = Logger::DEBUG;
+
+    /**
      * @var IAuth $auth
      */
     protected $auth;
@@ -37,11 +52,6 @@ abstract class Api
      * @var IHttp $http
      */
     protected $http;
-
-    /**
-     * @var LoggerInterface $logger
-     */
-    protected $logger;
 
     public function __construct(IAuth $auth = null, IHttp $http = null)
     {
@@ -103,25 +113,57 @@ abstract class Api
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(LoggerInterface $logger)
+    public static function setLogger(LoggerInterface $logger)
     {
-        $this->logger = $logger;
+        self::$logger = $logger;
     }
 
     /**
      * @return Logger|LoggerInterface
      * @throws \Exception
      */
-    public function getLogger()
+    public static function getLogger()
     {
-        if ($this->logger === null) {
-            $this->logger = new Logger('kucoin-sdk');
-            $handler = new RotatingFileHandler('/tmp/kucoin-sdk.log', 0, Logger::DEBUG);
+        if (self::$logger === null) {
+            self::$logger = new Logger('kucoin-sdk');
+            $handler = new RotatingFileHandler(static::getLogPath() . '/kucoin-sdk.log', 0, static::$logLevel);
             $formatter = new LineFormatter(null, null, false, true);
             $handler->setFormatter($formatter);
-            $this->logger->pushHandler($handler);
+            self::$logger->pushHandler($handler);
         }
-        return $this->logger;
+        return self::$logger;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getLogPath()
+    {
+        return self::$logPath;
+    }
+
+    /**
+     * @param string $logPath
+     */
+    public static function setLogPath($logPath)
+    {
+        self::$logPath = $logPath;
+    }
+
+    /**
+     * @return int
+     */
+    public static function getLogLevel()
+    {
+        return self::$logLevel;
+    }
+
+    /**
+     * @param int $logLevel
+     */
+    public static function setLogLevel($logLevel)
+    {
+        self::$logLevel = $logLevel;
     }
 
     /**
@@ -155,11 +197,11 @@ abstract class Api
         $requestId = uniqid();
 
         if (self::isDebugMode()) {
-            $this->getLogger()->debug(sprintf('Sent a HTTP request#%s: %s', $requestId, $request));
+            static::getLogger()->debug(sprintf('Sent a HTTP request#%s: %s', $requestId, $request));
         }
         $response = $this->http->request($request, $timeout);
         if (self::isDebugMode()) {
-            $this->getLogger()->debug(sprintf('Received a HTTP response#%s: %s', $requestId, $response));
+            static::getLogger()->debug(sprintf('Received a HTTP response#%s: %s', $requestId, $response));
         }
 
         return $response;

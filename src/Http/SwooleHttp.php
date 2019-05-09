@@ -7,10 +7,17 @@ use KuCoin\SDK\Exceptions\InvalidApiUriException;
 use Swlib\Http\ContentType;
 use Swlib\Http\Exception\RequestException;
 use Swlib\Saber;
+use Swoole\Runtime;
 
 class SwooleHttp extends BaseHttp
 {
     protected static $clients = [];
+
+    public function __construct(array $config = [])
+    {
+        parent::__construct($config);
+        Runtime::enableCoroutine();
+    }
 
     /**
      * @param array $config
