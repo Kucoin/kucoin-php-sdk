@@ -47,7 +47,7 @@ KuCoinApi::setDebugMode(true);
 // Logging in your code
 // KuCoinApi::setLogPath('/tmp');
 // KuCoinApi::setLogLevel(Monolog\Logger::DEBUG);
-KuCoinApi::getLogger()->debug('I\'am a debug message');
+KuCoinApi::getLogger()->debug("I'am a debug message");
 ```
 
 ### Examples
