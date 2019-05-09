@@ -72,7 +72,6 @@ class WebSocketFeedTest extends TestCase
         $query = ['connectId' => uniqid('', true),];
         $channel = [
             'topic' => '/market/ticker:KCS-BTC',
-            //'response' => true,
         ];
 
         $options = [
@@ -104,8 +103,8 @@ class WebSocketFeedTest extends TestCase
     {
         $query = ['connectId' => uniqid('', true),];
         $channels = [
-            ['topic' => '/market/ticker:KCS-BTC',/*'response' => true,*/],
-            ['topic' => '/market/ticker:ETH-BTC',/*'response' => true,*/],
+            ['topic' => '/market/ticker:KCS-BTC'],
+            ['topic' => '/market/ticker:ETH-BTC'],
         ];
 
         $options = [
