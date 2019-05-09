@@ -19,7 +19,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $apiPassPhrase = getenv('API_PASSPHRASE');
         $apiBaseUri = getenv('API_BASE_URI');
         $apiSkipVerifyTls = (bool)getenv('API_SKIP_VERIFY_TLS');
+        $apiDebugMode = (bool)getenv('API_DEBUG_MODE');
         KuCoinApi::setSkipVerifyTls($apiSkipVerifyTls);
+        KuCoinApi::setDebugMode($apiDebugMode);
         if ($apiBaseUri) {
             KuCoinApi::setBaseUri($apiBaseUri);
         }

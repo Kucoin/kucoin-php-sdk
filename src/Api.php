@@ -6,6 +6,10 @@ use KuCoin\SDK\Http\GuzzleHttp;
 use KuCoin\SDK\Http\IHttp;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\Http\Response;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 abstract class Api
 {
@@ -20,6 +24,11 @@ abstract class Api
     protected static $skipVerifyTls = false;
 
     /**
+     * @var bool
+     */
+    protected static $debugMode = false;
+
+    /**
      * @var IAuth $auth
      */
     protected $auth;
@@ -28,6 +37,11 @@ abstract class Api
      * @var IHttp $http
      */
     protected $http;
+
+    /**
+     * @var LoggerInterface $logger
+     */
+    protected $logger;
 
     public function __construct(IAuth $auth = null, IHttp $http = null)
     {
@@ -71,6 +85,46 @@ abstract class Api
     }
 
     /**
+     * @return bool
+     */
+    public static function isDebugMode()
+    {
+        return self::$debugMode;
+    }
+
+    /**
+     * @param bool $debugMode
+     */
+    public static function setDebugMode($debugMode)
+    {
+        self::$debugMode = $debugMode;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @return Logger|LoggerInterface
+     * @throws \Exception
+     */
+    public function getLogger()
+    {
+        if ($this->logger === null) {
+            $this->logger = new Logger('kucoin-sdk');
+            $handler = new RotatingFileHandler('/tmp/kucoin-sdk.log', 0, Logger::DEBUG);
+            $formatter = new LineFormatter(null, null, false, true);
+            $handler->setFormatter($formatter);
+            $this->logger->pushHandler($handler);
+        }
+        return $this->logger;
+    }
+
+    /**
      * @param string $method
      * @param string $uri
      * @param array $params
@@ -98,7 +152,16 @@ abstract class Api
         }
         $request->setHeaders($headers);
 
+        $requestId = uniqid();
+
+        if (self::isDebugMode()) {
+            $this->getLogger()->debug(sprintf('Sent a HTTP request#%s: %s', $requestId, $request));
+        }
         $response = $this->http->request($request, $timeout);
+        if (self::isDebugMode()) {
+            $this->getLogger()->debug(sprintf('Received a HTTP response#%s: %s', $requestId, $response));
+        }
+
         return $response;
     }
 }
