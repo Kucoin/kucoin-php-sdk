@@ -41,7 +41,7 @@ KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ### Debug mode & logging
 
 ```php
-// Debug mode will record the logs of API and WebSocket to files in the directory "KuCoinApi::getDefaultLogPath()" according to the minimum log level "KuCoinApi::getLogLevel()".
+// Debug mode will record the logs of API and WebSocket to files in the directory "KuCoinApi::getLogPath()" according to the minimum log level "KuCoinApi::getLogLevel()".
 KuCoinApi::setDebugMode(true);
 
 // Logging in your code
