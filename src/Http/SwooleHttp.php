@@ -50,7 +50,7 @@ class SwooleHttp extends BaseHttp
             'ssl_verify_peer' => empty($this->config['skipVerifyTls']),
         ];
         $client = static::getClient($config);
-        $options['headers'] = $request->getHeaders() + ['Content-Type' => ContentType::JSON];
+        $options['headers'] = $request->getHeaders();
 
         $method = $request->getMethod();
         $requestUri = $request->getRequestUri();
@@ -64,6 +64,7 @@ class SwooleHttp extends BaseHttp
                 case Request::METHOD_PUT:
                 case Request::METHOD_POST:
                     $data = $request->getBodyParams();
+                    $options['headers']['Content-Type'] = ContentType::JSON;
                     /**@var \Swlib\Saber\Response $saberResponse */
                     $saberResponse = $client->{strtolower($method)}($requestUri, $data, $options);
                     break;
