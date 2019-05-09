@@ -38,6 +38,18 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
+### Debug mode & logging
+
+```php
+// Debug mode will record the logs of API and WebSocket to files in the directory "KuCoinApi::getDefaultLogPath()" according to the minimum log level "KuCoinApi::getLogLevel()".
+KuCoinApi::setDebugMode(true);
+
+// Logging in your code
+// KuCoinApi::setLogPath('/tmp');
+// KuCoinApi::setLogLevel(Monolog\Logger::DEBUG);
+KuCoinApi::getLogger()->debug('I\'am a debug message');
+```
+
 ### Examples
 > See the [test case](tests) for more examples.
 
@@ -251,6 +263,12 @@ go(function () {
 > Modify your API key in `phpunit.xml` first.
 
 ```shell
+# Add your API configuration items into the environmental variable first
+export API_BASE_URI=https://openapi-v2.kucoin.com
+export API_KEY=key
+export API_SECRET=secret
+export API_PASSPHRASE=passphrase
+
 composer test
 ```
 

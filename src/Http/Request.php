@@ -166,4 +166,12 @@ class Request
     {
         return in_array($this->getMethod(), [self::METHOD_GET, self::METHOD_DELETE], true);
     }
+
+    public function __toString()
+    {
+        $str = $this->getMethod() . ' ' . $this->getRequestUri();
+        $str .= ' with headers=' . json_encode($this->getHeaders(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $str .= ' with body=' . $this->getBodyParams();
+        return $str;
+    }
 }

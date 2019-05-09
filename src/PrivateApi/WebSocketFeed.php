@@ -115,14 +115,21 @@ class WebSocketFeed extends KuCoinApi
             $pingTimer = $loop->addPeriodicTimer($server['pingInterval'] / 1000 - 1, function () use ($ws) {
                 try {
                     $ping = $this->createPingMessage();
+                    $pingStr = json_encode($ping);
+                    if (self::isDebugMode()) {
+                        static::getLogger()->debug(sprintf('Sent a WebSocket message: %s', $pingStr));
+                    }
                     // fputs(STDIN, print_r($ping, true));
-                    $ws->send(json_encode($ping));
+                    $ws->send($pingStr);
                 } catch (\Exception $e) {
                     // Ignore this exception
                 }
             });
             $ws->on('message', function (MessageInterface $msg) use ($server, $ws, $channels, $onMessage, $loop, $pingTimer) {
                 $msgStr = $msg->__toString();
+                if (self::isDebugMode()) {
+                    static::getLogger()->debug(sprintf('Received a WebSocket message: %s', $msgStr));
+                }
                 $msgArray = json_decode($msgStr, true);
                 if (!isset($msgArray['type'])) {
                     throw new BusinessException('Invalid format of message without type: ' . $msgStr);

@@ -61,4 +61,12 @@ class Response
         return $this->statusCode == 200;
     }
 
+    public function __toString()
+    {
+        $str = 'respond ' . $this->getStatusCode();
+        $str .= ' with headers=' . json_encode($this->getHeaders(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $str .= ' with body=' . $this->getBody(false);
+        return $str;
+    }
+
 }

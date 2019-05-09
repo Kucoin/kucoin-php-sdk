@@ -70,10 +70,7 @@ class WebSocketFeedTest extends TestCase
     public function testSubscribePublicChannel(WebSocketFeed $api)
     {
         $query = ['connectId' => uniqid('', true),];
-        $channel = [
-            'topic' => '/market/ticker:KCS-BTC',
-            //'response' => true,
-        ];
+        $channel = ['topic' => '/market/ticker:KCS-BTC'];
 
         $options = [
 //            'tls' => [
@@ -104,8 +101,8 @@ class WebSocketFeedTest extends TestCase
     {
         $query = ['connectId' => uniqid('', true),];
         $channels = [
-            ['topic' => '/market/ticker:KCS-BTC',/*'response' => true,*/],
-            ['topic' => '/market/ticker:ETH-BTC',/*'response' => true,*/],
+            ['topic' => '/market/ticker:KCS-BTC'],
+            ['topic' => '/market/ticker:ETH-BTC'],
         ];
 
         $options = [
@@ -136,10 +133,7 @@ class WebSocketFeedTest extends TestCase
     public function testSubscribePrivateChannel(WebSocketFeed $api)
     {
         $query = ['connectId' => uniqid('', true),];
-        $channel = [
-            'topic' => '/market/match:KCS-BTC',
-            //'response' => true,
-        ];
+        $channel = ['topic' => '/market/match:KCS-BTC'];
 
         $options = [
 //            'tls' => [
@@ -169,8 +163,8 @@ class WebSocketFeedTest extends TestCase
     {
         $query = ['connectId' => uniqid('', true),];
         $channels = [
-            ['topic' => '/market/match:KCS-BTC',/*'response' => true,*/],
-            ['topic' => '/market/match:ETH-BTC',/*'response' => true,*/],
+            ['topic' => '/market/match:KCS-BTC'],
+            ['topic' => '/market/match:ETH-BTC'],
         ];
 
         $options = [
