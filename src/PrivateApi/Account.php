@@ -96,6 +96,7 @@ class Account extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated This interface was discontinued on August 29, 2019. Please use the transfer v2 interface provided below.
      */
     public function innerTransfer($clientOid, $payAccountId, $recAccountId, $amount)
     {
@@ -103,6 +104,29 @@ class Account extends KuCoinApi
             Request::METHOD_POST,
             '/api/v1/accounts/inner-transfer',
             compact('clientOid', 'payAccountId', 'recAccountId', 'amount')
+        );
+        return $response->getApiData();
+    }
+
+    /**
+     * Inner transfer V2, recommended for use on June 5, 2019
+     * @param string $clientOid
+     * @param string $currency
+     * @param string $from The account type of payer main or trade
+     * @param string $to The account type of payee main or trade
+     * @param float $amount Transfer amount, a quantity that exceeds the precision of the currency.
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated This interface was discontinued on August 29, 2019. Please use the transfer v2 interface provided below.
+     */
+    public function innerTransferV2($clientOid, $currency, $from, $to, $amount)
+    {
+        $response = $this->call(
+            Request::METHOD_POST,
+            '/api/v2/accounts/inner-transfer',
+            compact('clientOid', 'currency', 'from', 'to', 'amount')
         );
         return $response->getApiData();
     }
