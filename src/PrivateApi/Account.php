@@ -119,7 +119,6 @@ class Account extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     * @deprecated This interface was discontinued on August 29, 2019. Please use the transfer v2 interface provided below.
      */
     public function innerTransferV2($clientOid, $currency, $from, $to, $amount)
     {
