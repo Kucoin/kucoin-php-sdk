@@ -158,6 +158,19 @@ class AccountTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
+    public function testInnerTransferV2(Account $api)
+    {
+        $order = $api->innerTransferV2(uniqid(), 'KCS', 'main', 'trade', '2');
+        $this->assertArrayHasKey('orderId', $order);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
     public function testGetHolds(Account $api)
     {
         $accounts = $api->getList(['type' => 'trade']);
