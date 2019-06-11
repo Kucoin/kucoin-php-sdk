@@ -88,10 +88,10 @@ class Account extends KuCoinApi
 
     /**
      * Inner transfer
-     * @param string $clientOid
-     * @param string $payAccountId
-     * @param string $recAccountId
-     * @param float $amount
+     * @param string $clientOid Request ID
+     * @param string $payAccountId Account ID of payer
+     * @param string $recAccountId Account ID of receiver
+     * @param string $amount Transfer amount, a quantity that exceeds the precision of the currency
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -110,11 +110,11 @@ class Account extends KuCoinApi
 
     /**
      * Inner transfer V2, recommended for use on June 5, 2019
-     * @param string $clientOid
-     * @param string $currency
+     * @param string $clientOid Request ID
+     * @param string $currency Currency
      * @param string $from The account type of payer main or trade
      * @param string $to The account type of payee main or trade
-     * @param float $amount Transfer amount, a quantity that exceeds the precision of the currency.
+     * @param string $amount Transfer amount, a quantity that exceeds the precision of the currency
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
