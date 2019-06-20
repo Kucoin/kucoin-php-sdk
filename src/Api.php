@@ -14,6 +14,11 @@ use Psr\Log\LoggerInterface;
 abstract class Api
 {
     /**
+     * @var string SDK Version
+     */
+    const VERSION = '1.1.9';
+
+    /**
      * @var string
      */
     protected static $baseUri = 'https://openapi-v2.kucoin.com';
@@ -192,6 +197,7 @@ abstract class Api
             );
             $headers = array_merge($headers, $authHeaders);
         }
+        $headers['User-Agent'] = 'KuCoin-PHP-SDK/' . static::VERSION;
         $request->setHeaders($headers);
 
         $requestId = uniqid();
