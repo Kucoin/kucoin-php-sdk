@@ -287,11 +287,13 @@ class AccountTest extends TestCase
     public function testSubTransfer(Account $api)
     {
         $transfer = [
-            'clientOid' => uniqid(),
-            'amount'    => 1,
-            'direction' => 'OUT',
-            'currency'  => 'KCS',
-            'subUserId' => '5cc5b31c38300c336230d071',
+            'clientOid'      => uniqid(),
+            'amount'         => 1,
+            'direction'      => 'OUT',
+            'currency'       => 'KCS',
+            'accountType'    => 'main',
+            'subAccountType' => 'trade',
+            'subUserId'      => '5cc5b31c38300c336230d071',
         ];
         $result = $api->subTransfer($transfer);
         $this->assertInternalType('array', $result);
