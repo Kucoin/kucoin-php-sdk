@@ -88,6 +88,8 @@ class DepositTest extends TestCase
      */
     public function testGetV1Deposits(Deposit $api)
     {
+        $this->markTestSkipped();
+        return;
         $data = $api->getV1Deposits(['currency' => 'ETH'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {

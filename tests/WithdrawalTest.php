@@ -97,6 +97,8 @@ class WithdrawalTest extends TestCase
      */
     public function testGetV1List(Withdrawal $api)
     {
+        $this->markTestSkipped();
+        return;
         $params = [
             'currency' => 'BTC',
         ];
