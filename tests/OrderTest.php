@@ -109,6 +109,8 @@ class OrderTest extends TestCase
      */
     public function testGetV1List(Order $api)
     {
+        $this->markTestSkipped();
+        return;
         $data = $api->getV1List(['symbol' => 'BTC-USDT'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         foreach ($data['items'] as $item) {
