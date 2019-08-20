@@ -31,8 +31,8 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 
 | Environment | BaseUri |
 | -------- | -------- |
-| *Production* `DEFAULT` | https://openapi-v2.kucoin.com https://api.kucoin.com https://api.kcs.top |
-| *Sandbox* | https://openapi-sandbox.kucoin.com |
+| *Production* | `https://api.kucoin.com(DEFAULT)` `https://openapi-v2.kucoin.com` `https://api.kcs.top` |
+| *Sandbox* | `https://openapi-sandbox.kucoin.com` |
 
 ```php
 // Switch to the sandbox environment

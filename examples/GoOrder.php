@@ -6,8 +6,8 @@ use KuCoin\SDK\Http\SwooleHttp;
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\Order;
 
-// Set the base uri, default "https://openapi-v2.kucoin.com" for production environment.
-// KuCoinApi::setBaseUri('https://openapi-v2.kucoin.com');
+// Set the base uri, default "https://api.kucoin.com" for production environment.
+// KuCoinApi::setBaseUri('https://api.kucoin.com');
 
 // Require PHP 7.1+ and Swoole 2.1.2+
 // Require running in cli mode
