@@ -7,8 +7,8 @@ use KuCoin\SDK\PrivateApi\Account;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\BusinessException;
 
-// Set the base uri, default "https://openapi-v2.kucoin.com" for production environment.
-// KuCoinApi::setBaseUri('https://openapi-v2.kucoin.com');
+// Set the base uri, default "https://api.kucoin.com" for production environment.
+// KuCoinApi::setBaseUri('https://api.kucoin.com');
 
 $auth = new Auth('key', 'secret', 'passphrase');
 $api = new Account($auth);
