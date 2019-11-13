@@ -36,6 +36,8 @@ class DepositTest extends TestCase
      */
     public function testGetAddress(Deposit $api)
     {
+        $this->markTestSkipped();
+        return;
         try {
             $address = $api->getAddress('BTC');
             if ($address !== null) {
