@@ -74,7 +74,7 @@ class ApiResponse
 
         if (!$this->isSuccessful()) {
             $msg = sprintf(
-                '[API]Failure: api code is NOT %s, %s %s with body=%s, respond code=%s message="%s" data=%s',
+                '[API]Failure: api code is NOT %s, %s %s with body=%s, respond code=%s message="%s" body=%s',
                 ApiCode::SUCCESS,
                 $this->httpResponse->getRequest()->getMethod(),
                 $this->httpResponse->getRequest()->getRequestUri(),
