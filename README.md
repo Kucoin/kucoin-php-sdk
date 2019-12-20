@@ -282,6 +282,32 @@ go(function () {
 </details>
 
 <details>
+<summary>KuCoin\SDK\PrivateApi\Margin</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\Margin::getMarkPrice() | YES | https://docs.kucoin.com/#margin-info |
+| KuCoin\SDK\PrivateApi\Margin::getConfig() | YES | https://docs.kucoin.com/#get-margin-configuration-info |
+| KuCoin\SDK\PrivateApi\Margin::getAccount() | YES | https://docs.kucoin.com/#get-margin-account |
+| KuCoin\SDK\PrivateApi\Margin::borrow() | YES | https://docs.kucoin.com/#post-borrow-order |
+| KuCoin\SDK\PrivateApi\Margin::getBorrow() | YES | https://docs.kucoin.com/#get-borrow-order |
+| KuCoin\SDK\PrivateApi\Margin::getOutstanding() | YES | https://docs.kucoin.com/#get-repay-record |
+| KuCoin\SDK\PrivateApi\Margin::getRepayRecord() | YES | https://docs.kucoin.com/#get-repayment-record |
+| KuCoin\SDK\PrivateApi\Margin::repayAll() | YES | https://docs.kucoin.com/#one-click-repayment |
+| KuCoin\SDK\PrivateApi\Margin::repaySingle() | YES | https://docs.kucoin.com/#repay-a-single-order |
+| KuCoin\SDK\PrivateApi\Margin::lend() | YES | https://docs.kucoin.com/#post-lend-order |
+| KuCoin\SDK\PrivateApi\Margin::cancelLend() | YES | https://docs.kucoin.com/#cancel-lend-order |
+| KuCoin\SDK\PrivateApi\Margin::setAutoLend() | YES | https://docs.kucoin.com/#set-auto-lend |
+| KuCoin\SDK\PrivateApi\Margin::getLendActive() | YES | https://docs.kucoin.com/#get-active-order |
+| KuCoin\SDK\PrivateApi\Margin::getLendDone() | YES | https://docs.kucoin.com/#get-lent-history |
+| KuCoin\SDK\PrivateApi\Margin::getUnsettled() | YES | https://docs.kucoin.com/#get-active-lend-order-list |
+| KuCoin\SDK\PrivateApi\Margin::getSettled() | YES | https://docs.kucoin.com/#get-settled-lend-order-history |
+| KuCoin\SDK\PrivateApi\Margin::getLendAssets() | YES | https://docs.kucoin.com/#get-account-lend-record |
+| KuCoin\SDK\PrivateApi\Margin::getMarket() | YES | https://docs.kucoin.com/#lending-market-data |
+| KuCoin\SDK\PrivateApi\Margin::getTradeLast() | YES | https://docs.kucoin.com/#margin-trade-data |
+</details>
+
+<details>
 <summary>KuCoin\SDK\PublicApi\Time</summary>
 
 | API | Authentication | Description |
