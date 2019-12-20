@@ -174,7 +174,7 @@ class Margin extends KuCoinApi
      */
     public function cancelLend($orderId)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/margin/lend/'.$orderId);
+        $response = $this->call(Request::METHOD_DELETE, '/api/v1/margin/lend/' . $orderId);
         return $response->getApiData();
     }
 

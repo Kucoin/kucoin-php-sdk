@@ -145,7 +145,7 @@ class MarginTest extends TestCase
     {
         $params = [
             'currency' => 'USDT',
-            'sequence'     => 'RECENTLY_EXPIRE_FIRST',
+            'sequence' => 'RECENTLY_EXPIRE_FIRST',
             'size'     => 1,
         ];
         $data = $api->repayAll($params);
@@ -166,7 +166,7 @@ class MarginTest extends TestCase
         $params = [
             'currency' => 'USDT',
             'tradeId'  => '5da5a4f0f943c040c2f8501e',
-            'size'     =>1
+            'size'     => 1,
         ];
         $data = $api->repaySingle($params);
         $this->assertNotNull(1);
