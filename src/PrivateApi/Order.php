@@ -28,6 +28,21 @@ class Order extends KuCoinApi
     }
 
     /**
+     * Place Bulk Orders
+     * @param $symbol
+     * @param array $orderList
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createMulti($symbol, array $orderList)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/orders/multi', compact('symbol', 'orderList'));
+        return $response->getApiData();
+    }
+
+    /**
      * Cancel an order
      * @param $orderId
      * @return array
