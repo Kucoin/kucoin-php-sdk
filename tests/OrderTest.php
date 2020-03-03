@@ -63,6 +63,38 @@ class OrderTest extends TestCase
     /**
      * @dataProvider apiProvider
      * @param Order $api
+     * @return array|string
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCreateMulti(Order $api)
+    {
+        $order = [
+            'type'   => 'limit',
+            'side'   => 'buy',
+            'remark' => 'Multi 1',
+            'price'  => 100,
+            'size'   => 0.001,
+        ];
+        $symbol = 'BTC-USDT';
+        $orderList = [];
+        for ($i = 0; $i < 5; $i++) {
+            $order['clientOid'] = uniqid();
+            $order['remark'] = 'Multi ' . $i;
+            $orderList[] = $order;
+        }
+        $response = $api->createMulti($symbol, $orderList);
+        $this->assertInternalType('array', $response);
+        $this->assertArrayHasKey('data', $response);
+        $data = $response['data'];
+        $this->assertInternalType('array', $data);
+        var_dump($data);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
