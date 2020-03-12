@@ -136,7 +136,7 @@ use KuCoin\SDK\PublicApi\Time;
 // Require running in cli mode
 
 go(function () {
-    $api = new Time(null, new SwooleHttp));
+    $api = new Time(null, new SwooleHttp);
     $timestamp = $api->timestamp();
     var_dump($timestamp);
 });
@@ -216,6 +216,7 @@ go(function () {
 | API | Authentication | Description |
 | -------- | -------- | -------- |
 | KuCoin\SDK\PrivateApi\Order::create() | YES | https://docs.kucoin.com/#place-a-new-order |
+| KuCoin\SDK\PrivateApi\Order::createMulti() | YES | https://docs.kucoin.com/#place-bulk-orders |
 | KuCoin\SDK\PrivateApi\Order::cancel() | YES | https://docs.kucoin.com/#cancel-an-order |
 | KuCoin\SDK\PrivateApi\Order::cancelAll() | YES | https://docs.kucoin.com/#cancel-all-orders |
 | KuCoin\SDK\PrivateApi\Order::getList() | YES | https://docs.kucoin.com/#list-orders |
@@ -313,6 +314,15 @@ go(function () {
 | API | Authentication | Description |
 | -------- | -------- | -------- |
 | KuCoin\SDK\PublicApi\Time::timestamp() | NO | https://docs.kucoin.com/#server-time |
+
+</details>
+
+<details>
+<summary>KuCoin\SDK\PublicApi\ServiceStatus</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PublicApi\ServiceStatus::getStatus() | NO | https://docs.kucoin.com/#service-status |
 
 </details>
 
