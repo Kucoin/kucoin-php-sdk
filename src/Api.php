@@ -16,7 +16,7 @@ abstract class Api
     /**
      * @var string SDK Version
      */
-    const VERSION = '1.1.14';
+    const VERSION = '1.1.15';
 
     /**
      * @var string
@@ -205,9 +205,11 @@ abstract class Api
         if (self::isDebugMode()) {
             static::getLogger()->debug(sprintf('Sent a HTTP request#%s: %s', $requestId, $request));
         }
+        $requestStart = microtime(true);
         $response = $this->http->request($request, $timeout);
         if (self::isDebugMode()) {
-            static::getLogger()->debug(sprintf('Received a HTTP response#%s: %s', $requestId, $response));
+            $cost = (microtime(true) - $requestStart) * 1000;
+            static::getLogger()->debug(sprintf('Received a HTTP response#%s: cost %.2fms, %s', $requestId, $cost, $response));
         }
 
         return $response;
