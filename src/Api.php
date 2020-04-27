@@ -209,7 +209,7 @@ abstract class Api
         $response = $this->http->request($request, $timeout);
         if (self::isDebugMode()) {
             $cost = (microtime(true) - $requestStart) * 1000;
-            static::getLogger()->debug(sprintf('Received a HTTP response#%s: cost %.2fms, %s', $cost, $requestId, $response));
+            static::getLogger()->debug(sprintf('Received a HTTP response#%s: cost %.2fms, %s', $requestId, $cost, $response));
         }
 
         return $response;
