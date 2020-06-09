@@ -49,6 +49,11 @@ abstract class Api
     protected static $logLevel = Logger::DEBUG;
 
     /**
+     * @var array
+     */
+    protected static $customHeaders;
+
+    /**
      * @var IAuth $auth
      */
     protected $auth;
@@ -172,6 +177,22 @@ abstract class Api
     }
 
     /**
+     * @param array $headers
+     */
+    public static function setCustomHeaders(array $headers)
+    {
+        self::$customHeaders = $headers;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getCustomHeaders()
+    {
+        return self::$customHeaders;
+    }
+
+    /**
      * @param string $method
      * @param string $uri
      * @param array $params
@@ -198,6 +219,11 @@ abstract class Api
             $headers = array_merge($headers, $authHeaders);
         }
         $headers['User-Agent'] = 'KuCoin-PHP-SDK/' . static::VERSION;
+
+        if (self::$customHeaders) {
+            $headers = array_merge($headers, self::$customHeaders);
+        }
+
         $request->setHeaders($headers);
 
         $requestId = uniqid();
