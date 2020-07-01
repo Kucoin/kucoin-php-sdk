@@ -6,12 +6,12 @@ use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\Exceptions\NoAvailableWebSocketServerException;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
+use Ratchet\Client\Connector as RatchetConnector;
 use Ratchet\Client\WebSocket;
+use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Factory;
 use React\EventLoop\LoopInterface;
 use React\Socket\Connector as SocketConnector;
-use Ratchet\Client\Connector as RatchetConnector;
-use Ratchet\RFC6455\Messaging\MessageInterface;
 
 /**
  * Class WebSocketFeed
@@ -20,9 +20,29 @@ use Ratchet\RFC6455\Messaging\MessageInterface;
  */
 class WebSocketFeed extends KuCoinApi
 {
-
     /** @var LoopInterface */
-    public $loop = null;
+    protected $loop = null;
+
+    /**
+     * Get the event loop instance, default return Factory::create()
+     * @return LoopInterface
+     */
+    public function getLoop()
+    {
+        if ($this->loop === null) {
+            $this->loop = Factory::create();
+        }
+        return $this->loop;
+    }
+
+    /**
+     * Set the event loop instance
+     * @param LoopInterface $loop
+     */
+    public function setLoop(LoopInterface $loop)
+    {
+        $this->loop = $loop;
+    }
 
     /**
      * Get the server list and temporary token
@@ -108,7 +128,7 @@ class WebSocketFeed extends KuCoinApi
             $options['tls']['verify_peer'] = !static::isSkipVerifyTls();
         }
 
-        $loop = $this->loop === null ? Factory::create() : $this->loop;
+        $loop = $this->getLoop();
         $reactConnector = new SocketConnector($loop, $options);
         $connector = new RatchetConnector($loop, $reactConnector);
         /**
