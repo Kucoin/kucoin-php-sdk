@@ -8,6 +8,7 @@ use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\Factory;
+use React\EventLoop\LoopInterface;
 use React\Socket\Connector as SocketConnector;
 use Ratchet\Client\Connector as RatchetConnector;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -19,6 +20,10 @@ use Ratchet\RFC6455\Messaging\MessageInterface;
  */
 class WebSocketFeed extends KuCoinApi
 {
+
+    /** @var LoopInterface */
+    public $loop = null;
+
     /**
      * Get the server list and temporary token
      * @return array
@@ -103,7 +108,7 @@ class WebSocketFeed extends KuCoinApi
             $options['tls']['verify_peer'] = !static::isSkipVerifyTls();
         }
 
-        $loop = Factory::create();
+        $loop = $this->loop === null ? Factory::create() : $this->loop;
         $reactConnector = new SocketConnector($loop, $options);
         $connector = new RatchetConnector($loop, $reactConnector);
         /**
