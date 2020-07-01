@@ -21,7 +21,7 @@ use React\Socket\Connector as SocketConnector;
 class WebSocketFeed extends KuCoinApi
 {
     /** @var LoopInterface */
-    protected $loop = null;
+    protected $loop;
 
     /**
      * Get the event loop instance, default return Factory::create()
