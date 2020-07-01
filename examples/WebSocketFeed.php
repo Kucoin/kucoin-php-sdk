@@ -21,7 +21,7 @@ $api = new WebSocketFeed($auth);
 //$loop->addPeriodicTimer(1, function () {
 //    var_dump(date('Y-m-d H:i:s'));
 //});
-//$api->loop = $loop;
+//$api->setLoop($loop);
 
 $query = ['connectId' => uniqid('', true)];
 $channels = [
