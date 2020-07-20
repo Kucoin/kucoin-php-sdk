@@ -97,6 +97,20 @@ class Symbol extends KuCoinApi
     }
 
     /**
+     * Get full order book(atomic) v2
+     * @param string $symbol
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getV2AtomicFullOrderBook($symbol)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/market/orderbook/level3', compact('symbol'));
+        return $response->getApiData();
+    }
+
+    /**
      * Get trade histories
      * @param string $symbol
      * @return array

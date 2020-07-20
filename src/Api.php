@@ -16,7 +16,12 @@ abstract class Api
     /**
      * @var string SDK Version
      */
-    const VERSION = '1.1.17';
+    const VERSION = '1.1.18';
+
+    /**
+     * @var string SDK update date
+     */
+    const UPDATE_DATE = '2020.07.13';
 
     /**
      * @var string
@@ -136,8 +141,8 @@ abstract class Api
     {
         if (self::$logger === null) {
             self::$logger = new Logger('kucoin-sdk');
-            $handler = new RotatingFileHandler(static::getLogPath() . '/kucoin-sdk.log', 0, static::$logLevel);
-            $formatter = new LineFormatter(null, null, false, true);
+            $handler      = new RotatingFileHandler(static::getLogPath() . '/kucoin-sdk.log', 0, static::$logLevel);
+            $formatter    = new LineFormatter(null, null, false, true);
             $handler->setFormatter($formatter);
             self::$logger->pushHandler($handler);
         }
@@ -216,7 +221,7 @@ abstract class Api
                 $request->getRequestUri(),
                 $request->getBodyParams()
             );
-            $headers = array_merge($headers, $authHeaders);
+            $headers     = array_merge($headers, $authHeaders);
         }
         $headers['User-Agent'] = 'KuCoin-PHP-SDK/' . static::VERSION;
 
@@ -232,7 +237,7 @@ abstract class Api
             static::getLogger()->debug(sprintf('Sent a HTTP request#%s: %s', $requestId, $request));
         }
         $requestStart = microtime(true);
-        $response = $this->http->request($request, $timeout);
+        $response     = $this->http->request($request, $timeout);
         if (self::isDebugMode()) {
             $cost = (microtime(true) - $requestStart) * 1000;
             static::getLogger()->debug(sprintf('Received a HTTP response#%s: cost %.2fms, %s', $requestId, $cost, $response));
