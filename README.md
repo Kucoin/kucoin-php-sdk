@@ -1,5 +1,11 @@
+# DEPRECATED(弃用)
+
+This repo is deprecated, no longer actively maintained.
+
+---
 
 # PHP SDK for KuCoin API
+
 > The detailed document [https://docs.kucoin.com](https://docs.kucoin.com), in order to receive the latest API change notifications, please `Watch` this repository.
 
 [![Latest Version](https://img.shields.io/github/release/Kucoin/kucoin-php-sdk.svg)](https://github.com/Kucoin/kucoin-php-sdk/releases)
