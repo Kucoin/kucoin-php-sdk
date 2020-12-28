@@ -136,6 +136,23 @@ class SymbolTest extends TestCase
         $this->assertArrayHasKey('time', $data);
     }
 
+    /**
+     * @dataProvider apiProvider
+     * @param Symbol $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetV2AtomicFullOrderBook(Symbol $api)
+    {
+        $data = $api->getV2AtomicFullOrderBook('ETH-BTC');
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('sequence', $data);
+        $this->assertArrayHasKey('bids', $data);
+        $this->assertArrayHasKey('asks', $data);
+        $this->assertArrayHasKey('time', $data);
+    }
+
 
     /**
      * @dataProvider apiProvider

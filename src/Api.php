@@ -19,6 +19,11 @@ abstract class Api
     const VERSION = '1.1.19';
 
     /**
+     * @var string SDK update date
+     */
+    const UPDATE_DATE = '2020.07.13';
+
+    /**
      * @var string
      */
     protected static $baseUri = 'https://api.kucoin.com';
