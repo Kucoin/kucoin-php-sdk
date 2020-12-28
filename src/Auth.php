@@ -17,7 +17,7 @@ class Auth implements IAuth
 
     public function signature($requestUri, $body, $timestamp, $method)
     {
-        // Decode to the original text
+        // Decode $requestUri
         $parts = parse_url($requestUri);
         if (isset($parts['query'])) {
             parse_str($parts['query'], $queries);
