@@ -27,6 +27,6 @@
         <env name="API_BASE_URI" value="https://openapi-v2.kucoin.com" force="false"/>
         <env name="API_SKIP_VERIFY_TLS" value="0" force="false"/>
         <env name="API_DEBUG_MODE" value="1" force="false"/>
-        <env name="API_KEY_VERSION" value="2" force="false"/>
+        <env name="API_AUTH_VERSION" value="V1" force="false"/>
     </php>
 </phpunit>

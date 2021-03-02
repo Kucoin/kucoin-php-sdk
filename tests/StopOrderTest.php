@@ -148,7 +148,7 @@ class StopOrderTest extends TestCase
         $this->assertPagination($data);
         $orders = $data['items'];
         if (isset($orders[0])) {
-            $orders = $api->getDetailByClient($orders[0]['clientOid']);
+            $orders = $api->getDetailByClient($orders[0]['clientOid'], 'BTC-USDT');
             if (isset($orders[0])) {
                 $order = $orders[0];
                 $this->assertArrayHasKey('id', $order);
@@ -195,8 +195,8 @@ class StopOrderTest extends TestCase
             'side'      => 'sell',
             'symbol'    => 'BTC-USDT',
             'remark'    => '\中文备注 ',
-            'stopPrice' => '90',
-            'price'     => '5',
+            'stopPrice' => '2',
+            'price'     => '1',
             'size'      => '0.001',
         ];
 

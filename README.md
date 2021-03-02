@@ -31,23 +31,12 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 
 | Environment | BaseUri |
 | -------- | -------- |
-| *Production* | `https://api.kucoin.com(DEFAULT)` `https://api.kucoin.io` |
+| *Production* | `https://api.kucoin.com(DEFAULT)` `https://api.kucoin.cc` |
 | *Sandbox* | `https://openapi-sandbox.kucoin.com` |
 
 ```php
 // Switch to the sandbox environment
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
-```
-
-### Setting Api Key Version (recommend upgraded API key)
-
-##### **Note**
-To reinforce the security of the API, KuCoin upgraded the API key to version 2.0, the validation logic has also been changed. It is recommended to create(https://www.kucoin.com/account/api) and update your API key to version 2.0. The API key of version 1.0 will be still valid until May 1, 2021
-```php
-use KuCoin\SDK\ApiKeyVersion;
-// Switch API key version
-// API key version 2.0 
-KuCoinApi::setApiKeyVersion(ApiKeyVersion::V2);
 ```
 
 ### Debug mode & logging
@@ -59,7 +48,7 @@ KuCoinApi::setDebugMode(true);
 // Logging in your code
 // KuCoinApi::setLogPath('/tmp');
 // KuCoinApi::setLogLevel(Monolog\Logger::DEBUG);
-KuCoinApi::getLogger()->debug("I'am a debug message");
+KuCoinApi::getLogger()->debug("I'm a debug message");
 ```
 
 ### Examples
@@ -75,6 +64,12 @@ $timestamp = $api->timestamp();
 var_dump($timestamp);
 ```
 
+
+###  (recommend upgraded API key)
+
+##### **Note**
+To reinforce the security of the API, KuCoin upgraded the API key to version 2.0, the validation logic has also been changed. It is recommended to create(https://www.kucoin.com/account/api) and update your API key to version 2.0. The API key of version 1.0 will be still valid until May 1, 2021
+
 #### Example of API `with` authentication
 
 ```php
@@ -82,7 +77,13 @@ use KuCoin\SDK\PrivateApi\Account;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\BusinessException;
 use Kucoin\SDK\Auth;
-$auth = new Auth('key', 'secret', 'passphrase');
+use Kucoin\SDK\AuthVersion;
+
+// Auth version v2 (recommend)
+$auth = new Auth('key', 'secret', 'passphrase', AuthVersion::V2);
+// Auth version v1
+// $auth = new Auth('key', 'secret', 'passphrase');
+
 $api = new Account($auth);
 
 try {
@@ -149,6 +150,7 @@ use KuCoin\SDK\Http\SwooleHttp;
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\Order;
 use KuCoin\SDK\PublicApi\Time;
+use Kucoin\SDK\AuthVersion;
 
 // Require PHP 7.1+ and Swoole 2.1.2+
 // Require running in cli mode
@@ -160,7 +162,10 @@ go(function () {
 });
 
 go(function () {
-    $auth = new Auth('key', 'secret', 'passphrase');
+    // Auth version v2 (recommend)
+    $auth = new Auth('key', 'secret', 'passphrase', AuthVersion::V2);
+    // Auth version v1
+    // $auth = new Auth('key', 'secret', 'passphrase');
     $api = new Order($auth, new SwooleHttp);
     // Create 50 orders CONCURRENTLY in 1 second
     for ($i = 0; $i < 50; $i++) {

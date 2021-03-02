@@ -68,11 +68,6 @@ abstract class Api
      */
     protected $http;
 
-    /**
-     * @var string
-     */
-    protected static $apiKeyVersion = ApiKeyVersion::V1;
-
     public function __construct(IAuth $auth = null, IHttp $http = null)
     {
         if ($http === null) {
@@ -200,22 +195,6 @@ abstract class Api
     public static function getCustomHeaders()
     {
         return self::$customHeaders;
-    }
-
-    /**
-     * @param $apiKeyVersion
-     */
-    public static function setApiKeyVersion($apiKeyVersion)
-    {
-        static::$apiKeyVersion = $apiKeyVersion;
-    }
-
-    /**
-     * @return string
-     */
-    public static function getApiKeyVersion()
-    {
-        return static::$apiKeyVersion;
     }
 
     /**
