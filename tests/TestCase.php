@@ -4,6 +4,7 @@ namespace KuCoin\SDK\Tests;
 
 use KuCoin\SDK\ApiKeyVersion;
 use KuCoin\SDK\Auth;
+use KuCoin\SDK\Http\GuzzleHttp;
 use KuCoin\SDK\KuCoinApi;
 
 class TestCase extends \PHPUnit\Framework\TestCase
