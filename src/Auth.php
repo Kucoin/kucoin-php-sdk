@@ -59,7 +59,6 @@ class Auth implements IAuth
         ];
 
         !$isV1AuthVersion && $headers['KC-API-KEY-VERSION'] = AuthVersion::getAuthApiKeyVersion($this->authVersion);
-        var_dump($headers);
         return $headers;
     }
 

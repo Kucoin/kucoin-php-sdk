@@ -4,6 +4,7 @@ namespace KuCoin\SDK\Tests;
 
 use KuCoin\SDK\Auth;
 use KuCoin\SDK\AuthVersion;
+use KuCoin\SDK\Http\GuzzleHttp;
 use KuCoin\SDK\KuCoinApi;
 
 class TestCase extends \PHPUnit\Framework\TestCase
@@ -29,7 +30,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $auth = new Auth($apiKey, $apiSecret, $apiPassPhrase, $authVersion);
         return [
             [new $this->apiClass($this->apiWithAuth ? $auth : null)],
-            //[new $this->apiClass($this->apiWithAuth ? $auth : null, new GuzzleHttp(['skipVerifyTls' => $apiSkipVerifyTls]))],
+            [new $this->apiClass($this->apiWithAuth ? $auth : null, new GuzzleHttp(['skipVerifyTls' => $apiSkipVerifyTls]))],
             //[new $this->apiClass($this->apiWithAuth ? $auth : null, new SwooleHttp(['skipVerifyTls' => $apiSkipVerifyTls]))],
         ];
     }
