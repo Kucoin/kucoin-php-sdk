@@ -14,6 +14,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     public function apiProvider()
     {
         $apiKey = getenv('API_KEY');
+        var_dump($apiKey);
         $apiSecret = getenv('API_SECRET');
         $apiPassPhrase = getenv('API_PASSPHRASE');
         $apiBaseUri = getenv('API_BASE_URI');
