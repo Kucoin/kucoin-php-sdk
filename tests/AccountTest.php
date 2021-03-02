@@ -300,4 +300,51 @@ class AccountTest extends TestCase
         $this->assertArrayHasKey('orderId', $result);
     }
 
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testSubTransferV2(Account $api)
+    {
+        $transfer = [
+            'clientOid'      => uniqid(),
+            'amount'         => '1',
+            'direction'      => 'OUT',
+            'currency'       => 'USDT',
+            'accountType'    => 'MAIN',
+            'subAccountType' => 'TRADE',
+            'subUserId'      => '6034c8b8a2644e0006e7e891',
+        ];
+        $result = $api->subTransferV2($transfer);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('orderId', $result);
+    }
+
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetLedgersV2(Account $api)
+    {
+        $data = $api->getLedgersV2([], ['currentPage' => 1, 'pageSize' => 10]);
+        $this->assertPagination($data);
+        foreach ($data['items'] as $item) {
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('balance', $item);
+            $this->assertArrayHasKey('bizType', $item);
+            $this->assertArrayHasKey('direction', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('context', $item);
+        }
+    }
 }

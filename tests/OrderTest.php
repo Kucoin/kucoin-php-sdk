@@ -264,4 +264,101 @@ class OrderTest extends TestCase
             $this->assertArrayHasKey('cancelExist', $item);
         }
     }
+
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetDetailByClient(Order $api)
+    {
+        $data = $api->getList(['symbol' => 'BTC-USDT', 'status' => 'active'], ['currentPage' => 1, 'pageSize' => 10]);
+        $this->assertPagination($data);
+        $orders = $data['items'];
+        if (isset($orders[0])) {
+            $order = $api->getDetailByClient($orders[0]['clientOid']);
+            $this->assertArrayHasKey('symbol', $order);
+            $this->assertArrayHasKey('hidden', $order);
+            $this->assertArrayHasKey('opType', $order);
+            $this->assertArrayHasKey('fee', $order);
+            $this->assertArrayHasKey('channel', $order);
+            $this->assertArrayHasKey('feeCurrency', $order);
+            $this->assertArrayHasKey('type', $order);
+            $this->assertArrayHasKey('iceberg', $order);
+            $this->assertArrayHasKey('createdAt', $order);
+            $this->assertArrayHasKey('visibleSize', $order);
+            $this->assertArrayHasKey('price', $order);
+            $this->assertArrayHasKey('stopTriggered', $order);
+            $this->assertArrayHasKey('funds', $order);
+            $this->assertArrayHasKey('id', $order);
+            $this->assertArrayHasKey('timeInForce', $order);
+            $this->assertArrayHasKey('side', $order);
+            $this->assertArrayHasKey('dealSize', $order);
+            $this->assertArrayHasKey('cancelAfter', $order);
+            $this->assertArrayHasKey('dealFunds', $order);
+            $this->assertArrayHasKey('stp', $order);
+            $this->assertArrayHasKey('postOnly', $order);
+            $this->assertArrayHasKey('stopPrice', $order);
+            $this->assertArrayHasKey('size', $order);
+            $this->assertArrayHasKey('stop', $order);
+            $this->assertArrayHasKey('cancelExist', $order);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCancelByClient(Order $api)
+    {
+        $clientOid = uniqid();
+        $order = [
+            'clientOid' => $clientOid,
+            'type'      => 'limit',
+            'side'      => 'buy',
+            'symbol'    => 'BTC-USDT',
+            'remark'    => '\中文备注 ',
+
+            'price' => 100,
+            'size'  => 0.001,
+        ];
+        $data = $api->create($order);
+        if (isset($data['orderId'])) {
+            $data = $api->cancelByClient($clientOid);
+            $this->assertInternalType('array', $data);
+            $this->assertArrayHasKey('cancelledOrderId', $data);
+            $this->assertArrayHasKey('clientOid', $data);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return array|string
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCreateMarginLimit(Order $api)
+    {
+        $order = [
+            'clientOid' => uniqid(),
+            'type'      => 'limit',
+            'side'      => 'buy',
+            'symbol'    => 'BTC-USDT',
+            'remark'    => '\中文备注 ',
+
+            'price' => 1,
+            'size'  => 0.1,
+        ];
+        $data = $api->createMarginOrder($order);
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('orderId', $data);
+    }
 }

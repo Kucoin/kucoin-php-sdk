@@ -1,5 +1,4 @@
 # PHP SDK for KuCoin API
-**Note:** This library isn't actively maintained. Please refer to the [kucoin-python-sdk](https://github.com/Kucoin/kucoin-python-sdk) for an up-to-date client implementation.
 
 > The detailed document [https://docs.kucoin.com](https://docs.kucoin.com), in order to receive the latest API change notifications, please `Watch` this repository.
 
@@ -40,6 +39,17 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
 ```
 
+### Setting Api Key Version (recommend upgraded API key)
+
+##### **Note**
+To reinforce the security of the API, KuCoin upgraded the API key to version 2.0, the validation logic has also been changed. It is recommended to create(https://www.kucoin.com/account/api) and update your API key to version 2.0. The API key of version 1.0 will be still valid until May 1, 2021
+```php
+use KuCoin\SDK\ApiKeyVersion;
+// Switch API key version
+// API key version 2.0 
+KuCoinApi::setApiKeyVersion(ApiKeyVersion::V2);
+```
+
 ### Debug mode & logging
 
 ```php
@@ -68,11 +78,10 @@ var_dump($timestamp);
 #### Example of API `with` authentication
 
 ```php
-use KuCoin\SDK\Auth;
 use KuCoin\SDK\PrivateApi\Account;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\BusinessException;
-
+use Kucoin\SDK\Auth;
 $auth = new Auth('key', 'secret', 'passphrase');
 $api = new Account($auth);
 
@@ -177,6 +186,32 @@ go(function () {
 ```
 
 ### API list
+<details>
+<summary>Trade Fee</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\TradeFee::getBaseFee() | YES | https://docs.kucoin.com/#basic-user-fee |
+| KuCoin\SDK\PrivateApi\TradeFee::getTradeFees() | YES | https://docs.kucoin.com/#actual-fee-rate-of-the-trading-pair |
+
+</details>
+
+<details>
+<summary>Stop Order</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\StopOrder::create() | YES | https://docs.kucoin.com/#place-a-new-order-2 |
+| KuCoin\SDK\PrivateApi\StopOrder::cancel()  | YES | https://docs.kucoin.com/#cancel-an-order-2 |
+| KuCoin\SDK\PrivateApi\StopOrder::cancelByCond()  | YES | https://docs.kucoin.com/#cancel-orders |
+| KuCoin\SDK\PrivateApi\StopOrder::getDetail()  | YES | https://docs.kucoin.com/#get-single-order-info |
+| KuCoin\SDK\PrivateApi\StopOrder::getList()  | YES | https://docs.kucoin.com/#list-stop-orders |
+| KuCoin\SDK\PrivateApi\StopOrder::getDetailByClient()  | YES | https://docs.kucoin.com/#get-single-order-by-clientoid |
+| KuCoin\SDK\PrivateApi\StopOrder::cancelByClient()  | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid-2 |
+
+</details>
+
+
 
 <details>
 <summary>KuCoin\SDK\PrivateApi\Account</summary>
@@ -186,14 +221,16 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Account::create() | YES | https://docs.kucoin.com/#create-an-account |
 | KuCoin\SDK\PrivateApi\Account::getList() | YES | https://docs.kucoin.com/#list-accounts |
 | KuCoin\SDK\PrivateApi\Account::getDetail() | YES | https://docs.kucoin.com/#get-an-account |
-| KuCoin\SDK\PrivateApi\Account::getLedgers() | YES | https://docs.kucoin.com/#get-account-ledgers |
+| KuCoin\SDK\PrivateApi\Account::getLedgers() | YES | `DEPRECATED` https://docs.kucoin.com/#get-account-ledgers-deprecated |
 | KuCoin\SDK\PrivateApi\Account::getHolds() | YES | https://docs.kucoin.com/#get-holds |
 | KuCoin\SDK\PrivateApi\Account::innerTransfer() | YES | `DEPRECATED` https://docs.kucoin.com/#inner-transfer |
 | KuCoin\SDK\PrivateApi\Account::innerTransferV2() | YES | https://docs.kucoin.com/#inner-transfer |
 | KuCoin\SDK\PrivateApi\Account::getSubAccountUsers() | YES | https://docs.kucoin.com/#get-user-info-of-all-sub-accounts |
 | KuCoin\SDK\PrivateApi\Account::getSubAccountDetail() | YES | https://docs.kucoin.com/#get-account-balance-of-a-sub-account |
 | KuCoin\SDK\PrivateApi\Account::getSubAccountList() | YES | https://docs.kucoin.com/#get-the-aggregated-balance-of-all-sub-accounts-of-the-current-user |
-| KuCoin\SDK\PrivateApi\Account::subTransfer() | YES | https://docs.kucoin.com/#transfer-between-master-account-and-sub-account |
+| KuCoin\SDK\PrivateApi\Account::subTransfer() | YES | `DEPRECATED` https://docs.kucoin.com/#transfer-between-master-account-and-sub-account |
+| KuCoin\SDK\PrivateApi\Account::subTransferV2() | YES | https://docs.kucoin.com/#transfer-between-master-user-and-sub-user |
+| KuCoin\SDK\PrivateApi\Account::getLedgersV2() | YES | https://docs.kucoin.com/#get-account-ledgers |
 
 </details>
 
@@ -232,6 +269,10 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::getV1List() | YES | https://docs.kucoin.com/#get-v1-historical-orders-list |
 | KuCoin\SDK\PrivateApi\Order::getDetail() | YES | https://docs.kucoin.com/#get-an-order |
 | KuCoin\SDK\PrivateApi\Order::getRecentList() | YES | https://docs.kucoin.com/#recent-orders |
+| KuCoin\SDK\PrivateApi\Order::createMarginOrder()| YES | https://docs.kucoin.com/#place-a-margin-order |
+| KuCoin\SDK\PrivateApi\Order::cancelByClient() | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid |
+| KuCoin\SDK\PrivateApi\Order::getDetailByClient() | YES | https://docs.kucoin.com/#get-single-active-order-by-clientoid|
+
 
 </details>
 
