@@ -54,15 +54,15 @@ class Auth implements IAuth
     public function getHeaders($method, $requestUri, $body)
     {
         $timestamp = floor(microtime(true) * 1000);
-        $isV1AuthVersion = $this->apiKeyVersion === self::API_KEY_VERSION_V1;
+        $isApiKeyVersionV1 = $this->apiKeyVersion === self::API_KEY_VERSION_V1;
         $headers = [
             'KC-API-KEY'        => $this->key,
             'KC-API-TIMESTAMP'  => $timestamp,
-            'KC-API-PASSPHRASE' => $isV1AuthVersion ? $this->passphrase : $this->signaturePassphrase(),
+            'KC-API-PASSPHRASE' => $isApiKeyVersionV1 ? $this->passphrase : $this->signaturePassphrase(),
             'KC-API-SIGN'       => $this->signature($requestUri, $body, $timestamp, $method),
         ];
 
-        !$isV1AuthVersion && $headers['KC-API-KEY-VERSION'] = $this->apiKeyVersion;
+        !$isApiKeyVersionV1 && $headers['KC-API-KEY-VERSION'] = $this->apiKeyVersion;
         return $headers;
     }
 

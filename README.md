@@ -203,11 +203,11 @@ go(function () {
 | -------- | -------- | -------- |
 | KuCoin\SDK\PrivateApi\StopOrder::create() | YES | https://docs.kucoin.com/#place-a-new-order-2 |
 | KuCoin\SDK\PrivateApi\StopOrder::cancel()  | YES | https://docs.kucoin.com/#cancel-an-order-2 |
-| KuCoin\SDK\PrivateApi\StopOrder::cancelByCond()  | YES | https://docs.kucoin.com/#cancel-orders |
+| KuCoin\SDK\PrivateApi\StopOrder::cancelBatch()  | YES | https://docs.kucoin.com/#cancel-orders |
 | KuCoin\SDK\PrivateApi\StopOrder::getDetail()  | YES | https://docs.kucoin.com/#get-single-order-info |
 | KuCoin\SDK\PrivateApi\StopOrder::getList()  | YES | https://docs.kucoin.com/#list-stop-orders |
-| KuCoin\SDK\PrivateApi\StopOrder::getDetailByClient()  | YES | https://docs.kucoin.com/#get-single-order-by-clientoid |
-| KuCoin\SDK\PrivateApi\StopOrder::cancelByClient()  | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid-2 |
+| KuCoin\SDK\PrivateApi\StopOrder::getDetailByClientOid()  | YES | https://docs.kucoin.com/#get-single-order-by-clientoid |
+| KuCoin\SDK\PrivateApi\StopOrder::cancelByClientOid()  | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid-2 |
 
 </details>
 
@@ -270,8 +270,8 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::getDetail() | YES | https://docs.kucoin.com/#get-an-order |
 | KuCoin\SDK\PrivateApi\Order::getRecentList() | YES | https://docs.kucoin.com/#recent-orders |
 | KuCoin\SDK\PrivateApi\Order::createMarginOrder()| YES | https://docs.kucoin.com/#place-a-margin-order |
-| KuCoin\SDK\PrivateApi\Order::cancelByClient() | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid |
-| KuCoin\SDK\PrivateApi\Order::getDetailByClient() | YES | https://docs.kucoin.com/#get-single-active-order-by-clientoid|
+| KuCoin\SDK\PrivateApi\Order::cancelByClientOid() | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid |
+| KuCoin\SDK\PrivateApi\Order::getDetailByClientOid() | YES | https://docs.kucoin.com/#get-single-active-order-by-clientoid|
 
 
 </details>

@@ -28,7 +28,7 @@ class StopOrder extends KuCoinApi
     }
 
     /**
-     * cancel by cond
+     * cancel by batch
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
