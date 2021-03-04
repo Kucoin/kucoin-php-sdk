@@ -128,7 +128,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Get an order
+     * Get an order by clientOid
      *
      * @param $clientOid
      * @return mixed|null
@@ -143,7 +143,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Cancel an order
+     * Cancel an order by clientOid
      *
      * @param $clientOid
      * @return mixed|null

@@ -86,7 +86,7 @@ class StopOrder extends KuCoinApi
 
 
     /**
-     * Get an order
+     * Get an order by clientOid
      *
      * @param $clientOid
      * @param $symbol
@@ -103,7 +103,7 @@ class StopOrder extends KuCoinApi
     }
 
     /**
-     * Cancel an order
+     * Cancel an order by clientOid
      * @param $clientOid
      * @param $symbol
      * @return mixed|null
