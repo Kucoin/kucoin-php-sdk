@@ -64,9 +64,6 @@ $timestamp = $api->timestamp();
 var_dump($timestamp);
 ```
 
-
-###  (recommend upgraded API key)
-
 ##### **Note**
 To reinforce the security of the API, KuCoin upgraded the API key to version 2.0, the validation logic has also been changed. It is recommended to create(https://www.kucoin.com/account/api) and update your API key to version 2.0. The API key of version 1.0 will be still valid until May 1, 2021
 
@@ -77,10 +74,9 @@ use KuCoin\SDK\PrivateApi\Account;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\BusinessException;
 use Kucoin\SDK\Auth;
-use Kucoin\SDK\AuthVersion;
 
 // Auth version v2 (recommend)
-$auth = new Auth('key', 'secret', 'passphrase', AuthVersion::V2);
+$auth = new Auth('key', 'secret', 'passphrase', Auth::API_KEY_VERSION_V2);
 // Auth version v1
 // $auth = new Auth('key', 'secret', 'passphrase');
 
@@ -150,7 +146,6 @@ use KuCoin\SDK\Http\SwooleHttp;
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\Order;
 use KuCoin\SDK\PublicApi\Time;
-use Kucoin\SDK\AuthVersion;
 
 // Require PHP 7.1+ and Swoole 2.1.2+
 // Require running in cli mode
@@ -163,7 +158,7 @@ go(function () {
 
 go(function () {
     // Auth version v2 (recommend)
-    $auth = new Auth('key', 'secret', 'passphrase', AuthVersion::V2);
+    $auth = new Auth('key', 'secret', 'passphrase', Auth::API_KEY_VERSION_V2);
     // Auth version v1
     // $auth = new Auth('key', 'secret', 'passphrase');
     $api = new Order($auth, new SwooleHttp);

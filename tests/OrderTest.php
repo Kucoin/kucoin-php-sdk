@@ -273,13 +273,13 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetDetailByClient(Order $api)
+    public function testGetDetailByClientOid(Order $api)
     {
         $data = $api->getList(['symbol' => 'BTC-USDT', 'status' => 'active'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         $orders = $data['items'];
         if (isset($orders[0])) {
-            $order = $api->getDetailByClient($orders[0]['clientOid']);
+            $order = $api->getDetailByClientOid($orders[0]['clientOid']);
             $this->assertArrayHasKey('symbol', $order);
             $this->assertArrayHasKey('hidden', $order);
             $this->assertArrayHasKey('opType', $order);
@@ -315,7 +315,7 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testCancelByClient(Order $api)
+    public function testCancelByClientOid(Order $api)
     {
         $clientOid = uniqid();
         $order = [
@@ -330,7 +330,7 @@ class OrderTest extends TestCase
         ];
         $data = $api->create($order);
         if (isset($data['orderId'])) {
-            $data = $api->cancelByClient($clientOid);
+            $data = $api->cancelByClientOid($clientOid);
             $this->assertInternalType('array', $data);
             $this->assertArrayHasKey('cancelledOrderId', $data);
             $this->assertArrayHasKey('clientOid', $data);

@@ -142,13 +142,13 @@ class StopOrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testGetDetailByOClient(StopOrder $api)
+    public function testGetDetailByClientOid(StopOrder $api)
     {
         $data = $api->getList(['symbol' => 'BTC-USDT', 'status' => 'active'], ['currentPage' => 1, 'pageSize' => 10]);
         $this->assertPagination($data);
         $orders = $data['items'];
         if (isset($orders[0])) {
-            $orders = $api->getDetailByClient($orders[0]['clientOid'], 'BTC-USDT');
+            $orders = $api->getDetailByClientOid($orders[0]['clientOid'], 'BTC-USDT');
             if (isset($orders[0])) {
                 $order = $orders[0];
                 $this->assertArrayHasKey('id', $order);
@@ -186,7 +186,7 @@ class StopOrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testCancelByClient(StopOrder $api)
+    public function testCancelByClientOid(StopOrder $api)
     {
         $clientOid = uniqid();
         $order = [
@@ -202,7 +202,7 @@ class StopOrderTest extends TestCase
 
         $data = $api->create($order);
         if (isset($data['orderId'])) {
-            $data = $api->cancelByClient($clientOid);
+            $data = $api->cancelByClientOid($clientOid);
             $this->assertInternalType('array', $data);
             $this->assertArrayHasKey('cancelledOrderId', $data);
             $this->assertArrayHasKey('clientOid', $data);
@@ -217,7 +217,7 @@ class StopOrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testCancelByCond(StopOrder $api)
+    public function testCancelBatch(StopOrder $api)
     {
         $clientOid = uniqid();
         $order = [
@@ -233,7 +233,7 @@ class StopOrderTest extends TestCase
 
         $data = $api->create($order);
         if (isset($data['orderId'])) {
-            $data = $api->cancelByCond(['symbol' => 'BTC-USDT']);
+            $data = $api->cancelBatch(['symbol' => 'BTC-USDT']);
             $this->assertInternalType('array', $data);
             $this->assertArrayHasKey('cancelledOrderIds', $data);
         }

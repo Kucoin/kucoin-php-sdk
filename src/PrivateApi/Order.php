@@ -136,7 +136,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getDetailByClient($clientOid)
+    public function getDetailByClientOid($clientOid)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/order/client-order/' . $clientOid, []);
         return $response->getApiData();
@@ -151,7 +151,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function cancelByClient($clientOid)
+    public function cancelByClientOid($clientOid)
     {
         $response = $this->call(Request::METHOD_DELETE, '/api/v1/order/client-order/' . $clientOid);
         return $response->getApiData();

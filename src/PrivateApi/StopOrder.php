@@ -35,7 +35,7 @@ class StopOrder extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function cancelByCond(array $params)
+    public function cancelBatch(array $params)
     {
         $response = $this->call(Request::METHOD_DELETE, '/api/v1/stop-order/cancel', $params);
         return $response->getApiData();
@@ -95,7 +95,7 @@ class StopOrder extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function getDetailByClient($clientOid, $symbol = null)
+    public function getDetailByClientOid($clientOid, $symbol = null)
     {
         $params = compact('clientOid', 'symbol');
         $response = $this->call(Request::METHOD_GET, '/api/v1/stop-order/queryOrderByClientOid', $params);
@@ -104,7 +104,6 @@ class StopOrder extends KuCoinApi
 
     /**
      * Cancel an order
-     *
      * @param $clientOid
      * @param $symbol
      * @return mixed|null
@@ -112,7 +111,7 @@ class StopOrder extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function cancelByClient($clientOid, $symbol = null)
+    public function cancelByClientOid($clientOid, $symbol = null)
     {
         $params = compact('clientOid', 'symbol');
         $response = $this->call(Request::METHOD_DELETE, '/api/v1/stop-order/cancelOrderByClientOid', $params);

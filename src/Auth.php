@@ -10,14 +10,18 @@ class Auth implements IAuth
 
     private $passphrase;
 
-    private $authVersion;
+    private $apiKeyVersion;
 
-    public function __construct($key, $secret, $passphrase, $authVersion = AuthVersion::V1)
+    const API_KEY_VERSION_V1 = '1';
+
+    const API_KEY_VERSION_V2 = '2';
+
+    public function __construct($key, $secret, $passphrase, $apiKeyVersion = self::API_KEY_VERSION_V1)
     {
         $this->key = $key;
         $this->secret = $secret;
         $this->passphrase = $passphrase;
-        $this->authVersion = $authVersion;
+        $this->$apiKeyVersion = $key;
     }
 
     public function signature($requestUri, $body, $timestamp, $method)
@@ -50,7 +54,7 @@ class Auth implements IAuth
     public function getHeaders($method, $requestUri, $body)
     {
         $timestamp = floor(microtime(true) * 1000);
-        $isV1AuthVersion = $this->authVersion === AuthVersion::V1;
+        $isV1AuthVersion = $this->apiKeyVersion === self::API_KEY_VERSION_V1;
         $headers = [
             'KC-API-KEY'        => $this->key,
             'KC-API-TIMESTAMP'  => $timestamp,
@@ -58,7 +62,7 @@ class Auth implements IAuth
             'KC-API-SIGN'       => $this->signature($requestUri, $body, $timestamp, $method),
         ];
 
-        !$isV1AuthVersion && $headers['KC-API-KEY-VERSION'] = AuthVersion::getAuthApiKeyVersion($this->authVersion);
+        !$isV1AuthVersion && $headers['KC-API-KEY-VERSION'] = $this->apiKeyVersion;
         return $headers;
     }
 
