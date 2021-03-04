@@ -187,7 +187,7 @@ go(function () {
 
 ### API list
 <details>
-<summary>Trade Fee</summary>
+<summary>KuCoin\SDK\PrivateApi\TradeFee</summary>
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
@@ -197,7 +197,7 @@ go(function () {
 </details>
 
 <details>
-<summary>Stop Order</summary>
+<summary>KuCoin\SDK\PrivateApi\StopOrder</summary>
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
