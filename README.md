@@ -385,6 +385,7 @@ export API_BASE_URI=https://api.kucoin.com
 export API_KEY=key
 export API_SECRET=secret
 export API_PASSPHRASE=passphrase
+export API_KEY_VERSION=2
 
 composer test
 ```
