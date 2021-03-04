@@ -3,7 +3,6 @@
 namespace KuCoin\SDK\Tests;
 
 use KuCoin\SDK\Auth;
-use KuCoin\SDK\AuthVersion;
 use KuCoin\SDK\Http\GuzzleHttp;
 use KuCoin\SDK\KuCoinApi;
 
@@ -20,14 +19,14 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $apiBaseUri = getenv('API_BASE_URI');
         $apiSkipVerifyTls = (bool)getenv('API_SKIP_VERIFY_TLS');
         $apiDebugMode = (bool)getenv('API_DEBUG_MODE');
-        $authVersion = getenv('API_AUTH_VERSION') ?: AuthVersion::V2;
+        $apiKeyVersion = getenv('API_KEY_VERSION') ?: Auth::API_KEY_VERSION_V2;
         KuCoinApi::setSkipVerifyTls($apiSkipVerifyTls);
         KuCoinApi::setDebugMode($apiDebugMode);
         if ($apiBaseUri) {
             KuCoinApi::setBaseUri($apiBaseUri);
         }
 
-        $auth = new Auth($apiKey, $apiSecret, $apiPassPhrase, $authVersion);
+        $auth = new Auth($apiKey, $apiSecret, $apiPassPhrase, $apiKeyVersion);
         return [
             [new $this->apiClass($this->apiWithAuth ? $auth : null)],
             [new $this->apiClass($this->apiWithAuth ? $auth : null, new GuzzleHttp(['skipVerifyTls' => $apiSkipVerifyTls]))],

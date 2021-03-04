@@ -21,7 +21,7 @@ class Auth implements IAuth
         $this->key = $key;
         $this->secret = $secret;
         $this->passphrase = $passphrase;
-        $this->$apiKeyVersion = $key;
+        $this->apiKeyVersion = $apiKeyVersion;
     }
 
     public function signature($requestUri, $body, $timestamp, $method)
