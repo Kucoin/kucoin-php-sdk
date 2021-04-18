@@ -126,4 +126,50 @@ class Order extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/limit/orders');
         return $response->getApiData();
     }
+
+    /**
+     * Get an order by clientOid
+     *
+     * @param $clientOid
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getDetailByClientOid($clientOid)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/order/client-order/' . $clientOid, []);
+        return $response->getApiData();
+    }
+
+    /**
+     * Cancel an order by clientOid
+     *
+     * @param $clientOid
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function cancelByClientOid($clientOid)
+    {
+        $response = $this->call(Request::METHOD_DELETE, '/api/v1/order/client-order/' . $clientOid);
+        return $response->getApiData();
+    }
+
+
+    /**
+     * Place a new margin order
+     *
+     * @param array $order
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createMarginOrder(array $order)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/order', $order);
+        return $response->getApiData();
+    }
 }

@@ -81,6 +81,10 @@ class SymbolTest extends TestCase
 //            $this->assertArrayHasKey('high', $ticker);
 //            $this->assertArrayHasKey('low', $ticker);
             $this->assertArrayHasKey('vol', $ticker);
+            $this->assertArrayHasKey('takerFeeRate', $ticker);
+            $this->assertArrayHasKey('makerFeeRate', $ticker);
+            $this->assertArrayHasKey('takerCoefficient', $ticker);
+            $this->assertArrayHasKey('makerCoefficient', $ticker);
 //            $this->assertArrayHasKey('last', $ticker);
         }
     }
@@ -203,6 +207,10 @@ class SymbolTest extends TestCase
         $data = $api->get24HStats('ETH-BTC');
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('symbol', $data);
+        $this->assertArrayHasKey('takerFeeRate', $data);
+        $this->assertArrayHasKey('makerFeeRate', $data);
+        $this->assertArrayHasKey('takerCoefficient', $data);
+        $this->assertArrayHasKey('makerCoefficient', $data);
 //        $this->assertArrayHasKey('changeRate', $data);
 //        $this->assertArrayHasKey('changePrice', $data);
 //        $this->assertArrayHasKey('open', $data);
