@@ -16,7 +16,7 @@
 | Dependency | Requirement |
 | -------- | -------- |
 | [PHP](https://secure.php.net/manual/en/install.php) | `>=5.5.0` `Recommend PHP7+` |
-| [guzzlehttp/guzzle](https://github.com/guzzle/guzzle) | `~6.0` |
+| [guzzlehttp/guzzle](https://github.com/guzzle/guzzle) | `^6.0\|^7.0` |
 
 ## Install
 > Install package via [Composer](https://getcomposer.org/).
@@ -31,7 +31,7 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 
 | Environment | BaseUri |
 | -------- | -------- |
-| *Production* | `https://api.kucoin.com(DEFAULT)` `https://api.kucoin.cc` |
+| *Production* | `https://api.kucoin.com(DEFAULT)` `https://api.kucoin.top` |
 | *Sandbox* | `https://openapi-sandbox.kucoin.com` |
 
 ```php
