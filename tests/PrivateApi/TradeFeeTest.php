@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\TradeFee;
 
 class TradeFeeTest extends TestCase
 {
-    protected $apiClass    = TradeFee::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = TradeFee::class;
 
     /**
      * @dataProvider apiProvider

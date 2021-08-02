@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PublicApi;
 
 use KuCoin\SDK\PublicApi\Currency;
 
 class CurrencyTest extends TestCase
 {
-    protected $apiClass    = Currency::class;
-    protected $apiWithAuth = false;
+    protected $apiClass = Currency::class;
 
     /**
      * @dataProvider apiProvider
