@@ -1,6 +1,6 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\ApiCode;
 use KuCoin\SDK\Exceptions\BusinessException;
@@ -8,8 +8,7 @@ use KuCoin\SDK\PrivateApi\Account;
 
 class AccountTest extends TestCase
 {
-    protected $apiClass    = Account::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = Account::class;
 
     /**
      * @dataProvider apiProvider

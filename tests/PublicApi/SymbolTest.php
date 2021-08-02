@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PublicApi;
 
 use KuCoin\SDK\PublicApi\Symbol;
 
 class SymbolTest extends TestCase
 {
-    protected $apiClass    = Symbol::class;
-    protected $apiWithAuth = false;
+    protected $apiClass = Symbol::class;
 
     /**
      * @dataProvider apiProvider

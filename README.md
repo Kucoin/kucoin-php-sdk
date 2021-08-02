@@ -241,6 +241,7 @@ go(function () {
 | -------- | -------- | -------- |
 | KuCoin\SDK\PrivateApi\Deposit::createAddress() | YES | https://docs.kucoin.com/#create-deposit-address |
 | KuCoin\SDK\PrivateApi\Deposit::getAddress() | YES | https://docs.kucoin.com/#get-deposit-address |
+| KuCoin\SDK\PrivateApi\Deposit::getAddresses() | YES | https://docs.kucoin.com/#get-deposit-addresses-v2 |
 | KuCoin\SDK\PrivateApi\Deposit::getDeposits() | YES | https://docs.kucoin.com/#get-deposit-list |
 | KuCoin\SDK\PrivateApi\Deposit::getV1Deposits() | YES | https://docs.kucoin.com/#get-v1-historical-deposits-list |
 
@@ -273,6 +274,29 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::cancelByClientOid() | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid |
 | KuCoin\SDK\PrivateApi\Order::getDetailByClientOid() | YES | https://docs.kucoin.com/#get-single-active-order-by-clientoid|
 
+</details>
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\StopOrder</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\StopOrder::create() | YES | https://docs.kucoin.com/#place-a-new-order-2 |
+| KuCoin\SDK\PrivateApi\StopOrder::cancel() | YES | https://docs.kucoin.com/#cancel-an-order-2 |
+| KuCoin\SDK\PrivateApi\StopOrder::cancelBatch() | YES | https://docs.kucoin.com/#cancel-orders |
+| KuCoin\SDK\PrivateApi\StopOrder::getList() | YES | https://docs.kucoin.com/#list-stop-orders |
+| KuCoin\SDK\PrivateApi\StopOrder::getDetail() | YES | https://docs.kucoin.com/#get-single-order-info |
+| KuCoin\SDK\PrivateApi\StopOrder::getDetailByClientOid() | YES | https://docs.kucoin.com/#get-single-order-by-clientoid |
+| KuCoin\SDK\PrivateApi\StopOrder::cancelByClientOid()| YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid-2 |
+
+</details>
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\Symbol</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\Symbol::getAggregatedFullOrderBook() | NO | https://docs.kucoin.com/#get-full-order-book-aggregated |
 
 </details>
 
@@ -323,8 +347,6 @@ go(function () {
 | KuCoin\SDK\PublicApi\Symbol::getTicker() | NO | https://docs.kucoin.com/#get-ticker |
 | KuCoin\SDK\PublicApi\Symbol::getAllTickers() | NO | https://docs.kucoin.com/#get-all-tickers |
 | KuCoin\SDK\PublicApi\Symbol::getAggregatedPartOrderBook() | NO | https://docs.kucoin.com/#get-part-order-book-aggregated |
-| KuCoin\SDK\PublicApi\Symbol::getAggregatedFullOrderBook() | NO | https://docs.kucoin.com/#get-full-order-book-aggregated |
-| KuCoin\SDK\PublicApi\Symbol::getAtomicFullOrderBook() | NO | https://docs.kucoin.com/#get-full-order-book-atomic |
 | KuCoin\SDK\PublicApi\Symbol::getTradeHistories() | NO | https://docs.kucoin.com/#get-trade-histories |
 | KuCoin\SDK\PublicApi\Symbol::getKLines() | NO | https://docs.kucoin.com/#get-klines |
 | KuCoin\SDK\PublicApi\Symbol::get24HStats() | NO | https://docs.kucoin.com/#get-24hr-stats |

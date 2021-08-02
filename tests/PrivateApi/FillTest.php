@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\Fill;
 
 class FillTest extends TestCase
 {
-    protected $apiClass    = Fill::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = Fill::class;
 
     /**
      * @dataProvider apiProvider

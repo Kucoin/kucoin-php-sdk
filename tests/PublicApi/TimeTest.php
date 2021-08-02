@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PublicApi;
 
 use KuCoin\SDK\PublicApi\Time;
 
 class TimeTest extends TestCase
 {
-    protected $apiClass    = Time::class;
-    protected $apiWithAuth = false;
+    protected $apiClass = Time::class;
 
     /**
      * @dataProvider apiProvider

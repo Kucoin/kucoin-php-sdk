@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PublicApi;
 
 use KuCoin\SDK\PublicApi\ServiceStatus;
 
 class ServiceStatusTest extends TestCase
 {
-    protected $apiClass    = ServiceStatus::class;
-    protected $apiWithAuth = false;
+    protected $apiClass = ServiceStatus::class;
 
     /**
      * @dataProvider apiProvider
