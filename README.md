@@ -187,33 +187,6 @@ go(function () {
 
 ### API list
 <details>
-<summary>KuCoin\SDK\PrivateApi\TradeFee</summary>
-
-| API | Authentication | Description |
-| -------- | -------- | -------- |
-| KuCoin\SDK\PrivateApi\TradeFee::getBaseFee() | YES | https://docs.kucoin.com/#basic-user-fee |
-| KuCoin\SDK\PrivateApi\TradeFee::getTradeFees() | YES | https://docs.kucoin.com/#actual-fee-rate-of-the-trading-pair |
-
-</details>
-
-<details>
-<summary>KuCoin\SDK\PrivateApi\StopOrder</summary>
-
-| API | Authentication | Description |
-| -------- | -------- | -------- |
-| KuCoin\SDK\PrivateApi\StopOrder::create() | YES | https://docs.kucoin.com/#place-a-new-order-2 |
-| KuCoin\SDK\PrivateApi\StopOrder::cancel()  | YES | https://docs.kucoin.com/#cancel-an-order-2 |
-| KuCoin\SDK\PrivateApi\StopOrder::cancelBatch()  | YES | https://docs.kucoin.com/#cancel-orders |
-| KuCoin\SDK\PrivateApi\StopOrder::getDetail()  | YES | https://docs.kucoin.com/#get-single-order-info |
-| KuCoin\SDK\PrivateApi\StopOrder::getList()  | YES | https://docs.kucoin.com/#list-stop-orders |
-| KuCoin\SDK\PrivateApi\StopOrder::getDetailByClientOid()  | YES | https://docs.kucoin.com/#get-single-order-by-clientoid |
-| KuCoin\SDK\PrivateApi\StopOrder::cancelByClientOid()  | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid-2 |
-
-</details>
-
-
-
-<details>
 <summary>KuCoin\SDK\PrivateApi\Account</summary>
 
 | API | Authentication | Description |
@@ -248,12 +221,21 @@ go(function () {
 </details>
 
 <details>
-<summary>KuCoin\SDK\PrivateApi\Fill</summary>
+<summary>KuCoin\SDK\PrivateApi\TradeFee</summary>
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| KuCoin\SDK\PrivateApi\Fill::getList() | YES | https://docs.kucoin.com/#list-fills |
-| KuCoin\SDK\PrivateApi\Fill::getRecentList() | YES | https://docs.kucoin.com/#recent-fills |
+| KuCoin\SDK\PrivateApi\TradeFee::getBaseFee() | YES | https://docs.kucoin.com/#basic-user-fee |
+| KuCoin\SDK\PrivateApi\TradeFee::getTradeFees() | YES | https://docs.kucoin.com/#actual-fee-rate-of-the-trading-pair |
+
+</details>
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\Symbol</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\Symbol::getAggregatedFullOrderBook() | NO | https://docs.kucoin.com/#get-full-order-book-aggregated |
 
 </details>
 
@@ -292,11 +274,12 @@ go(function () {
 </details>
 
 <details>
-<summary>KuCoin\SDK\PrivateApi\Symbol</summary>
+<summary>KuCoin\SDK\PrivateApi\Fill</summary>
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| KuCoin\SDK\PrivateApi\Symbol::getAggregatedFullOrderBook() | NO | https://docs.kucoin.com/#get-full-order-book-aggregated |
+| KuCoin\SDK\PrivateApi\Fill::getList() | YES | https://docs.kucoin.com/#list-fills |
+| KuCoin\SDK\PrivateApi\Fill::getRecentList() | YES | https://docs.kucoin.com/#recent-fills |
 
 </details>
 
