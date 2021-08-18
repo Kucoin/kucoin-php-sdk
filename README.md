@@ -73,7 +73,7 @@ To reinforce the security of the API, KuCoin upgraded the API key to version 2.0
 use KuCoin\SDK\PrivateApi\Account;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\BusinessException;
-use Kucoin\SDK\Auth;
+use KuCoin\SDK\Auth;
 
 // Auth version v2 (recommend)
 $auth = new Auth('key', 'secret', 'passphrase', Auth::API_KEY_VERSION_V2);
