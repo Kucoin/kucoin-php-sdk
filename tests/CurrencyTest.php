@@ -66,4 +66,27 @@ class CurrencyTest extends TestCase
         $this->assertInternalType('array', $prices);
         $this->assertNotEmpty($prices);
     }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Currency $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetV2Detail(Currency $api)
+    {
+        $currency = $api->getV2Detail('BTC');
+        $this->assertInternalType('array', $currency);
+        $this->assertArrayHasKey('currency', $currency);
+        $this->assertArrayHasKey('name', $currency);
+        $this->assertArrayHasKey('fullName', $currency);
+        $this->assertArrayHasKey('precision', $currency);
+        $this->assertArrayHasKey('confirms', $currency);
+        $this->assertArrayHasKey('contractAddress', $currency);
+        $this->assertArrayHasKey('isMarginEnabled', $currency);
+        $this->assertArrayHasKey('isDebitEnabled', $currency);
+        $this->assertArrayHasKey('chains', $currency);
+        $this->assertInternalType('array', $currency['chains']);
+    }
 }

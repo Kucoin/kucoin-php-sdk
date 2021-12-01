@@ -54,4 +54,20 @@ class Currency extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/prices', compact('base', 'currencies'));
         return $response->getApiData();
     }
+
+    /**
+     * Get the v2 details of a currency
+     *
+     * @param $currency
+     * @param null $chain
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getV2Detail($currency, $chain = null)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/currencies/' . $currency, compact('chain'));
+        return $response->getApiData();
+    }
 }
