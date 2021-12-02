@@ -318,6 +318,7 @@ go(function () {
 | KuCoin\SDK\PublicApi\Currency::getList() | NO | https://docs.kucoin.com/#get-currencies |
 | KuCoin\SDK\PublicApi\Currency::getDetail() | NO | https://docs.kucoin.com/#get-currency-detail |
 | KuCoin\SDK\PublicApi\Currency::getPrices() | NO | https://docs.kucoin.com/#get-fiat-price |
+| KuCoin\SDK\PublicApi\Currency::getV2Detail() | NO | https://docs.kucoin.com/#get-currency-detail-recommend |
 
 </details>
 
