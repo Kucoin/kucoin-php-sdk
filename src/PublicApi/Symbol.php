@@ -8,7 +8,7 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Symbol
  * @package KuCoin\SDK\PublicApi
- * @see https://docs.kucoin.com/#symbols
+ * @see https://docs.kucoin.com/#market-data
  */
 class Symbol extends KuCoinApi
 {
@@ -64,7 +64,7 @@ class Symbol extends KuCoinApi
      */
     public function getAggregatedPartOrderBook($symbol, $depth = 20)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_' . intval($depth), compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_' . (int)$depth, compact('symbol'));
         return $response->getApiData();
     }
 
@@ -75,6 +75,7 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated Use v3 version: \KuCoin\SDK\PrivateApi\Symbol->getAggregatedFullOrderBook($symbol)
      */
     public function getAggregatedFullOrderBook($symbol)
     {
@@ -89,6 +90,7 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated
      */
     public function getAtomicFullOrderBook($symbol)
     {
@@ -103,6 +105,7 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated
      */
     public function getV2AtomicFullOrderBook($symbol)
     {

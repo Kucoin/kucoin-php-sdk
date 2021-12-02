@@ -51,11 +51,11 @@ class SwooleHttp extends BaseHttp
         }
 
         $config = [
-            'base_uri'        => $request->getBaseUri(),
-            'timeout'         => $timeout,
-            'use_pool'        => true,
-            'ssl_verify_peer' => empty($this->config['skipVerifyTls']),
-        ];
+                'base_uri'        => $request->getBaseUri(),
+                'timeout'         => $timeout,
+                'use_pool'        => true,
+                'ssl_verify_peer' => isset($this->config['ssl_verify_peer']) ? $this->config['ssl_verify_peer'] : empty($this->config['skipVerifyTls']),
+            ] + $this->config;
         $client = static::getClient($config);
         $options['headers'] = $request->getHeaders();
 

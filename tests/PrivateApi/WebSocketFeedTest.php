@@ -1,6 +1,6 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
@@ -8,8 +8,7 @@ use React\EventLoop\LoopInterface;
 
 class WebSocketFeedTest extends TestCase
 {
-    protected $apiClass    = WebSocketFeed::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = WebSocketFeed::class;
 
     /**
      * @dataProvider apiProvider
