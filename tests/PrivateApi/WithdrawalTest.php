@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\Withdrawal;
 
 class WithdrawalTest extends TestCase
 {
-    protected $apiClass    = Withdrawal::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = Withdrawal::class;
 
     /**
      * @dataProvider apiProvider

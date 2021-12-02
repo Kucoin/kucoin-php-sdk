@@ -1,14 +1,13 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\PrivateApi\Deposit;
 
 class DepositTest extends TestCase
 {
-    protected $apiClass    = Deposit::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = Deposit::class;
 
     /**
      * @dataProvider apiProvider
@@ -20,6 +19,8 @@ class DepositTest extends TestCase
      */
     public function testCreateAddress(Deposit $api)
     {
+        $this->markTestSkipped();
+        return;
         $address = $api->createAddress('BTC');
         $this->assertInternalType('array', $address);
         $this->assertArrayHasKey('address', $address);
@@ -36,10 +37,8 @@ class DepositTest extends TestCase
      */
     public function testGetAddress(Deposit $api)
     {
-        $this->markTestSkipped();
-        return;
         try {
-            $address = $api->getAddress('BTC');
+            $address = $api->getAddress('USDT');
             if ($address !== null) {
                 $this->assertInternalType('array', $address);
                 $this->assertArrayHasKey('address', $address);
@@ -51,6 +50,26 @@ class DepositTest extends TestCase
                 return;
             }
             throw $e;
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Deposit $api
+     * @return array|string
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetAddresses(Deposit $api)
+    {
+        $addresses = $api->getAddresses('USDT');
+        foreach ($addresses as $address) {
+            $this->assertInternalType('array', $address);
+            $this->assertArrayHasKey('address', $address);
+            $this->assertArrayHasKey('memo', $address);
+            $this->assertArrayHasKey('chain', $address);
+            $this->assertArrayHasKey('contractAddress', $address);
         }
     }
 

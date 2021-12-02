@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\StopOrder;
 
 class StopOrderTest extends TestCase
 {
-    protected $apiClass    = StopOrder::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = StopOrder::class;
 
     /**
      * @dataProvider apiProvider

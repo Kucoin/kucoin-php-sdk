@@ -1,13 +1,12 @@
 <?php
 
-namespace KuCoin\SDK\Tests;
+namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\Margin;
 
 class MarginTest extends TestCase
 {
-    protected $apiClass    = Margin::class;
-    protected $apiWithAuth = true;
+    protected $apiClass = Margin::class;
 
 
     /**
