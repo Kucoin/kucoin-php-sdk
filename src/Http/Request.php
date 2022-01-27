@@ -73,7 +73,7 @@ class Request
      */
     public function setBaseUri($baseUri)
     {
-        $this->baseUri = $baseUri ? rtrim($baseUri, '/') : null;
+        $this->baseUri = $baseUri ? sprintf('%s%s', rtrim($baseUri, '/'), '/') : null;
     }
 
     /**

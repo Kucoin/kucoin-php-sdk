@@ -23,7 +23,7 @@ class Order extends KuCoinApi
      */
     public function create(array $order)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/orders', $order);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/orders', $order);
         return $response->getApiData();
     }
 
@@ -38,7 +38,7 @@ class Order extends KuCoinApi
      */
     public function createMulti($symbol, array $orderList)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/orders/multi', compact('symbol', 'orderList'));
+        $response = $this->call(Request::METHOD_POST, 'api/v1/orders/multi', compact('symbol', 'orderList'));
         return $response->getApiData();
     }
 
@@ -52,7 +52,7 @@ class Order extends KuCoinApi
      */
     public function cancel($orderId)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/orders/' . $orderId);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/orders/' . $orderId);
         return $response->getApiData();
     }
 
@@ -66,7 +66,7 @@ class Order extends KuCoinApi
      */
     public function cancelAll($symbol = null)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/orders', compact('symbol'));
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/orders', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -81,7 +81,7 @@ class Order extends KuCoinApi
      */
     public function getList(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/orders', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/orders', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -96,7 +96,7 @@ class Order extends KuCoinApi
      */
     public function getV1List(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/hist-orders', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/hist-orders', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -110,7 +110,7 @@ class Order extends KuCoinApi
      */
     public function getDetail($orderId)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/orders/' . $orderId, []);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/orders/' . $orderId, []);
         return $response->getApiData();
     }
 
@@ -123,7 +123,7 @@ class Order extends KuCoinApi
      */
     public function getRecentList()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/limit/orders');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/limit/orders');
         return $response->getApiData();
     }
 
@@ -138,7 +138,7 @@ class Order extends KuCoinApi
      */
     public function getDetailByClientOid($clientOid)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/order/client-order/' . $clientOid, []);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/order/client-order/' . $clientOid, []);
         return $response->getApiData();
     }
 
@@ -153,7 +153,7 @@ class Order extends KuCoinApi
      */
     public function cancelByClientOid($clientOid)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/order/client-order/' . $clientOid);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/order/client-order/' . $clientOid);
         return $response->getApiData();
     }
 
@@ -169,7 +169,7 @@ class Order extends KuCoinApi
      */
     public function createMarginOrder(array $order)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/order', $order);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/margin/order', $order);
         return $response->getApiData();
     }
 }

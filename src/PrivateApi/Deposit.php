@@ -23,7 +23,7 @@ class Deposit extends KuCoinApi
      */
     public function createAddress($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/deposit-addresses', compact('currency', 'chain'));
+        $response = $this->call(Request::METHOD_POST, 'api/v1/deposit-addresses', compact('currency', 'chain'));
         return $response->getApiData();
     }
 
@@ -38,7 +38,7 @@ class Deposit extends KuCoinApi
      */
     public function getAddress($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/deposit-addresses', compact('currency', 'chain'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/deposit-addresses', compact('currency', 'chain'));
         return $response->getApiData();
     }
 
@@ -54,7 +54,7 @@ class Deposit extends KuCoinApi
      */
     public function getAddresses($currency)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v2/deposit-addresses', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, 'api/v2/deposit-addresses', compact('currency'));
         return $response->getApiData();
     }
 
@@ -69,7 +69,7 @@ class Deposit extends KuCoinApi
      */
     public function getDeposits(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/deposits', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/deposits', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -84,7 +84,7 @@ class Deposit extends KuCoinApi
      */
     public function getV1Deposits(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/hist-deposits', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/hist-deposits', $params + $pagination);
         return $response->getApiData();
     }
 }

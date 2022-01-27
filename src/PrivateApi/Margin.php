@@ -39,7 +39,7 @@ class Margin extends KuCoinApi
      */
     public function getConfig()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/config');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/config');
         return $response->getApiData();
     }
 
@@ -54,7 +54,7 @@ class Margin extends KuCoinApi
      */
     public function getAccount()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/account');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/account');
         return $response->getApiData();
     }
 
@@ -69,7 +69,7 @@ class Margin extends KuCoinApi
      */
     public function borrow(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/borrow', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/margin/borrow', $params);
         return $response->getApiData();
     }
 
@@ -84,7 +84,7 @@ class Margin extends KuCoinApi
      */
     public function getBorrow($orderId)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/borrow', compact('orderId'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/borrow', compact('orderId'));
         return $response->getApiData();
     }
 
@@ -99,7 +99,7 @@ class Margin extends KuCoinApi
      */
     public function getOutstanding($currency)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/borrow/outstanding', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/borrow/outstanding', compact('currency'));
         return $response->getApiData();
     }
 
@@ -114,7 +114,7 @@ class Margin extends KuCoinApi
      */
     public function getRepayRecord($currency)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/borrow/repaid', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/borrow/repaid', compact('currency'));
         return $response->getApiData();
     }
 
@@ -129,7 +129,7 @@ class Margin extends KuCoinApi
      */
     public function repayAll(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/repay/all', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/margin/repay/all', $params);
         return $response->getApiData();
     }
 
@@ -144,7 +144,7 @@ class Margin extends KuCoinApi
      */
     public function repaySingle(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/repay/single', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/margin/repay/single', $params);
         return $response->getApiData();
     }
 
@@ -159,7 +159,7 @@ class Margin extends KuCoinApi
      */
     public function lend(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/lend', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/margin/lend', $params);
         return $response->getApiData();
     }
 
@@ -174,7 +174,7 @@ class Margin extends KuCoinApi
      */
     public function cancelLend($orderId)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/margin/lend/' . $orderId);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/margin/lend/' . $orderId);
         return $response->getApiData();
     }
 
@@ -189,7 +189,7 @@ class Margin extends KuCoinApi
      */
     public function setAutoLend(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/margin/toggle-auto-lend', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/margin/toggle-auto-lend', $params);
         return $response->getApiData();
     }
 
@@ -205,7 +205,7 @@ class Margin extends KuCoinApi
      */
     public function getLendActive(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/lend/active', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/lend/active', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -221,7 +221,7 @@ class Margin extends KuCoinApi
      */
     public function getLendDone(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/lend/done', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/lend/done', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -237,7 +237,7 @@ class Margin extends KuCoinApi
      */
     public function getUnsettled(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/lend/trade/unsettled', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/lend/trade/unsettled', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -253,7 +253,7 @@ class Margin extends KuCoinApi
      */
     public function getSettled(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/lend/trade/settled', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/lend/trade/settled', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -268,7 +268,7 @@ class Margin extends KuCoinApi
      */
     public function getLendAssets($currency)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/lend/assets', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/lend/assets', compact('currency'));
         return $response->getApiData();
     }
 
@@ -283,7 +283,7 @@ class Margin extends KuCoinApi
      */
     public function getMarket(array $params)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/market', $params);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/market', $params);
         return $response->getApiData();
     }
 
@@ -298,7 +298,7 @@ class Margin extends KuCoinApi
      */
     public function getTradeLast($currency)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/margin/trade/last', compact('currency'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/margin/trade/last', compact('currency'));
         return $response->getApiData();
     }
 }

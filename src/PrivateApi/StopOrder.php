@@ -23,7 +23,7 @@ class StopOrder extends KuCoinApi
      */
     public function create(array $stopOrder)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/stop-order', $stopOrder);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/stop-order', $stopOrder);
         return $response->getApiData();
     }
 
@@ -37,7 +37,7 @@ class StopOrder extends KuCoinApi
      */
     public function cancelBatch(array $params)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/stop-order/cancel', $params);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/stop-order/cancel', $params);
         return $response->getApiData();
     }
 
@@ -51,7 +51,7 @@ class StopOrder extends KuCoinApi
      */
     public function cancel($orderId)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/stop-order/' . $orderId);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/stop-order/' . $orderId);
         return $response->getApiData();
     }
 
@@ -66,7 +66,7 @@ class StopOrder extends KuCoinApi
      */
     public function getList(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/stop-order', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/stop-order', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -80,7 +80,7 @@ class StopOrder extends KuCoinApi
      */
     public function getDetail($orderId)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/stop-order/' . $orderId, []);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/stop-order/' . $orderId, []);
         return $response->getApiData();
     }
 
@@ -98,7 +98,7 @@ class StopOrder extends KuCoinApi
     public function getDetailByClientOid($clientOid, $symbol = null)
     {
         $params = compact('clientOid', 'symbol');
-        $response = $this->call(Request::METHOD_GET, '/api/v1/stop-order/queryOrderByClientOid', $params);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/stop-order/queryOrderByClientOid', $params);
         return $response->getApiData();
     }
 
@@ -114,7 +114,7 @@ class StopOrder extends KuCoinApi
     public function cancelByClientOid($clientOid, $symbol = null)
     {
         $params = compact('clientOid', 'symbol');
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/stop-order/cancelOrderByClientOid', $params);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/stop-order/cancelOrderByClientOid', $params);
         return $response->getApiData();
     }
 }
