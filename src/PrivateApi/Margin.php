@@ -301,4 +301,19 @@ class Margin extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/margin/trade/last', compact('currency'));
         return $response->getApiData();
     }
+
+    /**
+     * This endpoint can query the cross/isolated margin risk limit.
+     * This endpoint requires the "General" permission
+     * @param string $marginModel corss（corss margin）, isolated (isolated margin)
+     * @return mixed
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getStrategyRiskLimit(string $marginModel)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/risk/limit/strategy', ['marginModel' => $marginModel]);
+        return $response->getApiData();
+    }
 }

@@ -371,4 +371,22 @@ class MarginTest extends TestCase
             $this->assertArrayHasKey('dailyIntRate', $data[0]);
         }
     }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Margin $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetStrategyRiskLimit(Margin $api)
+    {
+        $data = $api->getStrategyRiskLimit('cross');
+        if (!empty($data)) {
+            $this->assertArrayHasKey('currency', $data[0]);
+            $this->assertArrayHasKey('borrowMaxAmount', $data[0]);
+            $this->assertArrayHasKey('buyMaxAmount', $data[0]);
+            $this->assertArrayHasKey('precision', $data[0]);
+        }
+    }
 }

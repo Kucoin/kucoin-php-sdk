@@ -87,6 +87,7 @@ class Order extends KuCoinApi
 
     /**
      * Get v1 historical orders list
+     * @deprecated
      * @param array $params
      * @param array $pagination
      * @return array
