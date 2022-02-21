@@ -3,10 +3,8 @@
 namespace KuCoin\SDK\PrivateApi;
 
 
-use http\Encoding\Stream;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
-use phpDocumentor\Reflection\Types\String_;
 
 
 /**
