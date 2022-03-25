@@ -287,7 +287,7 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Create message for ping
+     * Create a ping message
      * @param string $id
      * @return array
      */
@@ -297,7 +297,20 @@ class WebSocketFeed extends KuCoinApi
     }
 
     /**
-     * Create message for unsubscribe
+     * Create a subscription message
+     * @param string $topic
+     * @param bool $privateChannel
+     * @param bool $response
+     * @param string $id
+     * @return array
+     */
+    public function createSubscribeMessage($topic, $privateChannel = false, $response = true, $id = null)
+    {
+        return ['id' => $id ?: uniqid('', true), 'type' => 'subscribe', 'topic' => $topic, 'privateChannel' => $privateChannel, 'response' => $response];
+    }
+
+    /**
+     * Create an unsubscribe message
      * @param string $topic
      * @param bool $privateChannel
      * @param bool $response

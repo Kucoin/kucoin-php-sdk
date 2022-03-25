@@ -32,6 +32,9 @@ $channels = [
 $api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     var_dump($message);
 
+    // Subscribe another channel
+    // $ws->send(json_encode($api->createSubscribeMessage('/market/ticker:LTC-BTC')));
+
     // Unsubscribe the channel
     // $ws->send(json_encode($api->createUnsubscribeMessage('/market/ticker:ETH-BTC')));
 

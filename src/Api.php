@@ -16,12 +16,12 @@ abstract class Api
     /**
      * @var string SDK Version
      */
-    const VERSION = '1.1.26';
+    const VERSION = '1.1.27';
 
     /**
      * @var string SDK update date
      */
-    const UPDATE_DATE = '2022.02.27';
+    const UPDATE_DATE = '2022.03.25';
 
     /**
      * @var string
