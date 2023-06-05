@@ -346,4 +346,172 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('context', $item);
         }
     }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSubUserV2(Account $api)
+    {
+        $data = $api->getSubUserV2(['currentPage' => 1, 'pageSize' => 10]);
+        $this->assertPagination($data);
+        foreach ($data['items'] as $item) {
+            $this->assertArrayHasKey('userId', $item);
+            $this->assertArrayHasKey('uid', $item);
+            $this->assertArrayHasKey('subName', $item);
+            $this->assertArrayHasKey('status', $item);
+            $this->assertArrayHasKey('type', $item);
+            $this->assertArrayHasKey('access', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('remarks', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetUserinfoV2(Account $api)
+    {
+        $data = $api->getUserinfoV2();
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('level', $data);
+        $this->assertArrayHasKey('subQuantity', $data);
+        $this->assertArrayHasKey('spotSubQuantity', $data);
+        $this->assertArrayHasKey('marginSubQuantity', $data);
+        $this->assertArrayHasKey('futuresSubQuantity', $data);
+        $this->assertArrayHasKey('maxSubQuantity', $data);
+        $this->assertArrayHasKey('maxDefaultSubQuantity', $data);
+        $this->assertArrayHasKey('maxSpotSubQuantity', $data);
+        $this->assertArrayHasKey('maxMarginSubQuantity', $data);
+        $this->assertArrayHasKey('maxFuturesSubQuantity', $data);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCreateSubUserV2(Account $api)
+    {
+        $params = [
+            'password' => 'phpunit123',
+            'remarks'  => 'phpunit123',
+            'subName'  => 'phpunit123',
+            'access'   => 'Futures,Spot,Margin',
+        ];
+        $result = $api->createSubUserV2($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('uid', $result);
+        $this->assertArrayHasKey('subName', $result);
+        $this->assertArrayHasKey('access', $result);
+        $this->assertArrayHasKey('remarks', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCreateSubUserApiKey(Account $api)
+    {
+        $params = [
+            'subName'     => 'testsubtest',
+            'passphrase'  => 'createSubAccountApi',
+            'remark'      => 'createSubAccountApi',
+            'permission'  => 'General,Trade',
+            'ipWhitelist' => '221.236.30.91',
+            'expire'      => '30',
+        ];
+        $result = $api->createSubUserApiKey($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('apiKey', $result);
+        $this->assertArrayHasKey('apiSecret', $result);
+        $this->assertArrayHasKey('subName', $result);
+        $this->assertArrayHasKey('passphrase', $result);
+        $this->assertArrayHasKey('remark', $result);
+        $this->assertArrayHasKey('permission', $result);
+        $this->assertArrayHasKey('ipWhitelist', $result);
+        $this->assertArrayHasKey('createdAt', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSubUserApiKey(Account $api)
+    {
+        $params = [
+            'subName' => 'testsubtest',
+            'apiKey'  => '647da6a7bfe99b00011961db',
+        ];
+        $result = $api->getSubUserApiKey($params);
+        foreach ($result as $item) {
+            $this->assertInternalType('array', $item);
+            $this->assertArrayHasKey('apiKey', $item);
+            $this->assertArrayHasKey('subName', $item);
+            $this->assertArrayHasKey('remark', $item);
+            $this->assertArrayHasKey('permission', $item);
+            $this->assertArrayHasKey('ipWhitelist', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testUpdateSubUserApiKey(Account $api)
+    {
+        $params = [
+            'subName'     => 'testsubtest',
+            'apiKey'      => '647da940d35150000196a56c',
+            'passphrase'  => 'createSubAccountApi',
+            'permission'  => 'General,Trade',
+            'ipWhitelist' => '221.236.30.91,221.236.30.92',
+            'expire'      => '90',
+        ];
+        $result = $api->updateSubUserApiKey($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('apiKey', $result);
+        $this->assertArrayHasKey('subName', $result);
+        $this->assertArrayHasKey('permission', $result);
+        $this->assertArrayHasKey('ipWhitelist', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testDeleteSubUserApiKey(Account $api)
+    {
+        $params = [
+            'subName'    => 'testsubtest',
+            'apiKey'     => '647da940d35150000196a56c',
+            'passphrase' => 'createSubAccountApi',
+        ];
+        $result = $api->deleteSubUserApiKey($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('apiKey', $result);
+        $this->assertArrayHasKey('subName', $result);
+    }
 }
