@@ -14,6 +14,7 @@ class Symbol extends KuCoinApi
 {
     /**
      * Get a list of symbol
+     * @deprecated Recommended to use /api/v2/symbols
      * @param string|null $market
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -172,6 +173,20 @@ class Symbol extends KuCoinApi
     public function getMarkets()
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/markets');
+        return $response->getApiData();
+    }
+
+    /**
+     * Get a list of symbol for V2
+     * @param string|null $market
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getListV2($market = null)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/symbols', compact('market'));
         return $response->getApiData();
     }
 }

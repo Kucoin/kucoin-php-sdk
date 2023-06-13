@@ -207,7 +207,17 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Account::subTransfer() | YES | `DEPRECATED` https://docs.kucoin.com/#transfer-between-master-account-and-sub-account |
 | KuCoin\SDK\PrivateApi\Account::subTransferV2() | YES | https://docs.kucoin.com/#transfer-between-master-user-and-sub-user |
 | KuCoin\SDK\PrivateApi\Account::getLedgersV2() | YES | https://docs.kucoin.com/#get-account-ledgers |
-
+| KuCoin\SDK\PrivateApi\Account::getLedgersV2() | YES | https://docs.kucoin.com/#get-account-ledgers |
+| KuCoin\SDK\PrivateApi\Account::getSubUserV2() | YES | https://docs.kucoin.com/#get-paginated-list-of-sub-accounts |
+| KuCoin\SDK\PrivateApi\Account::getUserinfoV2() | YES | https://docs.kucoin.com/#get-account-summary-info-v2 |
+| KuCoin\SDK\PrivateApi\Account::createSubUserV2() | YES | https://docs.kucoin.com/#create-sub-account-v2 |
+| KuCoin\SDK\PrivateApi\Account::createSubUserApiKey() | YES | https://docs.kucoin.com/#create-spot-apis-for-sub-account |
+| KuCoin\SDK\PrivateApi\Account::getSubUserApiKey() | YES | https://docs.kucoin.com/#get-sub-account-spot-api-list |
+| KuCoin\SDK\PrivateApi\Account::updateSubUserApiKey() | YES | https://docs.kucoin.com/#modify-sub-account-spot-apis |
+| KuCoin\SDK\PrivateApi\Account::deleteSubUserApiKey() | YES | https://docs.kucoin.com/#delete-sub-account-spot-apis |
+| KuCoin\SDK\PrivateApi\Account::getSubAccountListV2() | YES | https://docs.kucoin.com/#get-paginated-sub-account-information |
+| KuCoin\SDK\PrivateApi\Account::getAccountTransferable() | YES | https://docs.kucoin.com/#get-the-transferable |
+| KuCoin\SDK\PrivateApi\Account::getHfLedgersV2() | YES | https://docs.kucoin.com/spot-hf/#account-ledger-in-high-frequency-trading-accounts |
 </details>
 
 <details>
@@ -246,7 +256,7 @@ go(function () {
 <summary>KuCoin\SDK\PrivateApi\Order</summary>
 
 | API | Authentication | Description |
-| -------- | -------- | -------- |
+| -------- | -------- | ------ |
 | KuCoin\SDK\PrivateApi\Order::create() | YES | https://docs.kucoin.com/#place-a-new-order |
 | KuCoin\SDK\PrivateApi\Order::createMulti() | YES | https://docs.kucoin.com/#place-bulk-orders |
 | KuCoin\SDK\PrivateApi\Order::cancel() | YES | https://docs.kucoin.com/#cancel-an-order |
@@ -258,6 +268,25 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::createMarginOrder()| YES | https://docs.kucoin.com/#place-a-margin-order |
 | KuCoin\SDK\PrivateApi\Order::cancelByClientOid() | YES | https://docs.kucoin.com/#cancel-single-order-by-clientoid |
 | KuCoin\SDK\PrivateApi\Order::getDetailByClientOid() | YES | https://docs.kucoin.com/#get-single-active-order-by-clientoid|
+| KuCoin\SDK\PrivateApi\Order::hfCreate() | YES | https://docs.kucoin.com/spot-hf/#place-hf-order|
+| KuCoin\SDK\PrivateApi\Order::hfSyncCreate() | YES | https://docs.kucoin.com/spot-hf/#sync-place-hf-order|
+| KuCoin\SDK\PrivateApi\Order::hfCreateMulti() | YES | https://docs.kucoin.com/spot-hf/#place-multiple-hf-orders|
+| KuCoin\SDK\PrivateApi\Order::hfSyncCreateMulti() | YES | https://docs.kucoin.com/spot-hf/#sync-place-multiple-hf-orders|
+| KuCoin\SDK\PrivateApi\Order::hfModify() | YES | https://docs.kucoin.com/spot-hf/#modify-order|
+| KuCoin\SDK\PrivateApi\Order::hfCancel() | YES | https://docs.kucoin.com/spot-hf/#cancel-orders-by-orderid|
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancel() | YES | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-orderid|
+| KuCoin\SDK\PrivateApi\Order::hfCancelByClientOid() | YES | https://docs.kucoin.com/spot-hf/#cancel-order-by-clientoid|
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelByClientOid() | YES | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-clientoid|
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelSize() | YES | https://docs.kucoin.com/spot-hf/#cancel-specified-number-of-orders-by-orderid|
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelAll() | YES | https://docs.kucoin.com/spot-hf/#cancel-all-hf-orders-by-symbol|
+| KuCoin\SDK\PrivateApi\Order::getActiveOrderList() | YES | https://docs.kucoin.com/spot-hf/#obtain-list-of-active-hf-orders|
+| KuCoin\SDK\PrivateApi\Order::getActiveSymbols() | YES | https://docs.kucoin.com/spot-hf/#obtain-list-of-symbol-with-active-hf-orders|
+| KuCoin\SDK\PrivateApi\Order::getDoneOrderList() | YES | https://docs.kucoin.com/spot-hf/#obtain-list-of-filled-hf-orders|
+| KuCoin\SDK\PrivateApi\Order::getHfDetail() | YES | https://docs.kucoin.com/spot-hf/#details-of-a-single-hf-order|
+| KuCoin\SDK\PrivateApi\Order::getHfDetailByClientOid() | YES | https://docs.kucoin.com/spot-hf/#obtain-details-of-a-single-hf-order-using-clientoid|
+| KuCoin\SDK\PrivateApi\Order::hfAutoCancel() | YES | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-setting|
+| KuCoin\SDK\PrivateApi\Order::getHfAutoCancel() | YES | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-order-setting-query|
+| KuCoin\SDK\PrivateApi\Order::getHfFills() | YES | https://docs.kucoin.com/spot-hf/#hf-transaction-records|
 
 </details>
 
@@ -330,7 +359,7 @@ go(function () {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| KuCoin\SDK\PublicApi\Symbol::getList() | NO | https://docs.kucoin.com/#get-symbols-list |
+| KuCoin\SDK\PublicApi\Symbol::getList() | NO | `DEPRECATED` https://docs.kucoin.com/#get-symbols-list-deprecated |
 | KuCoin\SDK\PublicApi\Symbol::getTicker() | NO | https://docs.kucoin.com/#get-ticker |
 | KuCoin\SDK\PublicApi\Symbol::getAllTickers() | NO | https://docs.kucoin.com/#get-all-tickers |
 | KuCoin\SDK\PublicApi\Symbol::getAggregatedPartOrderBook() | NO | https://docs.kucoin.com/#get-part-order-book-aggregated |
@@ -338,7 +367,7 @@ go(function () {
 | KuCoin\SDK\PublicApi\Symbol::getKLines() | NO | https://docs.kucoin.com/#get-klines |
 | KuCoin\SDK\PublicApi\Symbol::get24HStats() | NO | https://docs.kucoin.com/#get-24hr-stats |
 | KuCoin\SDK\PublicApi\Symbol::getMarkets() | NO | https://docs.kucoin.com/#get-market-list |
-
+| KuCoin\SDK\PublicApi\Symbol::getListV2() | NO | https://docs.kucoin.com/#get-symbols-list |
 </details>
 
 <details>
@@ -365,6 +394,21 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Margin::getLendAssets() | YES | https://docs.kucoin.com/#get-account-lend-record |
 | KuCoin\SDK\PrivateApi\Margin::getMarket() | YES | https://docs.kucoin.com/#lending-market-data |
 | KuCoin\SDK\PrivateApi\Margin::getTradeLast() | YES | https://docs.kucoin.com/#margin-trade-data |
+</details>
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\IsolatedMargin</summary>
+
+| API | Authentication | Description |
+| -------- | -------- | -------- |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getSymbols() | YES | https://docs.kucoin.com/#query-isolated-margin-trading-pair-configuration |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getAccountList() | YES | https://docs.kucoin.com/#query-isolated-margin-account-info |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getAccountDetail() | YES | https://docs.kucoin.com/#query-single-isolated-margin-account-info |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::borrow() | YES | https://docs.kucoin.com/#isolated-margin-borrowing |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getOutstanding() | YES | https://docs.kucoin.com/#query-outstanding-repayment-records |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getRepaid() | YES | https://docs.kucoin.com/#query-repayment-records |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::repayAll() | YES | https://docs.kucoin.com/#quick-repayment |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::repaySingle() | YES | https://docs.kucoin.com/#single-repayment |
 </details>
 
 <details>

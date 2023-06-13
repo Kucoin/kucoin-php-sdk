@@ -159,7 +159,7 @@ class AccountTest extends TestCase
      */
     public function testInnerTransferV2(Account $api)
     {
-        $order = $api->innerTransferV2(uniqid(), 'KCS', 'main', 'trade', '2');
+        $order = $api->innerTransferV2(uniqid(), 'USDT', 'main', 'trade_hf', '200');
         $this->assertArrayHasKey('orderId', $order);
     }
 
@@ -513,5 +513,104 @@ class AccountTest extends TestCase
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('apiKey', $result);
         $this->assertArrayHasKey('subName', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSubAccountListV2(Account $api)
+    {
+        $params = ['currentPage' => 1, 'pageSize' => 10];
+        $accounts = $api->getSubAccountListV2($params);
+        foreach ($accounts['items'] as $account) {
+            $this->assertInternalType('array', $account);
+            $this->assertArrayHasKey('subUserId', $account);
+            $this->assertArrayHasKey('subName', $account);
+            $this->assertArrayHasKey('mainAccounts', $account);
+            $this->assertArrayHasKey('marginAccounts', $account);
+            $this->assertArrayHasKey('tradeAccounts', $account);
+            $this->assertInternalType('array', $account['mainAccounts']);
+            $this->assertInternalType('array', $account['marginAccounts']);
+            $this->assertInternalType('array', $account['tradeAccounts']);
+            foreach ($account['mainAccounts'] as $item) {
+                $this->assertArrayHasKey('currency', $item);
+                $this->assertArrayHasKey('balance', $item);
+                $this->assertArrayHasKey('available', $item);
+                $this->assertArrayHasKey('holds', $item);
+                $this->assertArrayHasKey('baseCurrency', $item);
+                $this->assertArrayHasKey('baseCurrencyPrice', $item);
+                $this->assertArrayHasKey('baseAmount', $item);
+            }
+            foreach ($account['marginAccounts'] as $item) {
+                $this->assertArrayHasKey('currency', $item);
+                $this->assertArrayHasKey('balance', $item);
+                $this->assertArrayHasKey('available', $item);
+                $this->assertArrayHasKey('holds', $item);
+                $this->assertArrayHasKey('baseCurrency', $item);
+                $this->assertArrayHasKey('baseCurrencyPrice', $item);
+                $this->assertArrayHasKey('baseAmount', $item);
+            }
+            foreach ($account['tradeAccounts'] as $item) {
+                $this->assertArrayHasKey('currency', $item);
+                $this->assertArrayHasKey('balance', $item);
+                $this->assertArrayHasKey('available', $item);
+                $this->assertArrayHasKey('holds', $item);
+                $this->assertArrayHasKey('baseCurrency', $item);
+                $this->assertArrayHasKey('baseCurrencyPrice', $item);
+                $this->assertArrayHasKey('baseAmount', $item);
+            }
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetAccountTransferable(Account $api)
+    {
+        $params = [
+            'currency' => 'USDT',
+            'type'     => 'MAIN',
+        ];
+        $result = $api->getAccountTransferable($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('balance', $result);
+        $this->assertArrayHasKey('available', $result);
+        $this->assertArrayHasKey('currency', $result);
+        $this->assertArrayHasKey('holds', $result);
+        $this->assertArrayHasKey('transferable', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Account $api
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetHfLedgersV2(Account $api)
+    {
+        $params = ['currency' => 'USDT'];
+        $data = $api->getHfLedgersV2($params);
+        $this->assertInternalType('array', $data);
+        foreach ($data as $item) {
+            $this->assertArrayHasKey('id', $item);
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('balance', $item);
+            $this->assertArrayHasKey('accountType', $item);
+            $this->assertArrayHasKey('bizType', $item);
+            $this->assertArrayHasKey('direction', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('context', $item);
+        }
     }
 }

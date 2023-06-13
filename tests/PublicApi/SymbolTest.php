@@ -233,4 +233,36 @@ class SymbolTest extends TestCase
         $this->assertInternalType('array', $data);
         $this->assertNotEmpty($data, 'Empty markets');
     }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Symbol $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetListV2(Symbol $api)
+    {
+        $data = $api->getListV2('BTC');
+        $this->assertInternalType('array', $data);
+        foreach ($data as $item) {
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('name', $item);
+            $this->assertArrayHasKey('baseCurrency', $item);
+            $this->assertArrayHasKey('quoteCurrency', $item);
+            $this->assertArrayHasKey('market', $item);
+            $this->assertArrayHasKey('baseMinSize', $item);
+            $this->assertArrayHasKey('quoteMinSize', $item);
+            $this->assertArrayHasKey('baseMaxSize', $item);
+            $this->assertArrayHasKey('quoteMaxSize', $item);
+            $this->assertArrayHasKey('baseIncrement', $item);
+            $this->assertArrayHasKey('quoteIncrement', $item);
+            $this->assertArrayHasKey('priceIncrement', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('enableTrading', $item);
+            $this->assertArrayHasKey('isMarginEnabled', $item);
+            $this->assertArrayHasKey('priceLimitRate', $item);
+            $this->assertArrayHasKey('minFunds', $item);
+        }
+    }
 }

@@ -259,7 +259,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Create sub account api key
+     * Create sub user api key
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -313,4 +313,47 @@ class Account extends KuCoinApi
         $response = $this->call(Request::METHOD_DELETE, '/api/v1/sub/api-key', $params);
         return $response->getApiData();
     }
+
+    /**
+     * Get the aggregated balance of all sub-accounts of the current user for V2 version
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubAccountListV2(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/sub-accounts', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get transferable funds under the specified account and currency
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getAccountTransferable(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/transferable', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get  account ledgers for high-frequency
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getHfLedgersV2(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/hf/accounts/ledgers', $params);
+        return $response->getApiData();
+    }
+
 }
