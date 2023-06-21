@@ -175,7 +175,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Place a high-frequency new order
+     * Place a high-frequency new order.
      * @param array $order
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -189,7 +189,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Place synchronize high-frequency new order
+     * Place synchronize high-frequency new order.
      * @param array $order
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -203,7 +203,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Place high-frequency bulk orders
+     * Place high-frequency bulk orders.
      * @param array $orderList
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -217,7 +217,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Place synchronize high-frequency bulk orders
+     * Place synchronize high-frequency bulk orders.
      * @param array $orderList
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -290,7 +290,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Cancel synchronize  high-frequency order by ClientOid
+     * Cancel synchronize  high-frequency order by ClientOid.
      * @param $clientOid
      * @param array $params
      * @return mixed|null
@@ -348,7 +348,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Get all trading pairs that the user has active orders
+     * Get all trading pairs that the user has active orders.
      * @return mixed|null
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -424,7 +424,7 @@ class Order extends KuCoinApi
     }
 
     /**
-     * Get the settings of automatic order cancellation
+     * Get the settings of automatic order cancellation.
      * @return mixed|null
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException

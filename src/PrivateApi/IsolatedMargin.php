@@ -14,7 +14,7 @@ class IsolatedMargin extends KuCoinApi
 {
 
     /**
-     * Get the current isolated margin trading pair configuration
+     * Get the current isolated margin trading pair configuration.
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
@@ -27,7 +27,7 @@ class IsolatedMargin extends KuCoinApi
     }
 
     /**
-     * Get all isolated margin accounts of the current user
+     * Get all isolated margin accounts of the current user.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -41,7 +41,7 @@ class IsolatedMargin extends KuCoinApi
     }
 
     /**
-     * Get the info on a single isolated margin account of the current user
+     * Get the info on a single isolated margin account of the current user.
      * @param string $symbol
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -70,7 +70,7 @@ class IsolatedMargin extends KuCoinApi
 
 
     /**
-     * Get outstanding repayment records of isolated margin
+     * Get outstanding repayment records of isolated margin.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -98,7 +98,7 @@ class IsolatedMargin extends KuCoinApi
     }
 
     /**
-     * Initiate quick repayment for isolated margin accounts
+     * Initiate quick repayment for isolated margin accounts.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -112,7 +112,7 @@ class IsolatedMargin extends KuCoinApi
     }
 
     /**
-     * Initiate quick repayment for single margin accounts
+     * Initiate quick repayment for single margin accounts.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException

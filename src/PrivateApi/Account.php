@@ -217,7 +217,7 @@ class Account extends KuCoinApi
         return $response->getApiData();
     }
     /**
-     * Get sub user
+     * Get sub user.
      * @param array $pagination
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -231,7 +231,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Get account description
+     * Get account description.
      * @param array $pagination
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -245,7 +245,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Create sub user
+     * Create sub user.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -259,7 +259,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Create sub user api key
+     * Create sub user api key.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -273,7 +273,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Get sub user api key
+     * Get sub user api key.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -287,7 +287,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Update sub user api key
+     * Update sub user api key.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -301,7 +301,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Delete sub user api key
+     * Delete sub user api key.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -315,7 +315,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Get the aggregated balance of all sub-accounts of the current user for V2 version
+     * Get the aggregated balance of all sub-accounts of the current user for V2 version.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -329,7 +329,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Get transferable funds under the specified account and currency
+     * Get transferable funds under the specified account and currency.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
@@ -343,7 +343,7 @@ class Account extends KuCoinApi
     }
 
     /**
-     * Get  account ledgers for high-frequency
+     * Get  account ledgers for high-frequency.
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException

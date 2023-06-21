@@ -177,7 +177,7 @@ class Symbol extends KuCoinApi
     }
 
     /**
-     * Get a list of symbol for V2
+     * Get a list of symbol for V2.
      * @param string|null $market
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
