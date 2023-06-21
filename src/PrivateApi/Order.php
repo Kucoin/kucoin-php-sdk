@@ -446,7 +446,7 @@ class Order extends KuCoinApi
      */
     public function getHfFills(array $params)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/hf/fills',$params);
+        $response = $this->call(Request::METHOD_GET, '/api/v1/hf/fills', $params);
         return $response->getApiData();
     }
 }

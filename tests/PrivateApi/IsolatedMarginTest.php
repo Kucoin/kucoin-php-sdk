@@ -180,6 +180,7 @@ class IsolatedMarginTest extends TestCase
             $this->assertArrayHasKey('repayFinishAt', $item);
         }
     }
+
     /**
      * @dataProvider apiProvider
      * @param IsolatedMargin $api
@@ -193,6 +194,7 @@ class IsolatedMarginTest extends TestCase
         $result = $api->repayAll($params);
         $this->assertInternalType('array', $result);
     }
+
     /**
      * @dataProvider apiProvider
      * @param IsolatedMargin $api

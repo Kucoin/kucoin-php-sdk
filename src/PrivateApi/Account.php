@@ -56,9 +56,6 @@ class Account extends KuCoinApi
     }
 
     /**
-     * @deprecated Use getLedgersV1 instead
-     *
-     * Get account ledgers
      * @param string $accountId
      * @param array $params
      * @param array $pagination
@@ -66,6 +63,9 @@ class Account extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated Use getLedgersV1 instead
+     *
+     * Get account ledgers
      */
     public function getLedgers($accountId, array $params = [], array $pagination = [])
     {
@@ -173,13 +173,13 @@ class Account extends KuCoinApi
     }
 
     /**
-     * @deprecated Use subTransferV2 instead.
-     * Transfer between master account and sub-account
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated Use subTransferV2 instead.
+     * Transfer between master account and sub-account
      */
     public function subTransfer(array $params)
     {
@@ -216,6 +216,7 @@ class Account extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/ledgers', $params + $pagination);
         return $response->getApiData();
     }
+
     /**
      * Get sub user.
      * @param array $pagination

@@ -14,12 +14,12 @@ class Symbol extends KuCoinApi
 {
     /**
      * Get a list of symbol
-     * @deprecated Recommended to use /api/v2/symbols
      * @param string|null $market
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated Recommended to use /api/v2/symbols
      */
     public function getList($market = null)
     {
