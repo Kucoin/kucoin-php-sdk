@@ -56,8 +56,6 @@ class Account extends KuCoinApi
     }
 
     /**
-     * @deprecated Use getLedgersV1 instead
-     *
      * Get account ledgers
      * @param string $accountId
      * @param array $params
@@ -66,6 +64,7 @@ class Account extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated Call getLedgersV2() instead
      */
     public function getLedgers($accountId, array $params = [], array $pagination = [])
     {
@@ -173,13 +172,13 @@ class Account extends KuCoinApi
     }
 
     /**
-     * @deprecated Use subTransferV2 instead.
      * Transfer between master account and sub-account
      * @param array $params
      * @return array
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @deprecated Call subTransferV2() instead.
      */
     public function subTransfer(array $params)
     {
@@ -216,4 +215,145 @@ class Account extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/ledgers', $params + $pagination);
         return $response->getApiData();
     }
+
+    /**
+     * Get sub user.
+     * @param array $pagination
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubUserV2(array $pagination = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/sub/user', $pagination);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get account description.
+     * @param array $pagination
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getUserinfoV2()
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/user-info');
+        return $response->getApiData();
+    }
+
+    /**
+     * Create sub user.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createSubUserV2(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v2/sub/user/created', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Create sub user api key.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createSubUserApiKey(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/sub/api-key', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get sub user api key.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubUserApiKey(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/sub/api-key', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Update sub user api key.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function updateSubUserApiKey(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/sub/api-key/update', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Delete sub user api key.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function deleteSubUserApiKey(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_DELETE, '/api/v1/sub/api-key', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get the aggregated balance of all sub-accounts of the current user for V2 version.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSubAccountListV2(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/sub-accounts', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get transferable funds under the specified account and currency.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getAccountTransferable(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/transferable', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Get  account ledgers for high-frequency.
+     * @param array $params
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getHfLedgersV2(array $params = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v1/hf/accounts/ledgers', $params);
+        return $response->getApiData();
+    }
+
 }
