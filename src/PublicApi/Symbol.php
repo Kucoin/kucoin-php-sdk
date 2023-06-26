@@ -19,7 +19,7 @@ class Symbol extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
-     * @deprecated Recommended to use /api/v2/symbols
+     * @deprecated Call getListV2() instead
      */
     public function getList($market = null)
     {

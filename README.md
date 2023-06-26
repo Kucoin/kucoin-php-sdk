@@ -207,7 +207,6 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Account::subTransfer() | YES | `DEPRECATED` https://docs.kucoin.com/#transfer-between-master-account-and-sub-account |
 | KuCoin\SDK\PrivateApi\Account::subTransferV2() | YES | https://docs.kucoin.com/#transfer-between-master-user-and-sub-user |
 | KuCoin\SDK\PrivateApi\Account::getLedgersV2() | YES | https://docs.kucoin.com/#get-account-ledgers |
-| KuCoin\SDK\PrivateApi\Account::getLedgersV2() | YES | https://docs.kucoin.com/#get-account-ledgers |
 | KuCoin\SDK\PrivateApi\Account::getSubUserV2() | YES | https://docs.kucoin.com/#get-paginated-list-of-sub-accounts |
 | KuCoin\SDK\PrivateApi\Account::getUserinfoV2() | YES | https://docs.kucoin.com/#get-account-summary-info-v2 |
 | KuCoin\SDK\PrivateApi\Account::createSubUserV2() | YES | https://docs.kucoin.com/#create-sub-account-v2 |
