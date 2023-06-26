@@ -247,7 +247,7 @@ go(function () {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| KuCoin\SDK\PrivateApi\Symbol::getAggregatedFullOrderBook() | NO | https://docs.kucoin.com/#get-full-order-book-aggregated |
+| KuCoin\SDK\PrivateApi\Symbol::getAggregatedFullOrderBook() | NO | `DEPRECATED`https://docs.kucoin.com/#get-full-order-book-aggregated |
 
 </details>
 
@@ -261,7 +261,7 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::cancel() | YES | https://docs.kucoin.com/#cancel-an-order |
 | KuCoin\SDK\PrivateApi\Order::cancelAll() | YES | https://docs.kucoin.com/#cancel-all-orders |
 | KuCoin\SDK\PrivateApi\Order::getList() | YES | https://docs.kucoin.com/#list-orders |
-| KuCoin\SDK\PrivateApi\Order::getV1List() | YES | https://docs.kucoin.com/#get-v1-historical-orders-list |
+| KuCoin\SDK\PrivateApi\Order::getV1List() | YES | `DEPRECATED`https://docs.kucoin.com/#get-v1-historical-orders-list |
 | KuCoin\SDK\PrivateApi\Order::getDetail() | YES | https://docs.kucoin.com/#get-an-order |
 | KuCoin\SDK\PrivateApi\Order::getRecentList() | YES | https://docs.kucoin.com/#recent-orders |
 | KuCoin\SDK\PrivateApi\Order::createMarginOrder()| YES | https://docs.kucoin.com/#place-a-margin-order |
