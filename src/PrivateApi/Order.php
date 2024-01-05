@@ -449,4 +449,17 @@ class Order extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/hf/fills', $params);
         return $response->getApiData();
     }
+
+    /**
+     * Cancel all HF orders.
+     *
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function hfCancelAll()
+    {
+        return $this->call(Request::METHOD_DELETE, '/api/v1/hf/orders/cancelAll')->getApiData();
+    }
 }

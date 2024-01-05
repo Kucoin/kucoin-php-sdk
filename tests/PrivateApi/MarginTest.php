@@ -389,4 +389,25 @@ class MarginTest extends TestCase
             $this->assertArrayHasKey('precision', $data[0]);
         }
     }
+
+
+    /**
+     * @dataProvider apiProvider
+     * @param Margin $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetEtfInfo(Margin $api)
+    {
+        $data = $api->getEtfInfo();
+        foreach ($data as $item) {
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('netAsset', $item);
+            $this->assertArrayHasKey('targetLeverage', $item);
+            $this->assertArrayHasKey('actualLeverage', $item);
+            $this->assertArrayHasKey('issuedSize', $item);
+            $this->assertArrayHasKey('basket', $item);
+        }
+    }
 }
