@@ -961,4 +961,18 @@ class OrderTest extends TestCase
         }
     }
 
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testhfCancelAll(Order $api)
+    {
+        $data = $api->hfCancelAll();
+        $this->assertArrayHasKey('succeedSymbols', $data);
+        $this->assertArrayHasKey('failedSymbols', $data);
+    }
 }

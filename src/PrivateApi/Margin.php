@@ -316,4 +316,17 @@ class Margin extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v1/risk/limit/strategy', ['marginModel' => $marginModel]);
         return $response->getApiData();
     }
+
+    /**
+     * This interface returns leveraged token information.
+     *
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getEtfInfo()
+    {
+        return $this->call(Request::METHOD_GET, '/api/v3/etf/info')->getApiData();
+    }
 }
