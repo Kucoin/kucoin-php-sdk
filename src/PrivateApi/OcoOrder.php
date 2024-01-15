@@ -66,13 +66,10 @@ class OcoOrder extends KuCoinApi
      */
     public function cancelMulti($symbol = '', array $orderIds = [])
     {
-        $query = http_build_query(array_filter([
+        return $this->call(Request::METHOD_DELETE, '/api/v3/oco/orders', [
             'symbol'   => $symbol,
             'orderIds' => implode(',', $orderIds),
-        ]));
-
-        $path = '/api/v3/oco/orders';
-        return $this->call(Request::METHOD_DELETE, $query ? "$path?$query" : $path)->getApiData();
+        ])->getApiData();
     }
 
     /**

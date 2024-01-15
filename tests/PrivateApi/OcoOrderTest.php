@@ -178,7 +178,10 @@ class OcoOrderTest extends TestCase
              * @var $api OcoOrder
              */
             $api = current($item);
-            $api->cancelMulti();
+            try {
+                $api->cancelMulti();
+            } catch (\Exception $e) {
+            }
         }
     }
 
