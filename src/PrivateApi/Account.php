@@ -356,4 +356,24 @@ class Account extends KuCoinApi
         return $response->getApiData();
     }
 
+
+
+    /**
+     * This method is similar to innerTransfer, but it has less Manage weight compared to it
+     * @param array $params
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function flexTransfer(array $params)
+    {
+        $response = $this->call(
+            Request::METHOD_POST,
+            '/api/v3/accounts/universal-transfer',
+            $params
+        );
+        return $response->getApiData();
+    }
+
 }
