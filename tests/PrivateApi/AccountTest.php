@@ -613,4 +613,29 @@ class AccountTest extends TestCase
             $this->assertArrayHasKey('context', $item);
         }
     }
+
+    /**
+     * @dataProvider apiProvider
+     *
+     * @param Account $api
+     * @return void
+     * @throws BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testFlexTransfer(Account $api)
+    {
+        $params = [
+            'clientOid'       => uniqid(),
+            'type'            => 'INTERNAL',
+            'currency'        => "USDT",
+            'amount'          => '1',
+            'fromAccountType' => 'MAIN',
+            'toAccountType'   => 'CONTRACT',
+        ];
+
+        $data = $api->flexTransfer($params);
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('orderId', $data);
+    }
 }
