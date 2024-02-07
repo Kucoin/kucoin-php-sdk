@@ -30,10 +30,10 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 
 ### Choose environment
 
-| Environment  | BaseUri                              |
-|--------------|--------------------------------------|
-| *Production* | `https://api.kucoin.com(DEFAULT)`    |
-| *Sandbox*    | `https://openapi-sandbox.kucoin.com` |
+| Environment  | BaseUri                                   |
+|--------------|-------------------------------------------|
+| *Production* | https://api.kucoin.com                    |
+| ~~*Sandbox*~~    | ~~https://openapi-sandbox.kucoin.com~~ (Deprecated) |
 
 ```php
 // Switch to the sandbox environment
@@ -137,6 +137,52 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
 }, function ($code, $reason) {
     echo "OnClose: {$code} {$reason}\n";
 });
+```
+
+#### Add custom options
+
+```php
+use KuCoin\SDK\PublicApi\Time;
+
+$api = new Time(null, new GuzzleHttp([
+    'curl' => [ // custom cURL options: https://www.php.net/manual/en/function.curl-setopt
+        CURLOPT_TCP_NODELAY => true, // Disable TCP's Nagle algorithm, which tries to minimize the number of small packets on the network.
+        // ...
+    ],
+]));
+$timestamp = $api->timestamp();
+var_dump($timestamp);
+```
+
+```php
+use KuCoin\SDK\Auth;
+use KuCoin\SDK\Http\GuzzleHttp;
+use KuCoin\SDK\KuCoinApi;
+use KuCoin\SDK\PrivateApi\WebSocketFeed;
+use Ratchet\Client\WebSocket;
+use React\EventLoop\Factory;
+use React\EventLoop\LoopInterface;
+
+$api = new WebSocketFeed(
+    null,
+    new GuzzleHttp([
+        'curl' => [ // Custom cURL options: https://www.php.net/manual/en/function.curl-setopt
+            CURLOPT_TCP_NODELAY => true, // Disable TCP's Nagle algorithm, which tries to minimize the number of small packets on the network.
+            // ...
+        ],
+    ])
+);
+$query = ['connectId' => uniqid('', true)];
+$channels = [
+    ['topic' => '/market/ticker:KCS-BTC'],
+    ['topic' => '/market/ticker:ETH-BTC'],
+];
+$options = ['tcp' => ['tcp_nodelay' => true]]; // Custom socket context options: https://www.php.net/manual/zh/context.socket
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+    var_dump($message);
+}, function ($code, $reason) {
+    echo "OnClose: {$code} {$reason}\n";
+}, $options);
 ```
 
 #### ⚡️Coroutine HTTP client for asynchronous IO
