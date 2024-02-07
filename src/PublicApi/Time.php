@@ -21,7 +21,7 @@ class Time extends KuCoinApi
      */
     public function timestamp()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/timestamp');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/timestamp');
         return $response->getApiData();
     }
 }
