@@ -15,8 +15,8 @@
   },
   "authors": [
     {
-      "name": "KuCoin",
-      "email": "php@kucoin.com"
+      "name": "KuCoin API",
+      "email": "api@kucoin.com"
     }
   ],
   "require": {
