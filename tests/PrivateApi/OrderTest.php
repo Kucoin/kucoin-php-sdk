@@ -3,6 +3,7 @@
 namespace KuCoin\SDK\Tests\PrivateApi;
 
 use KuCoin\SDK\PrivateApi\Order;
+use KuCoin\SDK\PublicApi\Symbol;
 
 class OrderTest extends TestCase
 {
@@ -544,7 +545,7 @@ class OrderTest extends TestCase
         $order = [
             'symbol'    => 'BTC-USDT',
             'clientOid' => '64819b02d066b',
-//            'orderId' => '64819b035b13c7000179854c',
+            //            'orderId' => '64819b035b13c7000179854c',
             'newPrice'  => 2,
         ];
         $data = $api->hfModify($order);
@@ -961,7 +962,6 @@ class OrderTest extends TestCase
         }
     }
 
-
     /**
      * @dataProvider apiProvider
      * @param Order $api
@@ -974,5 +974,379 @@ class OrderTest extends TestCase
         $data = $api->hfCancelAll();
         $this->assertArrayHasKey('succeedSymbols', $data);
         $this->assertArrayHasKey('failedSymbols', $data);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCreateHfMarginOrder(Order $api)
+    {
+        $order = $this->createMarginHf($api);
+        $this->assertInternalType('array', $order);
+        $this->assertArrayHasKey('orderId', $order);
+    }
+
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testMarginHfCancel(Order $api)
+    {
+        $order = $this->createMarginHf($api);
+        $result = $api->marginHfCancel($order['orderId'], $order['symbol']);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('orderId', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testMarginHfCancelByClientOid(Order $api)
+    {
+        $order = $this->createMarginHf($api);
+        $result = $api->marginHfCancelByClientOid($order['clientOid'], $order['symbol']);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('clientOid', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarginHfActiveOrders(Order $api)
+    {
+        $symbol = 'DOT-USDT';
+        $tradeType = 'MARGIN_TRADE';
+        $result = $api->getMarginHfActiveOrders($symbol, $tradeType);
+        $this->assertInternalType('array', $result);
+        foreach ($result as $item) {
+            $this->assertArrayHasKey('id', $item);
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('opType', $item);
+            $this->assertArrayHasKey('type', $item);
+            $this->assertArrayHasKey('side', $item);
+            $this->assertArrayHasKey('price', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('funds', $item);
+            $this->assertArrayHasKey('dealFunds', $item);
+            $this->assertArrayHasKey('dealSize', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('stp', $item);
+            $this->assertArrayHasKey('timeInForce', $item);
+            $this->assertArrayHasKey('postOnly', $item);
+            $this->assertArrayHasKey('hidden', $item);
+            $this->assertArrayHasKey('iceberg', $item);
+            $this->assertArrayHasKey('visibleSize', $item);
+            $this->assertArrayHasKey('cancelAfter', $item);
+            $this->assertArrayHasKey('channel', $item);
+            $this->assertArrayHasKey('clientOid', $item);
+            $this->assertArrayHasKey('tags', $item);
+            $this->assertArrayHasKey('active', $item);
+            $this->assertArrayHasKey('inOrderBook', $item);
+            $this->assertArrayHasKey('cancelExist', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('lastUpdatedAt', $item);
+            $this->assertArrayHasKey('tradeType', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarginHfFilledOrders(Order $api)
+    {
+        $symbol = 'DOT-USDT';
+        $tradeType = 'MARGIN_TRADE';
+        $result = $api->getMarginHfFilledOrders(['symbol' => $symbol, 'tradeType' => $tradeType]);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('lastId', $result);
+        $this->assertArrayHasKey('items', $result);
+        foreach ($result['items'] as $item) {
+            $this->assertArrayHasKey('id', $item);
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('opType', $item);
+            $this->assertArrayHasKey('type', $item);
+            $this->assertArrayHasKey('side', $item);
+            $this->assertArrayHasKey('price', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('funds', $item);
+            $this->assertArrayHasKey('dealFunds', $item);
+            $this->assertArrayHasKey('dealSize', $item);
+            $this->assertArrayHasKey('fee', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('stp', $item);
+            $this->assertArrayHasKey('timeInForce', $item);
+            $this->assertArrayHasKey('postOnly', $item);
+            $this->assertArrayHasKey('hidden', $item);
+            $this->assertArrayHasKey('iceberg', $item);
+            $this->assertArrayHasKey('visibleSize', $item);
+            $this->assertArrayHasKey('cancelAfter', $item);
+            $this->assertArrayHasKey('channel', $item);
+            $this->assertArrayHasKey('clientOid', $item);
+            $this->assertArrayHasKey('tags', $item);
+            $this->assertArrayHasKey('active', $item);
+            $this->assertArrayHasKey('inOrderBook', $item);
+            $this->assertArrayHasKey('cancelExist', $item);
+            $this->assertArrayHasKey('createdAt', $item);
+            $this->assertArrayHasKey('lastUpdatedAt', $item);
+            $this->assertArrayHasKey('tradeType', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarginHfDetail(Order $api)
+    {
+        $order = $this->createMarginHf($api);
+        $detail = $api->getMarginHfDetail($order['orderId'], $order['symbol']);
+        $this->assertArrayHasKey('id', $detail);
+        $this->assertArrayHasKey('symbol', $detail);
+        $this->assertArrayHasKey('opType', $detail);
+        $this->assertArrayHasKey('type', $detail);
+        $this->assertArrayHasKey('side', $detail);
+        $this->assertArrayHasKey('price', $detail);
+        $this->assertArrayHasKey('size', $detail);
+        $this->assertArrayHasKey('funds', $detail);
+        $this->assertArrayHasKey('dealFunds', $detail);
+        $this->assertArrayHasKey('dealSize', $detail);
+        $this->assertArrayHasKey('fee', $detail);
+        $this->assertArrayHasKey('feeCurrency', $detail);
+        $this->assertArrayHasKey('stp', $detail);
+        $this->assertArrayHasKey('timeInForce', $detail);
+        $this->assertArrayHasKey('postOnly', $detail);
+        $this->assertArrayHasKey('hidden', $detail);
+        $this->assertArrayHasKey('iceberg', $detail);
+        $this->assertArrayHasKey('visibleSize', $detail);
+        $this->assertArrayHasKey('cancelAfter', $detail);
+        $this->assertArrayHasKey('channel', $detail);
+        $this->assertArrayHasKey('clientOid', $detail);
+        $this->assertArrayHasKey('tags', $detail);
+        $this->assertArrayHasKey('active', $detail);
+        $this->assertArrayHasKey('inOrderBook', $detail);
+        $this->assertArrayHasKey('cancelExist', $detail);
+        $this->assertArrayHasKey('createdAt', $detail);
+        $this->assertArrayHasKey('lastUpdatedAt', $detail);
+        $this->assertArrayHasKey('tradeType', $detail);
+        $api->marginHfCancel($order['orderId'], $order['symbol']);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarginHfDetailByClientOid(Order $api)
+    {
+        $order = $this->createMarginHf($api);
+        $detail = $api->getMarginHfDetailByClientOid($order['clientOid'], $order['symbol']);
+        $this->assertArrayHasKey('id', $detail);
+        $this->assertArrayHasKey('symbol', $detail);
+        $this->assertArrayHasKey('opType', $detail);
+        $this->assertArrayHasKey('type', $detail);
+        $this->assertArrayHasKey('side', $detail);
+        $this->assertArrayHasKey('price', $detail);
+        $this->assertArrayHasKey('size', $detail);
+        $this->assertArrayHasKey('funds', $detail);
+        $this->assertArrayHasKey('dealFunds', $detail);
+        $this->assertArrayHasKey('dealSize', $detail);
+        $this->assertArrayHasKey('fee', $detail);
+        $this->assertArrayHasKey('feeCurrency', $detail);
+        $this->assertArrayHasKey('stp', $detail);
+        $this->assertArrayHasKey('timeInForce', $detail);
+        $this->assertArrayHasKey('postOnly', $detail);
+        $this->assertArrayHasKey('hidden', $detail);
+        $this->assertArrayHasKey('iceberg', $detail);
+        $this->assertArrayHasKey('visibleSize', $detail);
+        $this->assertArrayHasKey('cancelAfter', $detail);
+        $this->assertArrayHasKey('channel', $detail);
+        $this->assertArrayHasKey('clientOid', $detail);
+        $this->assertArrayHasKey('tags', $detail);
+        $this->assertArrayHasKey('active', $detail);
+        $this->assertArrayHasKey('inOrderBook', $detail);
+        $this->assertArrayHasKey('cancelExist', $detail);
+        $this->assertArrayHasKey('createdAt', $detail);
+        $this->assertArrayHasKey('lastUpdatedAt', $detail);
+        $this->assertArrayHasKey('tradeType', $detail);
+        $api->marginHfCancel($order['orderId'], $order['symbol']);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testMarginHfCancelAll(Order $api)
+    {
+        $symbol = 'DOT-USDT';
+        $tradeType = 'MARGIN_TRADE';
+        $result = $api->marginHfCancelAll($symbol, $tradeType);
+        $this->assertEquals('success', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarginHfFills(Order $api)
+    {
+        $symbol = 'DOT-USDT';
+        $tradeType = 'MARGIN_TRADE';
+        $result = $api->getMarginHfFills(['symbol' => $symbol, 'tradeType' => $tradeType]);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('items', $result);
+        $this->assertArrayHasKey('lastId', $result);
+    }
+
+    /**
+     * @param Order $api
+     * @return array
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    protected function createMarginHf(Order $api)
+    {
+        $symbolApi = new Symbol();
+        $symbol = 'DOT-USDT';
+
+        $tradeStats = $symbolApi->get24HStats($symbol);
+        $nowPrice = $tradeStats['last'];
+        $openPrice = (string) round($nowPrice * '0.3', 2);
+        $order = [
+            'clientOid'  => uniqid(),
+            'type'       => 'limit',
+            'side'       => 'buy',
+            'symbol'     => $symbol,
+            'price'      => $openPrice,
+            'size'       => 0.1,
+            'isIsolated' => false,
+        ];
+
+        $result = $api->createHfMarginOrder($order);
+        $order['orderId'] = $result['orderId'];
+        return $order;
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testCreateTest(Order $api)
+    {
+        $clientOid = uniqid();
+        $order = [
+            'clientOid' => $clientOid,
+            'type'      => 'limit',
+            'side'      => 'buy',
+            'symbol'    => 'BTC-USDT',
+            'remark'    => 'test order',
+
+            'price' => 100,
+            'size'  => 0.001,
+        ];
+
+        $data = $api->createTest($order);
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('orderId', $data);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testHfCreateTest(Order $api)
+    {
+        $order = [
+            'clientOid' => uniqid(),
+            'type'      => 'limit',
+            'side'      => 'buy',
+            'symbol'    => 'BTC-USDT',
+            'remark'    => 'test',
+            'price'     => 100,
+            'size'      => 1,
+        ];
+        $data = $api->hfCreateTest($order);
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('orderId', $data);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testMarginHfCreate(Order $api)
+    {
+        $symbolApi = new Symbol();
+        $symbol = 'DOT-USDT';
+
+        $tradeStats = $symbolApi->get24HStats($symbol);
+        $nowPrice = $tradeStats['last'];
+        $openPrice = (string) round($nowPrice * '0.3', 2);
+        $order = [
+            'clientOid'  => uniqid(),
+            'type'       => 'limit',
+            'side'       => 'buy',
+            'symbol'     => $symbol,
+            'price'      => $openPrice,
+            'size'       => 0.1,
+            'isIsolated' => false,
+        ];
+
+        $data = $api->createMarginTestOrder($order);
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('orderId', $data);
     }
 }

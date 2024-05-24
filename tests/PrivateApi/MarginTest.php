@@ -410,4 +410,149 @@ class MarginTest extends TestCase
             $this->assertArrayHasKey('basket', $item);
         }
     }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Margin $api
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testBorrowV3(Margin $api)
+    {
+        $params = [
+            'isIsolated'  => false,
+            'currency'    => 'USDT',
+            'size'        => '10',
+            'timeInForce' => 'IOC',
+        ];
+
+        $result = $api->borrowV3($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('actualSize', $result);
+        $this->assertArrayHasKey('orderNo', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Margin $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testRepayV3(Margin $api)
+    {
+        $params = [
+            'isIsolated' => false,
+            'currency'   => 'USDT',
+            'size'       => '10',
+        ];
+
+        $result = $api->repayV3($params);
+        $this->assertInternalType('array', $result);
+        $this->assertArrayHasKey('actualSize', $result);
+        $this->assertArrayHasKey('orderNo', $result);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     *
+     * @param Margin $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetBorrowV3(Margin $api)
+    {
+        $params = [
+            'currency'   => 'USDT',
+            'isIsolated' => false,
+        ];
+
+        $pagination = [
+            'pageSize' => 10,
+            'currentPage' => 1,
+        ];
+
+        $result = $api->getBorrowV3($params, $pagination);
+        $this->assertPagination($result);
+        $this->assertTrue(count($result['items']) <= $pagination['pageSize']);
+        foreach ($result['items'] as $item) {
+            $this->assertArrayHasKey('orderNo', $item);
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('actualSize', $item);
+            $this->assertArrayHasKey('status', $item);
+            $this->assertArrayHasKey('createdTime', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Margin $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetRepayV3(Margin $api)
+    {
+        $params = [
+            'currency'   => 'USDT',
+            'isIsolated' => false,
+        ];
+
+        $pagination = [
+            'pageSize' => 10,
+            'currentPage' => 1,
+        ];
+
+        $result = $api->getRepayV3($params, $pagination);
+        $this->assertPagination($result);
+        $this->assertTrue(count($result['items']) <= $pagination['pageSize']);
+        foreach ($result['items'] as $item) {
+            $this->assertArrayHasKey('orderNo', $item);
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('size', $item);
+            $this->assertArrayHasKey('principal', $item);
+            $this->assertArrayHasKey('interest', $item);
+            $this->assertArrayHasKey('status', $item);
+            $this->assertArrayHasKey('createdTime', $item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     * @param Margin $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetInterestV3(Margin $api)
+    {
+        $params = [
+            'currency'   => 'USDT',
+            'isIsolated' => false,
+        ];
+
+        $pagination = [
+            'pageSize' => 10,
+            'currentPage' => 1,
+        ];
+
+        $result = $api->getInterestV3($params, $pagination);
+        $this->assertPagination($result);
+        $this->assertTrue(count($result['items']) <= $pagination['pageSize']);
+        foreach ($result['items'] as $item) {
+            $this->assertArrayHasKey('currency', $item);
+            $this->assertArrayHasKey('dayRatio', $item);
+            $this->assertArrayHasKey('interestAmount', $item);
+            $this->assertArrayHasKey('createdTime', $item);
+        }
+    }
 }

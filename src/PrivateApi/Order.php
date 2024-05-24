@@ -462,4 +462,190 @@ class Order extends KuCoinApi
     {
         return $this->call(Request::METHOD_DELETE, '/api/v1/hf/orders/cancelAll')->getApiData();
     }
+
+    /**
+     * This interface is used to place cross-margin or isolated-margin high-frequency margin trading.
+     *
+     * @param array $order
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createHfMarginOrder(array $order)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v3/hf/margin/order', $order);
+        return $response->getApiData();
+    }
+
+    /**
+     * Cancel a single order by orderId. If the order cannot be canceled (sold or canceled), an error message will be returned, and the reason can be obtained according to the returned msg.
+     *
+     * @param $orderId
+     * @param $symbol
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function marginHfCancel($orderId, $symbol)
+    {
+        $response = $this->call(Request::METHOD_DELETE, '/api/v3/hf/margin/orders/' . $orderId, ['symbol' => $symbol]);
+        return $response->getApiData();
+    }
+
+    /**
+     * Cancel a single order by clientOid.
+     *
+     * @param $clientOid
+     * @param $symbol
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function marginHfCancelByClientOid($clientOid, $symbol)
+    {
+        $response = $this->call(Request::METHOD_DELETE, '/api/v3/hf/margin/orders/client-order/' . $clientOid, ['symbol' => $symbol]);
+        return $response->getApiData();
+    }
+
+    /**
+     * This interface can cancel all open high-frequency Margin orders.
+     *
+     * @param $symbol
+     * @param $tradeType
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function marginHfCancelAll($symbol, $tradeType)
+    {
+        $response = $this->call(Request::METHOD_DELETE, '/api/v3/hf/margin/orders', ['symbol' => $symbol, 'tradeType' => $tradeType]);
+        return $response->getApiData();
+    }
+
+    /**
+     * This interface is to obtain all active hf margin order lists, and the return value of the active order interface is the paged data of all uncompleted order lists. The returned data is sorted in descending order according to the latest update time of the order.
+     *
+     * @param $symbol
+     * @param $tradeType
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getMarginHfActiveOrders($symbol, $tradeType)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/hf/margin/orders/active', ['symbol' => $symbol, 'tradeType' => $tradeType]);
+        return $response->getApiData();
+    }
+
+    /**
+     * This endpoint obtains a list of filled margin HF orders and returns paginated data. The returned data is sorted in descending order based on the latest order update times.
+     *
+     * @param array $params
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getMarginHfFilledOrders(array $params)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/hf/margin/orders/done', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * This endpoint can be used to obtain information for a single margin HF order using the order id.
+     *
+     * @param $orderId
+     * @param $symbol
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getMarginHfDetail($orderId, $symbol)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/hf/margin/orders/' . $orderId, ['symbol' => $symbol]);
+        return $response->getApiData();
+    }
+
+    /**
+     * This endpoint can be used to obtain information for a single margin HF order using the clientOid.
+     *
+     * @param $clientOid
+     * @param $symbol
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getMarginHfDetailByClientOid($clientOid, $symbol)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/hf/margin/orders/client-order/' . $clientOid, ['symbol' => $symbol]);
+        return $response->getApiData();
+    }
+
+    /**
+     * This endpoint can be used to obtain a list of the latest margin HF transaction details. The returned results are paginated. The data is sorted in descending order according to time.
+     *
+     * @param array $params
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getMarginHfFills(array $params)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/hf/margin/fills', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * Order test endpoint, the request parameters and return parameters of this endpoint are exactly the same as the order endpoint, and can be used to verify whether the signature is correct and other operations. After placing an order, the order will not enter the matching system, and the order cannot be queried.
+     *
+     * @param array $order
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function hfCreateTest(array $order)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/hf/orders/test', $order);
+        return $response->getApiData();
+    }
+
+    /**
+     * Order test endpoint, the request parameters and return parameters of this endpoint are exactly the same as the order endpoint, and can be used to verify whether the signature is correct and other operations. After placing an order, the order will not enter the matching system, and the order cannot be queried.
+     *
+     * @param array $order
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createTest(array $order)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v1/orders/test', $order);
+        return $response->getApiData();
+    }
+
+    /**
+     * Order test endpoint, the request parameters and return parameters of this endpoint are exactly the same as the order endpoint, and can be used to verify whether the signature is correct and other operations. After placing an order, the order will not enter the matching system, and the order cannot be queried.
+     *
+     * @param array $order
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function createMarginTestOrder(array $order)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v3/hf/margin/order/test', $order);
+        return $response->getApiData();
+    }
 }
