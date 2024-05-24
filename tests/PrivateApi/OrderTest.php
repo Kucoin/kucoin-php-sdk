@@ -1252,7 +1252,7 @@ class OrderTest extends TestCase
 
         $tradeStats = $symbolApi->get24HStats($symbol);
         $nowPrice = $tradeStats['last'];
-        $openPrice = (string) round($nowPrice * '0.3', 2);
+        $openPrice = (string)round($nowPrice * '0.3', 2);
         $order = [
             'clientOid'  => uniqid(),
             'type'       => 'limit',
@@ -1285,9 +1285,8 @@ class OrderTest extends TestCase
             'side'      => 'buy',
             'symbol'    => 'BTC-USDT',
             'remark'    => 'test order',
-
-            'price' => 100,
-            'size'  => 0.001,
+            'price'     => 100,
+            'size'      => 0.001,
         ];
 
         $data = $api->createTest($order);
@@ -1334,7 +1333,7 @@ class OrderTest extends TestCase
 
         $tradeStats = $symbolApi->get24HStats($symbol);
         $nowPrice = $tradeStats['last'];
-        $openPrice = (string) round($nowPrice * '0.3', 2);
+        $openPrice = (string)round($nowPrice * '0.3', 2);
         $order = [
             'clientOid'  => uniqid(),
             'type'       => 'limit',

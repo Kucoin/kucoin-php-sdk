@@ -472,7 +472,7 @@ class MarginTest extends TestCase
         ];
 
         $pagination = [
-            'pageSize' => 10,
+            'pageSize'    => 10,
             'currentPage' => 1,
         ];
 
@@ -506,7 +506,7 @@ class MarginTest extends TestCase
         ];
 
         $pagination = [
-            'pageSize' => 10,
+            'pageSize'    => 10,
             'currentPage' => 1,
         ];
 
@@ -541,7 +541,7 @@ class MarginTest extends TestCase
         ];
 
         $pagination = [
-            'pageSize' => 10,
+            'pageSize'    => 10,
             'currentPage' => 1,
         ];
 

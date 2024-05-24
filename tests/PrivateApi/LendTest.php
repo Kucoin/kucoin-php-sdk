@@ -116,7 +116,7 @@ class LendTest extends TestCase
         ];
 
         $pagination = [
-            'page' => 1,
+            'page'     => 1,
             'pageSize' => 10,
         ];
         $orders = $api->getPurchaseOrders($params, $pagination);
@@ -151,7 +151,7 @@ class LendTest extends TestCase
         ];
 
         $pagination = [
-            'page' => 1,
+            'page'     => 1,
             'pageSize' => 10,
         ];
         $orders = $api->getRedeemOrders($params, $pagination);
@@ -187,9 +187,9 @@ class LendTest extends TestCase
         $orderNo = $orders['orderNo'];
 
         $update = [
-            'currency' => $currency,
+            'currency'        => $currency,
             'purchaseOrderNo' => $orderNo,
-            'interestRate' => (string) $rate * 2,
+            'interestRate'    => (string)$rate * 2,
         ];
 
         $updateOrder = $api->purchaseUpdate($update);
