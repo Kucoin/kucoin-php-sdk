@@ -21,7 +21,7 @@ abstract class Api
     /**
      * @var string SDK update date
      */
-    const UPDATE_DATE = '2024.05.30';
+    const UPDATE_DATE = '2024.05.28';
 
     /**
      * @var string
