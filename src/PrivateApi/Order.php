@@ -488,7 +488,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function marginHfCancel($orderId, $symbol)
+    public function cancelMarginHfOrder($orderId, $symbol)
     {
         $response = $this->call(Request::METHOD_DELETE, '/api/v3/hf/margin/orders/' . $orderId, ['symbol' => $symbol]);
         return $response->getApiData();
@@ -504,7 +504,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function marginHfCancelByClientOid($clientOid, $symbol)
+    public function cancelMarginHfOrderByClientOid($clientOid, $symbol)
     {
         $response = $this->call(Request::METHOD_DELETE, '/api/v3/hf/margin/orders/client-order/' . $clientOid, ['symbol' => $symbol]);
         return $response->getApiData();
@@ -520,7 +520,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function marginHfCancelAll($symbol, $tradeType)
+    public function cancelAllMarginHfOrder($symbol, $tradeType)
     {
         $response = $this->call(Request::METHOD_DELETE, '/api/v3/hf/margin/orders', ['symbol' => $symbol, 'tradeType' => $tradeType]);
         return $response->getApiData();
@@ -613,7 +613,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function hfCreateTest(array $order)
+    public function createHfTestOrder(array $order)
     {
         $response = $this->call(Request::METHOD_POST, '/api/v1/hf/orders/test', $order);
         return $response->getApiData();
@@ -628,7 +628,7 @@ class Order extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function createTest(array $order)
+    public function createTestOrder(array $order)
     {
         $response = $this->call(Request::METHOD_POST, '/api/v1/orders/test', $order);
         return $response->getApiData();

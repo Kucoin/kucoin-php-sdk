@@ -991,7 +991,6 @@ class OrderTest extends TestCase
         $this->assertArrayHasKey('orderId', $order);
     }
 
-
     /**
      * @dataProvider apiProvider
      * @param Order $api
@@ -1000,10 +999,10 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testMarginHfCancel(Order $api)
+    public function testCancelMarginHfOrder(Order $api)
     {
         $order = $this->createMarginHf($api);
-        $result = $api->marginHfCancel($order['orderId'], $order['symbol']);
+        $result = $api->cancelMarginHfOrder($order['orderId'], $order['symbol']);
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('orderId', $result);
     }
@@ -1016,10 +1015,10 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testMarginHfCancelByClientOid(Order $api)
+    public function testCancelMarginHfOrderByClientOid(Order $api)
     {
         $order = $this->createMarginHf($api);
-        $result = $api->marginHfCancelByClientOid($order['clientOid'], $order['symbol']);
+        $result = $api->cancelMarginHfOrderByClientOid($order['clientOid'], $order['symbol']);
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('clientOid', $result);
     }
@@ -1158,7 +1157,7 @@ class OrderTest extends TestCase
         $this->assertArrayHasKey('createdAt', $detail);
         $this->assertArrayHasKey('lastUpdatedAt', $detail);
         $this->assertArrayHasKey('tradeType', $detail);
-        $api->marginHfCancel($order['orderId'], $order['symbol']);
+        $api->cancelMarginHfOrder($order['orderId'], $order['symbol']);
     }
 
     /**
@@ -1201,7 +1200,7 @@ class OrderTest extends TestCase
         $this->assertArrayHasKey('createdAt', $detail);
         $this->assertArrayHasKey('lastUpdatedAt', $detail);
         $this->assertArrayHasKey('tradeType', $detail);
-        $api->marginHfCancel($order['orderId'], $order['symbol']);
+        $api->cancelMarginHfOrder($order['orderId'], $order['symbol']);
     }
 
     /**
@@ -1212,11 +1211,11 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testMarginHfCancelAll(Order $api)
+    public function testCancelAllMarginHfOrder(Order $api)
     {
         $symbol = 'DOT-USDT';
         $tradeType = 'MARGIN_TRADE';
-        $result = $api->marginHfCancelAll($symbol, $tradeType);
+        $result = $api->cancelAllMarginHfOrder($symbol, $tradeType);
         $this->assertEquals('success', $result);
     }
 
@@ -1276,7 +1275,7 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testCreateTest(Order $api)
+    public function testCreateTestOrder(Order $api)
     {
         $clientOid = uniqid();
         $order = [
@@ -1289,7 +1288,7 @@ class OrderTest extends TestCase
             'size'      => 0.001,
         ];
 
-        $data = $api->createTest($order);
+        $data = $api->createTestOrder($order);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('orderId', $data);
     }
@@ -1302,7 +1301,7 @@ class OrderTest extends TestCase
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function testHfCreateTest(Order $api)
+    public function testCreateHfTestOrder(Order $api)
     {
         $order = [
             'clientOid' => uniqid(),
@@ -1313,7 +1312,7 @@ class OrderTest extends TestCase
             'price'     => 100,
             'size'      => 1,
         ];
-        $data = $api->hfCreateTest($order);
+        $data = $api->createHfTestOrder($order);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('orderId', $data);
     }
