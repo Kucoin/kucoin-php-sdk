@@ -23,7 +23,7 @@ class Fill extends KuCoinApi
      */
     public function getList(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/fills', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/fills', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -36,7 +36,7 @@ class Fill extends KuCoinApi
      */
     public function getRecentList()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/limit/fills');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/limit/fills');
         return $response->getApiData();
     }
 }

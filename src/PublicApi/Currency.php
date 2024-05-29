@@ -21,7 +21,7 @@ class Currency extends KuCoinApi
      */
     public function getList()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/currencies');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/currencies');
         return $response->getApiData();
     }
 
@@ -36,7 +36,7 @@ class Currency extends KuCoinApi
      */
     public function getDetail($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/currencies/' . $currency, compact('chain'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/currencies/' . $currency, compact('chain'));
         return $response->getApiData();
     }
 
@@ -51,7 +51,7 @@ class Currency extends KuCoinApi
      */
     public function getPrices($base = null, $currencies = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/prices', compact('base', 'currencies'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/prices', compact('base', 'currencies'));
         return $response->getApiData();
     }
 
@@ -67,7 +67,7 @@ class Currency extends KuCoinApi
      */
     public function getV2Detail($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v2/currencies/' . $currency, compact('chain'));
+        $response = $this->call(Request::METHOD_GET, 'api/v2/currencies/' . $currency, compact('chain'));
         return $response->getApiData();
     }
 }

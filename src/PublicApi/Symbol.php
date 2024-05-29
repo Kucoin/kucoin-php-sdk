@@ -23,7 +23,7 @@ class Symbol extends KuCoinApi
      */
     public function getList($market = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/symbols', compact('market'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/symbols', compact('market'));
         return $response->getApiData();
     }
 
@@ -37,7 +37,7 @@ class Symbol extends KuCoinApi
      */
     public function getTicker($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level1', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/market/orderbook/level1', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -50,7 +50,7 @@ class Symbol extends KuCoinApi
      */
     public function getAllTickers()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/allTickers');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/market/allTickers');
         return $response->getApiData();
     }
 
@@ -65,7 +65,7 @@ class Symbol extends KuCoinApi
      */
     public function getAggregatedPartOrderBook($symbol, $depth = 20)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level2_' . (int)$depth, compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/market/orderbook/level2_' . (int)$depth, compact('symbol'));
         return $response->getApiData();
     }
 
@@ -80,7 +80,7 @@ class Symbol extends KuCoinApi
      */
     public function getAggregatedFullOrderBook($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v2/market/orderbook/level2', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v2/market/orderbook/level2', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -95,7 +95,7 @@ class Symbol extends KuCoinApi
      */
     public function getAtomicFullOrderBook($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/orderbook/level3', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/market/orderbook/level3', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -110,7 +110,7 @@ class Symbol extends KuCoinApi
      */
     public function getV2AtomicFullOrderBook($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v2/market/orderbook/level3', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v2/market/orderbook/level3', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -124,7 +124,7 @@ class Symbol extends KuCoinApi
      */
     public function getTradeHistories($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/histories', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/market/histories', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -159,7 +159,7 @@ class Symbol extends KuCoinApi
      */
     public function get24HStats($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/market/stats', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/market/stats', compact('symbol'));
         return $response->getApiData();
     }
 
@@ -172,7 +172,7 @@ class Symbol extends KuCoinApi
      */
     public function getMarkets()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/markets');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/markets');
         return $response->getApiData();
     }
 

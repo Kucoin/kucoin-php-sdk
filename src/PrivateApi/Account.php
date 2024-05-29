@@ -23,7 +23,7 @@ class Account extends KuCoinApi
      */
     public function create($type, $currency)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/accounts', compact('type', 'currency'));
+        $response = $this->call(Request::METHOD_POST, 'api/v1/accounts', compact('type', 'currency'));
         return $response->getApiData();
     }
 
@@ -37,7 +37,7 @@ class Account extends KuCoinApi
      */
     public function getList(array $params = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts', $params);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/accounts', $params);
         return $response->getApiData();
     }
 
@@ -51,7 +51,7 @@ class Account extends KuCoinApi
      */
     public function getDetail($accountId)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/accounts/' . $accountId);
         return $response->getApiData();
     }
 
@@ -68,7 +68,7 @@ class Account extends KuCoinApi
      */
     public function getLedgers($accountId, array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/ledgers', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/accounts/' . $accountId . '/ledgers', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -83,7 +83,7 @@ class Account extends KuCoinApi
      */
     public function getHolds($accountId, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/' . $accountId . '/holds', $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/accounts/' . $accountId . '/holds', $pagination);
         return $response->getApiData();
     }
 
@@ -140,7 +140,7 @@ class Account extends KuCoinApi
      */
     public function getSubAccountUsers()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/sub/user');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/sub/user');
         return $response->getApiData();
     }
 
@@ -154,7 +154,7 @@ class Account extends KuCoinApi
      */
     public function getSubAccountDetail($subUserId)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/sub-accounts/' . $subUserId);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/sub-accounts/' . $subUserId);
         return $response->getApiData();
     }
 
@@ -167,7 +167,7 @@ class Account extends KuCoinApi
      */
     public function getSubAccountList()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/sub-accounts');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/sub-accounts');
         return $response->getApiData();
     }
 
@@ -182,7 +182,7 @@ class Account extends KuCoinApi
      */
     public function subTransfer(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/accounts/sub-transfer', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/accounts/sub-transfer', $params);
         return $response->getApiData();
     }
 
@@ -197,7 +197,7 @@ class Account extends KuCoinApi
      */
     public function subTransferV2(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v2/accounts/sub-transfer', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v2/accounts/sub-transfer', $params);
         return $response->getApiData();
     }
 
@@ -212,7 +212,7 @@ class Account extends KuCoinApi
      */
     public function getLedgersV2(array $params = [], array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/accounts/ledgers', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/accounts/ledgers', $params + $pagination);
         return $response->getApiData();
     }
 

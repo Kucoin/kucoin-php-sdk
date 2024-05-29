@@ -21,7 +21,7 @@ class ServiceStatus extends KuCoinApi
      */
     public function getStatus()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/status');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/status');
         return $response->getApiData();
     }
 }

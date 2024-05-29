@@ -17,7 +17,7 @@ class Symbol extends KuCoinApi
      */
     public function getAggregatedFullOrderBook($symbol)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v3/market/orderbook/level2', compact('symbol'));
+        $response = $this->call(Request::METHOD_GET, 'api/v3/market/orderbook/level2', compact('symbol'));
         return $response->getApiData();
     }
 }
