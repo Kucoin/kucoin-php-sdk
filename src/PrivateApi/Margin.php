@@ -10,7 +10,8 @@ use KuCoin\SDK\KuCoinApi;
 /**
  * Class Margin
  * @package KuCoin\SDK\PrivateApi
- * @see https://docs.kucoin.com/#margin-info
+ *
+ * @see https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/margin-borrowing
  */
 class Margin extends KuCoinApi
 {
@@ -59,13 +60,16 @@ class Margin extends KuCoinApi
     }
 
     /**
-     * Post Borrow Order.
-     *
      * @param array $params
      * @return mixed
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call borrowV3 instead.
+     *
+     * Post Borrow Order.
+     *
      */
     public function borrow(array $params)
     {
@@ -81,6 +85,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call getBorrowV3 instead.
      */
     public function getBorrow($orderId)
     {
@@ -96,6 +102,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call getAccount instead.
      */
     public function getOutstanding($currency)
     {
@@ -111,6 +119,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getRepayRecord($currency)
     {
@@ -126,6 +136,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call repayV3 instead.
      */
     public function repayAll(array $params)
     {
@@ -141,6 +153,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call repayV3 instead.
      */
     public function repaySingle(array $params)
     {
@@ -156,6 +170,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function lend(array $params)
     {
@@ -171,6 +187,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function cancelLend($orderId)
     {
@@ -186,6 +204,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function setAutoLend(array $params)
     {
@@ -202,6 +222,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getLendActive(array $params, array $pagination = [])
     {
@@ -218,6 +240,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getLendDone(array $params, array $pagination = [])
     {
@@ -234,6 +258,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getUnsettled(array $params, array $pagination = [])
     {
@@ -249,7 +275,9 @@ class Margin extends KuCoinApi
      * @return mixed
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
-     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     * @throws \KuCoin\SDK\Exceptions\
+     *
+     * @deprecated
      */
     public function getSettled(array $params, array $pagination = [])
     {
@@ -265,6 +293,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getLendAssets($currency)
     {
@@ -280,6 +310,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getMarket(array $params)
     {
@@ -295,6 +327,8 @@ class Margin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getTradeLast($currency)
     {
@@ -328,5 +362,83 @@ class Margin extends KuCoinApi
     public function getEtfInfo()
     {
         return $this->call(Request::METHOD_GET, '/api/v3/etf/info')->getApiData();
+    }
+
+    /**
+     * This API endpoint is used to initiate an application for cross or isolated margin borrowing.
+     *
+     * @param array $params
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function borrowV3(array $params)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v3/margin/borrow', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * This API endpoint is used to initiate an application for the repayment of cross or isolated margin borrowing.
+     *
+     * @param array $params
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function repayV3(array $params)
+    {
+        $response = $this->call(Request::METHOD_POST, '/api/v3/margin/repay', $params);
+        return $response->getApiData();
+    }
+
+    /**
+     * This API endpoint is used to get the borrowing orders for cross and isolated margin accounts.
+     *
+     * @param array $params
+     * @param array $pagination
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getBorrowV3(array $params, array $pagination = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/margin/borrow', $params + $pagination);
+        return $response->getApiData();
+    }
+
+    /**
+     * This API endpoint is used to get the repayment orders for cross and isolated margin accounts.
+     *
+     * @param array $params
+     * @param array $pagination
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getRepayV3(array $params, array $pagination = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/margin/repay', $params + $pagination);
+        return $response->getApiData();
+    }
+
+    /**
+     * This API endpoint is used to get the interest orders for cross and isolated margin accounts.
+     *
+     * @param array $params
+     * @param array $pagination
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getInterestV3(array $params, array $pagination = [])
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/margin/interest', $params + $pagination);
+        return $response->getApiData();
     }
 }

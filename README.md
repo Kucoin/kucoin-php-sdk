@@ -30,14 +30,13 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 
 ### Choose environment
 
-| Environment  | BaseUri                                   |
-|--------------|-------------------------------------------|
-| *Production* | https://api.kucoin.com                    |
-| ~~*Sandbox*~~    | ~~https://openapi-sandbox.kucoin.com~~ (Deprecated) |
+| Environment   | BaseUri                                             |
+|---------------|-----------------------------------------------------|
+| *Production*  | https://api.kucoin.com                              |
 
 ```php
 // Switch to the sandbox environment
-KuCoinApi::setBaseUri('https://openapi-sandbox.kucoin.com');
+KuCoinApi::setBaseUri('https://api.kucoin.com');
 ```
 
 ### Debug mode & logging
@@ -307,39 +306,59 @@ go(function () {
 <details>
 <summary>KuCoin\SDK\PrivateApi\Order</summary>
 
-| API                                                    | Authentication | Description                                                                                  |
-|--------------------------------------------------------|----------------|----------------------------------------------------------------------------------------------|
-| KuCoin\SDK\PrivateApi\Order::create()                  | YES            | https://docs.kucoin.com/#place-a-new-order                                                   |
-| KuCoin\SDK\PrivateApi\Order::createMulti()             | YES            | https://docs.kucoin.com/#place-bulk-orders                                                   |
-| KuCoin\SDK\PrivateApi\Order::cancel()                  | YES            | https://docs.kucoin.com/#cancel-an-order                                                     |
-| KuCoin\SDK\PrivateApi\Order::cancelAll()               | YES            | https://docs.kucoin.com/#cancel-all-orders                                                   |
-| KuCoin\SDK\PrivateApi\Order::getList()                 | YES            | https://docs.kucoin.com/#list-orders                                                         |
-| KuCoin\SDK\PrivateApi\Order::getV1List()               | YES            | `DEPRECATED`https://docs.kucoin.com/#get-v1-historical-orders-list                           |
-| KuCoin\SDK\PrivateApi\Order::getDetail()               | YES            | https://docs.kucoin.com/#get-an-order                                                        |
-| KuCoin\SDK\PrivateApi\Order::getRecentList()           | YES            | https://docs.kucoin.com/#recent-orders                                                       |
-| KuCoin\SDK\PrivateApi\Order::createMarginOrder()       | YES            | https://docs.kucoin.com/#place-a-margin-order                                                |
-| KuCoin\SDK\PrivateApi\Order::cancelByClientOid()       | YES            | https://docs.kucoin.com/#cancel-single-order-by-clientoid                                    |
-| KuCoin\SDK\PrivateApi\Order::getDetailByClientOid()    | YES            | https://docs.kucoin.com/#get-single-active-order-by-clientoid                                |
-| KuCoin\SDK\PrivateApi\Order::hfCreate()                | YES            | https://docs.kucoin.com/spot-hf/#place-hf-order                                              |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCreate()            | YES            | https://docs.kucoin.com/spot-hf/#sync-place-hf-order                                         |
-| KuCoin\SDK\PrivateApi\Order::hfCreateMulti()           | YES            | https://docs.kucoin.com/spot-hf/#place-multiple-hf-orders                                    |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCreateMulti()       | YES            | https://docs.kucoin.com/spot-hf/#sync-place-multiple-hf-orders                               |
-| KuCoin\SDK\PrivateApi\Order::hfModify()                | YES            | https://docs.kucoin.com/spot-hf/#modify-order                                                |
-| KuCoin\SDK\PrivateApi\Order::hfCancel()                | YES            | https://docs.kucoin.com/spot-hf/#cancel-orders-by-orderid                                    |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancel()            | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-orderid                               |
-| KuCoin\SDK\PrivateApi\Order::hfCancelByClientOid()     | YES            | https://docs.kucoin.com/spot-hf/#cancel-order-by-clientoid                                   |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancelByClientOid() | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-clientoid                             |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancelSize()        | YES            | https://docs.kucoin.com/spot-hf/#cancel-specified-number-of-orders-by-orderid                |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancelAll()         | YES            | https://docs.kucoin.com/spot-hf/#cancel-all-hf-orders-by-symbol                              |
-| KuCoin\SDK\PrivateApi\Order::getActiveOrderList()      | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-active-hf-orders                             |
-| KuCoin\SDK\PrivateApi\Order::getActiveSymbols()        | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-symbol-with-active-hf-orders                 |
-| KuCoin\SDK\PrivateApi\Order::getDoneOrderList()        | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-filled-hf-orders                             |
-| KuCoin\SDK\PrivateApi\Order::getHfDetail()             | YES            | https://docs.kucoin.com/spot-hf/#details-of-a-single-hf-order                                |
-| KuCoin\SDK\PrivateApi\Order::getHfDetailByClientOid()  | YES            | https://docs.kucoin.com/spot-hf/#obtain-details-of-a-single-hf-order-using-clientoid         |
-| KuCoin\SDK\PrivateApi\Order::hfAutoCancel()            | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-setting                                      |
-| KuCoin\SDK\PrivateApi\Order::getHfAutoCancel()         | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-order-setting-query                          |
-| KuCoin\SDK\PrivateApi\Order::getHfFills()              | YES            | https://docs.kucoin.com/spot-hf/#hf-transaction-records                                      |
-| KuCoin\SDK\PrivateApi\Order::hfCancelAll()             | YES            | https://www.kucoin.com/docs/rest/spot-trading/spot-hf-trade-pro-account/cancel-all-hf-orders |
+| API                                                         | Authentication | Description                                                                                       |
+|-------------------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Order::create()                       | YES            | https://docs.kucoin.com/#place-a-new-order                                                        |
+| KuCoin\SDK\PrivateApi\Order::createMulti()                  | YES            | https://docs.kucoin.com/#place-bulk-orders                                                        |
+| KuCoin\SDK\PrivateApi\Order::cancel()                       | YES            | https://docs.kucoin.com/#cancel-an-order                                                          |
+| KuCoin\SDK\PrivateApi\Order::cancelAll()                    | YES            | https://docs.kucoin.com/#cancel-all-orders                                                        |
+| KuCoin\SDK\PrivateApi\Order::getList()                      | YES            | https://docs.kucoin.com/#list-orders                                                              |
+| KuCoin\SDK\PrivateApi\Order::getV1List()                    | YES            | `DEPRECATED`https://docs.kucoin.com/#get-v1-historical-orders-list                                |
+| KuCoin\SDK\PrivateApi\Order::getDetail()                    | YES            | https://docs.kucoin.com/#get-an-order                                                             |
+| KuCoin\SDK\PrivateApi\Order::getRecentList()                | YES            | https://docs.kucoin.com/#recent-orders                                                            |
+| KuCoin\SDK\PrivateApi\Order::createMarginOrder()            | YES            | https://docs.kucoin.com/#place-a-margin-order                                                     |
+| KuCoin\SDK\PrivateApi\Order::cancelByClientOid()            | YES            | https://docs.kucoin.com/#cancel-single-order-by-clientoid                                         |
+| KuCoin\SDK\PrivateApi\Order::getDetailByClientOid()         | YES            | https://docs.kucoin.com/#get-single-active-order-by-clientoid                                     |
+| KuCoin\SDK\PrivateApi\Order::hfCreate()                     | YES            | https://docs.kucoin.com/spot-hf/#place-hf-order                                                   |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCreate()                 | YES            | https://docs.kucoin.com/spot-hf/#sync-place-hf-order                                              |
+| KuCoin\SDK\PrivateApi\Order::hfCreateMulti()                | YES            | https://docs.kucoin.com/spot-hf/#place-multiple-hf-orders                                         |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCreateMulti()            | YES            | https://docs.kucoin.com/spot-hf/#sync-place-multiple-hf-orders                                    |
+| KuCoin\SDK\PrivateApi\Order::hfModify()                     | YES            | https://docs.kucoin.com/spot-hf/#modify-order                                                     |
+| KuCoin\SDK\PrivateApi\Order::hfCancel()                     | YES            | https://docs.kucoin.com/spot-hf/#cancel-orders-by-orderid                                         |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancel()                 | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-orderid                                    |
+| KuCoin\SDK\PrivateApi\Order::hfCancelByClientOid()          | YES            | https://docs.kucoin.com/spot-hf/#cancel-order-by-clientoid                                        |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelByClientOid()      | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-clientoid                                  |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelSize()             | YES            | https://docs.kucoin.com/spot-hf/#cancel-specified-number-of-orders-by-orderid                     |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelAll()              | YES            | https://docs.kucoin.com/spot-hf/#cancel-all-hf-orders-by-symbol                                   |
+| KuCoin\SDK\PrivateApi\Order::getActiveOrderList()           | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-active-hf-orders                                  |
+| KuCoin\SDK\PrivateApi\Order::getActiveSymbols()             | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-symbol-with-active-hf-orders                      |
+| KuCoin\SDK\PrivateApi\Order::getDoneOrderList()             | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-filled-hf-orders                                  |
+| KuCoin\SDK\PrivateApi\Order::getHfDetail()                  | YES            | https://docs.kucoin.com/spot-hf/#details-of-a-single-hf-order                                     |
+| KuCoin\SDK\PrivateApi\Order::getHfDetailByClientOid()       | YES            | https://docs.kucoin.com/spot-hf/#obtain-details-of-a-single-hf-order-using-clientoid              |
+| KuCoin\SDK\PrivateApi\Order::hfAutoCancel()                 | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-setting                                           |
+| KuCoin\SDK\PrivateApi\Order::getHfAutoCancel()              | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-order-setting-query                               |
+| KuCoin\SDK\PrivateApi\Order::getHfFills()                   | YES            | https://docs.kucoin.com/spot-hf/#hf-transaction-records                                           |
+| KuCoin\SDK\PrivateApi\Order::hfCancelAll()                  | YES            | https://www.kucoin.com/docs/rest/spot-trading/spot-hf-trade-pro-account/cancel-all-hf-orders      |
+| KuCoin\SDK\PrivateApi\Order::createHfMarginOrder()          | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/place-hf-order                    |
+| KuCoin\SDK\PrivateApi\Order::cancelMarginHfOrder()               | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-hf-order-by-orderid        |
+| KuCoin\SDK\PrivateApi\Order::cancelMarginHfOrderByClientOid()    | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-hf-order-by-clientoid      |
+| KuCoin\SDK\PrivateApi\Order::cancelAllMarginHfOrder()            | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-all-hf-orders-by-symbol    |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfActiveOrders()      | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-active-hf-orders-list         |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfFilledOrders()      | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-filled-list                |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfDetail()            | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-orderid   |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfDetailByClientOid() | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-clientoid |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfFills()             | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-transaction-records        |
+
+</details>
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\OrderTest</summary>
+
+| API                                                  | Authentication | Description                                                                                 |
+|------------------------------------------------------|----------------|---------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Order::createTest()            | YES            | https://www.kucoin.com/docs/rest/spot-trading/orders/place-order-test                       |
+| KuCoin\SDK\PrivateApi\Order::hfCreateTest()          | YES            | https://www.kucoin.com/docs/rest/spot-trading/spot-hf-trade-pro-account/place-hf-order-test |
+| KuCoin\SDK\PrivateApi\Order::createMarginTestOrder() | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/place-hf-order-test         |
 
 </details>
 
@@ -357,8 +376,6 @@ go(function () {
 | KuCoin\SDK\PrivateApi\OcoOrder::getList()              | YES            | https://www.kucoin.com/docs/rest/spot-trading/oco-order/get-order-list              |
 
 </details>
-
-
 
 
 <details>
@@ -445,28 +462,48 @@ go(function () {
 <details>
 <summary>KuCoin\SDK\PrivateApi\Margin</summary>
 
-| API                                            | Authentication | Description                                                                          |
-|------------------------------------------------|----------------|--------------------------------------------------------------------------------------|
-| KuCoin\SDK\PrivateApi\Margin::getMarkPrice()   | YES            | https://docs.kucoin.com/#margin-info                                                 |
-| KuCoin\SDK\PrivateApi\Margin::getConfig()      | YES            | https://docs.kucoin.com/#get-margin-configuration-info                               |
-| KuCoin\SDK\PrivateApi\Margin::getAccount()     | YES            | https://docs.kucoin.com/#get-margin-account                                          |
-| KuCoin\SDK\PrivateApi\Margin::borrow()         | YES            | https://docs.kucoin.com/#post-borrow-order                                           |
-| KuCoin\SDK\PrivateApi\Margin::getBorrow()      | YES            | https://docs.kucoin.com/#get-borrow-order                                            |
-| KuCoin\SDK\PrivateApi\Margin::getOutstanding() | YES            | https://docs.kucoin.com/#get-repay-record                                            |
-| KuCoin\SDK\PrivateApi\Margin::getRepayRecord() | YES            | https://docs.kucoin.com/#get-repayment-record                                        |
-| KuCoin\SDK\PrivateApi\Margin::repayAll()       | YES            | https://docs.kucoin.com/#one-click-repayment                                         |
-| KuCoin\SDK\PrivateApi\Margin::repaySingle()    | YES            | https://docs.kucoin.com/#repay-a-single-order                                        |
-| KuCoin\SDK\PrivateApi\Margin::lend()           | YES            | https://docs.kucoin.com/#post-lend-order                                             |
-| KuCoin\SDK\PrivateApi\Margin::cancelLend()     | YES            | https://docs.kucoin.com/#cancel-lend-order                                           |
-| KuCoin\SDK\PrivateApi\Margin::setAutoLend()    | YES            | https://docs.kucoin.com/#set-auto-lend                                               |
-| KuCoin\SDK\PrivateApi\Margin::getLendActive()  | YES            | https://docs.kucoin.com/#get-active-order                                            |
-| KuCoin\SDK\PrivateApi\Margin::getLendDone()    | YES            | https://docs.kucoin.com/#get-lent-history                                            |
-| KuCoin\SDK\PrivateApi\Margin::getUnsettled()   | YES            | https://docs.kucoin.com/#get-active-lend-order-list                                  |
-| KuCoin\SDK\PrivateApi\Margin::getSettled()     | YES            | https://docs.kucoin.com/#get-settled-lend-order-history                              |
-| KuCoin\SDK\PrivateApi\Margin::getLendAssets()  | YES            | https://docs.kucoin.com/#get-account-lend-record                                     |
-| KuCoin\SDK\PrivateApi\Margin::getMarket()      | YES            | https://docs.kucoin.com/#lending-market-data                                         |
-| KuCoin\SDK\PrivateApi\Margin::getTradeLast()   | YES            | https://docs.kucoin.com/#margin-trade-data                                           |
-| KuCoin\SDK\PrivateApi\Margin::getEtfInfo()     | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-info/get-leveraged-token-info |
+| API                                            | Authentication | Description                                                                                                   |
+|------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Margin::getMarkPrice()   | YES            | https://docs.kucoin.com/#margin-info                                                                          |
+| KuCoin\SDK\PrivateApi\Margin::getConfig()      | YES            | https://docs.kucoin.com/#get-margin-configuration-info                                                        |
+| KuCoin\SDK\PrivateApi\Margin::getAccount()     | YES            | https://docs.kucoin.com/#get-margin-account                                                                   |
+| KuCoin\SDK\PrivateApi\Margin::borrow()         | YES            | `DEPRECATED` https://docs.kucoin.com/#post-borrow-order                                                       |
+| KuCoin\SDK\PrivateApi\Margin::getBorrow()      | YES            | `DEPRECATED` https://docs.kucoin.com/#get-borrow-order                                                        |
+| KuCoin\SDK\PrivateApi\Margin::getOutstanding() | YES            | `DEPRECATED` https://docs.kucoin.com/#get-repay-record                                                        |
+| KuCoin\SDK\PrivateApi\Margin::getRepayRecord() | YES            | `DEPRECATED` https://docs.kucoin.com/#get-repayment-record                                                    |
+| KuCoin\SDK\PrivateApi\Margin::repayAll()       | YES            | `DEPRECATED` https://docs.kucoin.com/#one-click-repayment                                                     |
+| KuCoin\SDK\PrivateApi\Margin::repaySingle()    | YES            | `DEPRECATED` https://docs.kucoin.com/#repay-a-single-order                                                    |
+| KuCoin\SDK\PrivateApi\Margin::lend()           | YES            | `DEPRECATED` https://docs.kucoin.com/#post-lend-order                                                         |
+| KuCoin\SDK\PrivateApi\Margin::cancelLend()     | YES            | `DEPRECATED` https://docs.kucoin.com/#cancel-lend-order                                                       |
+| KuCoin\SDK\PrivateApi\Margin::setAutoLend()    | YES            | `DEPRECATED` https://docs.kucoin.com/#set-auto-lend                                                           |
+| KuCoin\SDK\PrivateApi\Margin::getLendActive()  | YES            | `DEPRECATED` https://docs.kucoin.com/#get-active-order                                                        |
+| KuCoin\SDK\PrivateApi\Margin::getLendDone()    | YES            | `DEPRECATED` https://docs.kucoin.com/#get-lent-history                                                        |
+| KuCoin\SDK\PrivateApi\Margin::getUnsettled()   | YES            | `DEPRECATED` https://docs.kucoin.com/#get-active-lend-order-list                                              |
+| KuCoin\SDK\PrivateApi\Margin::getSettled()     | YES            | `DEPRECATED` https://docs.kucoin.com/#get-settled-lend-order-history                                          |
+| KuCoin\SDK\PrivateApi\Margin::getLendAssets()  | YES            | `DEPRECATED` https://docs.kucoin.com/#get-account-lend-record                                                 |
+| KuCoin\SDK\PrivateApi\Margin::getMarket()      | YES            | `DEPRECATED` https://docs.kucoin.com/#lending-market-data                                                     |
+| KuCoin\SDK\PrivateApi\Margin::getTradeLast()   | YES            | `DEPRECATED` https://docs.kucoin.com/#margin-trade-data                                                       |
+| KuCoin\SDK\PrivateApi\Margin::getEtfInfo()     | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-info/get-leveraged-token-info                          |
+| KuCoin\SDK\PrivateApi\Margin::borrowV3()       | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/margin-borrowing                           |
+| KuCoin\SDK\PrivateApi\Margin::repayV3()        | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/repayment                                  |
+| KuCoin\SDK\PrivateApi\Margin::getBorrowV3()    | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-margin-borrowing-history               |
+| KuCoin\SDK\PrivateApi\Margin::getRepayV3()     | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-repayment-history                      |
+| KuCoin\SDK\PrivateApi\Margin::getInterestV3()  | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-cross-isolated-margin-interest-records |
+
+</details>
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\Lend</summary>
+
+| API                                                 | Authentication | Description                                                                                   |
+|-----------------------------------------------------|----------------|-----------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Lend::getCurrencies()         | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/get-currency-information   |
+| KuCoin\SDK\PrivateApi\Lend::getMarketInterestRate() | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/get-interest-rates         |
+| KuCoin\SDK\PrivateApi\Lend::purchase()              | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/subscription               |
+| KuCoin\SDK\PrivateApi\Lend::redeem()                | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/redemption                 |
+| KuCoin\SDK\PrivateApi\Lend::purchaseUpdate()        | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/modify-subscription-orders |
+| KuCoin\SDK\PrivateApi\Lend::getRedeemOrders()       | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/get-redemption-orders      |
+| KuCoin\SDK\PrivateApi\Lend::getPurchaseOrders()     | YES            | https://www.kucoin.com/docs/rest/margin-trading/lending-market-v3-/get-subscription-orders    |
 
 </details>
 
@@ -478,11 +515,11 @@ go(function () {
 | KuCoin\SDK\PrivateApi\IsolatedMargin::getSymbols()       | YES            | https://docs.kucoin.com/#query-isolated-margin-trading-pair-configuration |
 | KuCoin\SDK\PrivateApi\IsolatedMargin::getAccountList()   | YES            | https://docs.kucoin.com/#query-isolated-margin-account-info               |
 | KuCoin\SDK\PrivateApi\IsolatedMargin::getAccountDetail() | YES            | https://docs.kucoin.com/#query-single-isolated-margin-account-info        |
-| KuCoin\SDK\PrivateApi\IsolatedMargin::borrow()           | YES            | https://docs.kucoin.com/#isolated-margin-borrowing                        |
-| KuCoin\SDK\PrivateApi\IsolatedMargin::getOutstanding()   | YES            | https://docs.kucoin.com/#query-outstanding-repayment-records              |
-| KuCoin\SDK\PrivateApi\IsolatedMargin::getRepaid()        | YES            | https://docs.kucoin.com/#query-repayment-records                          |
-| KuCoin\SDK\PrivateApi\IsolatedMargin::repayAll()         | YES            | https://docs.kucoin.com/#quick-repayment                                  |
-| KuCoin\SDK\PrivateApi\IsolatedMargin::repaySingle()      | YES            | https://docs.kucoin.com/#single-repayment                                 |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::borrow()           | YES            | `DEPRECATED` https://docs.kucoin.com/#isolated-margin-borrowing           |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getOutstanding()   | YES            | `DEPRECATED` https://docs.kucoin.com/#query-outstanding-repayment-records |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::getRepaid()        | YES            | `DEPRECATED` https://docs.kucoin.com/#query-repayment-records             |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::repayAll()         | YES            | `DEPRECATED` https://docs.kucoin.com/#quick-repayment                     |
+| KuCoin\SDK\PrivateApi\IsolatedMargin::repaySingle()      | YES            | `DEPRECATED` https://docs.kucoin.com/#single-repayment                    |
 
 </details>
 
