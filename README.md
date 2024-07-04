@@ -30,9 +30,9 @@ composer require "kucoin/kucoin-php-sdk:~1.1.0"
 
 ### Choose environment
 
-| Environment   | BaseUri                                             |
-|---------------|-----------------------------------------------------|
-| *Production*  | https://api.kucoin.com                              |
+| Environment  | BaseUri                |
+|--------------|------------------------|
+| *Production* | https://api.kucoin.com |
 
 ```php
 // Switch to the sandbox environment
@@ -306,48 +306,48 @@ go(function () {
 <details>
 <summary>KuCoin\SDK\PrivateApi\Order</summary>
 
-| API                                                         | Authentication | Description                                                                                       |
-|-------------------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------|
-| KuCoin\SDK\PrivateApi\Order::create()                       | YES            | https://docs.kucoin.com/#place-a-new-order                                                        |
-| KuCoin\SDK\PrivateApi\Order::createMulti()                  | YES            | https://docs.kucoin.com/#place-bulk-orders                                                        |
-| KuCoin\SDK\PrivateApi\Order::cancel()                       | YES            | https://docs.kucoin.com/#cancel-an-order                                                          |
-| KuCoin\SDK\PrivateApi\Order::cancelAll()                    | YES            | https://docs.kucoin.com/#cancel-all-orders                                                        |
-| KuCoin\SDK\PrivateApi\Order::getList()                      | YES            | https://docs.kucoin.com/#list-orders                                                              |
-| KuCoin\SDK\PrivateApi\Order::getV1List()                    | YES            | `DEPRECATED`https://docs.kucoin.com/#get-v1-historical-orders-list                                |
-| KuCoin\SDK\PrivateApi\Order::getDetail()                    | YES            | https://docs.kucoin.com/#get-an-order                                                             |
-| KuCoin\SDK\PrivateApi\Order::getRecentList()                | YES            | https://docs.kucoin.com/#recent-orders                                                            |
-| KuCoin\SDK\PrivateApi\Order::createMarginOrder()            | YES            | https://docs.kucoin.com/#place-a-margin-order                                                     |
-| KuCoin\SDK\PrivateApi\Order::cancelByClientOid()            | YES            | https://docs.kucoin.com/#cancel-single-order-by-clientoid                                         |
-| KuCoin\SDK\PrivateApi\Order::getDetailByClientOid()         | YES            | https://docs.kucoin.com/#get-single-active-order-by-clientoid                                     |
-| KuCoin\SDK\PrivateApi\Order::hfCreate()                     | YES            | https://docs.kucoin.com/spot-hf/#place-hf-order                                                   |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCreate()                 | YES            | https://docs.kucoin.com/spot-hf/#sync-place-hf-order                                              |
-| KuCoin\SDK\PrivateApi\Order::hfCreateMulti()                | YES            | https://docs.kucoin.com/spot-hf/#place-multiple-hf-orders                                         |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCreateMulti()            | YES            | https://docs.kucoin.com/spot-hf/#sync-place-multiple-hf-orders                                    |
-| KuCoin\SDK\PrivateApi\Order::hfModify()                     | YES            | https://docs.kucoin.com/spot-hf/#modify-order                                                     |
-| KuCoin\SDK\PrivateApi\Order::hfCancel()                     | YES            | https://docs.kucoin.com/spot-hf/#cancel-orders-by-orderid                                         |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancel()                 | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-orderid                                    |
-| KuCoin\SDK\PrivateApi\Order::hfCancelByClientOid()          | YES            | https://docs.kucoin.com/spot-hf/#cancel-order-by-clientoid                                        |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancelByClientOid()      | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-clientoid                                  |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancelSize()             | YES            | https://docs.kucoin.com/spot-hf/#cancel-specified-number-of-orders-by-orderid                     |
-| KuCoin\SDK\PrivateApi\Order::hfSyncCancelAll()              | YES            | https://docs.kucoin.com/spot-hf/#cancel-all-hf-orders-by-symbol                                   |
-| KuCoin\SDK\PrivateApi\Order::getActiveOrderList()           | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-active-hf-orders                                  |
-| KuCoin\SDK\PrivateApi\Order::getActiveSymbols()             | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-symbol-with-active-hf-orders                      |
-| KuCoin\SDK\PrivateApi\Order::getDoneOrderList()             | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-filled-hf-orders                                  |
-| KuCoin\SDK\PrivateApi\Order::getHfDetail()                  | YES            | https://docs.kucoin.com/spot-hf/#details-of-a-single-hf-order                                     |
-| KuCoin\SDK\PrivateApi\Order::getHfDetailByClientOid()       | YES            | https://docs.kucoin.com/spot-hf/#obtain-details-of-a-single-hf-order-using-clientoid              |
-| KuCoin\SDK\PrivateApi\Order::hfAutoCancel()                 | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-setting                                           |
-| KuCoin\SDK\PrivateApi\Order::getHfAutoCancel()              | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-order-setting-query                               |
-| KuCoin\SDK\PrivateApi\Order::getHfFills()                   | YES            | https://docs.kucoin.com/spot-hf/#hf-transaction-records                                           |
-| KuCoin\SDK\PrivateApi\Order::hfCancelAll()                  | YES            | https://www.kucoin.com/docs/rest/spot-trading/spot-hf-trade-pro-account/cancel-all-hf-orders      |
-| KuCoin\SDK\PrivateApi\Order::createHfMarginOrder()          | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/place-hf-order                    |
-| KuCoin\SDK\PrivateApi\Order::cancelMarginHfOrder()               | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-hf-order-by-orderid        |
-| KuCoin\SDK\PrivateApi\Order::cancelMarginHfOrderByClientOid()    | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-hf-order-by-clientoid      |
-| KuCoin\SDK\PrivateApi\Order::cancelAllMarginHfOrder()            | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-all-hf-orders-by-symbol    |
-| KuCoin\SDK\PrivateApi\Order::getMarginHfActiveOrders()      | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-active-hf-orders-list         |
-| KuCoin\SDK\PrivateApi\Order::getMarginHfFilledOrders()      | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-filled-list                |
-| KuCoin\SDK\PrivateApi\Order::getMarginHfDetail()            | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-orderid   |
-| KuCoin\SDK\PrivateApi\Order::getMarginHfDetailByClientOid() | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-clientoid |
-| KuCoin\SDK\PrivateApi\Order::getMarginHfFills()             | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-transaction-records        |
+| API                                                           | Authentication | Description                                                                                       |
+|---------------------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Order::create()                         | YES            | https://docs.kucoin.com/#place-a-new-order                                                        |
+| KuCoin\SDK\PrivateApi\Order::createMulti()                    | YES            | https://docs.kucoin.com/#place-bulk-orders                                                        |
+| KuCoin\SDK\PrivateApi\Order::cancel()                         | YES            | https://docs.kucoin.com/#cancel-an-order                                                          |
+| KuCoin\SDK\PrivateApi\Order::cancelAll()                      | YES            | https://docs.kucoin.com/#cancel-all-orders                                                        |
+| KuCoin\SDK\PrivateApi\Order::getList()                        | YES            | https://docs.kucoin.com/#list-orders                                                              |
+| KuCoin\SDK\PrivateApi\Order::getV1List()                      | YES            | `DEPRECATED`https://docs.kucoin.com/#get-v1-historical-orders-list                                |
+| KuCoin\SDK\PrivateApi\Order::getDetail()                      | YES            | https://docs.kucoin.com/#get-an-order                                                             |
+| KuCoin\SDK\PrivateApi\Order::getRecentList()                  | YES            | https://docs.kucoin.com/#recent-orders                                                            |
+| KuCoin\SDK\PrivateApi\Order::createMarginOrder()              | YES            | https://docs.kucoin.com/#place-a-margin-order                                                     |
+| KuCoin\SDK\PrivateApi\Order::cancelByClientOid()              | YES            | https://docs.kucoin.com/#cancel-single-order-by-clientoid                                         |
+| KuCoin\SDK\PrivateApi\Order::getDetailByClientOid()           | YES            | https://docs.kucoin.com/#get-single-active-order-by-clientoid                                     |
+| KuCoin\SDK\PrivateApi\Order::hfCreate()                       | YES            | https://docs.kucoin.com/spot-hf/#place-hf-order                                                   |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCreate()                   | YES            | https://docs.kucoin.com/spot-hf/#sync-place-hf-order                                              |
+| KuCoin\SDK\PrivateApi\Order::hfCreateMulti()                  | YES            | https://docs.kucoin.com/spot-hf/#place-multiple-hf-orders                                         |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCreateMulti()              | YES            | https://docs.kucoin.com/spot-hf/#sync-place-multiple-hf-orders                                    |
+| KuCoin\SDK\PrivateApi\Order::hfModify()                       | YES            | https://docs.kucoin.com/spot-hf/#modify-order                                                     |
+| KuCoin\SDK\PrivateApi\Order::hfCancel()                       | YES            | https://docs.kucoin.com/spot-hf/#cancel-orders-by-orderid                                         |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancel()                   | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-orderid                                    |
+| KuCoin\SDK\PrivateApi\Order::hfCancelByClientOid()            | YES            | https://docs.kucoin.com/spot-hf/#cancel-order-by-clientoid                                        |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelByClientOid()        | YES            | https://docs.kucoin.com/spot-hf/#sync-cancel-orders-by-clientoid                                  |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelSize()               | YES            | https://docs.kucoin.com/spot-hf/#cancel-specified-number-of-orders-by-orderid                     |
+| KuCoin\SDK\PrivateApi\Order::hfSyncCancelAll()                | YES            | https://docs.kucoin.com/spot-hf/#cancel-all-hf-orders-by-symbol                                   |
+| KuCoin\SDK\PrivateApi\Order::getActiveOrderList()             | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-active-hf-orders                                  |
+| KuCoin\SDK\PrivateApi\Order::getActiveSymbols()               | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-symbol-with-active-hf-orders                      |
+| KuCoin\SDK\PrivateApi\Order::getDoneOrderList()               | YES            | https://docs.kucoin.com/spot-hf/#obtain-list-of-filled-hf-orders                                  |
+| KuCoin\SDK\PrivateApi\Order::getHfDetail()                    | YES            | https://docs.kucoin.com/spot-hf/#details-of-a-single-hf-order                                     |
+| KuCoin\SDK\PrivateApi\Order::getHfDetailByClientOid()         | YES            | https://docs.kucoin.com/spot-hf/#obtain-details-of-a-single-hf-order-using-clientoid              |
+| KuCoin\SDK\PrivateApi\Order::hfAutoCancel()                   | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-setting                                           |
+| KuCoin\SDK\PrivateApi\Order::getHfAutoCancel()                | YES            | https://docs.kucoin.com/spot-hf/#hf-auto-cancel-order-setting-query                               |
+| KuCoin\SDK\PrivateApi\Order::getHfFills()                     | YES            | https://docs.kucoin.com/spot-hf/#hf-transaction-records                                           |
+| KuCoin\SDK\PrivateApi\Order::hfCancelAll()                    | YES            | https://www.kucoin.com/docs/rest/spot-trading/spot-hf-trade-pro-account/cancel-all-hf-orders      |
+| KuCoin\SDK\PrivateApi\Order::createHfMarginOrder()            | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/place-hf-order                    |
+| KuCoin\SDK\PrivateApi\Order::cancelMarginHfOrder()            | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-hf-order-by-orderid        |
+| KuCoin\SDK\PrivateApi\Order::cancelMarginHfOrderByClientOid() | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-hf-order-by-clientoid      |
+| KuCoin\SDK\PrivateApi\Order::cancelAllMarginHfOrder()         | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/cancel-all-hf-orders-by-symbol    |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfActiveOrders()        | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-active-hf-orders-list         |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfFilledOrders()        | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-filled-list                |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfDetail()              | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-orderid   |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfDetailByClientOid()   | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-clientoid |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfFills()               | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-transaction-records        |
 
 </details>
 
@@ -374,6 +374,24 @@ go(function () {
 | KuCoin\SDK\PrivateApi\OcoOrder::getDetail()            | YES            | https://www.kucoin.com/docs/rest/spot-trading/oco-order/get-order-info-by-orderid   |
 | KuCoin\SDK\PrivateApi\OcoOrder::getDetailByClientOid() | YES            | https://www.kucoin.com/docs/rest/spot-trading/oco-order/get-order-info-by-clientoid |
 | KuCoin\SDK\PrivateApi\OcoOrder::getList()              | YES            | https://www.kucoin.com/docs/rest/spot-trading/oco-order/get-order-list              |
+
+</details>
+
+
+<details>
+<summary>KuCoin\SDK\PrivateApi\Earn</summary>
+
+| API                                                 | Authentication | Description                                                                                |
+|-----------------------------------------------------|----------------|--------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Earn::getSavingProducts()     | YES            | https://www.kucoin.com/docs/rest/earn/kucoin-earn/get-earn-savings-products                |
+| KuCoin\SDK\PrivateApi\Earn::getPromotionProducts()  | YES            | https://www.kucoin.com/docs/rest/earn/kucoin-earn/get-earn-limited-time-promotion-products |
+| KuCoin\SDK\PrivateApi\Earn::getStakingProducts()    | YES            | https://www.kucoin.com/docs/rest/earn/staking/get-earn-staking-products                    |
+| KuCoin\SDK\PrivateApi\Earn::getEthStakingProducts() | YES            | https://www.kucoin.com/docs/rest/earn/staking/get-earn-eth-staking-products                |
+| KuCoin\SDK\PrivateApi\Earn::getKcsStakingProducts() | YES            | https://www.kucoin.com/docs/rest/earn/staking/get-earn-kcs-staking-products                |
+| KuCoin\SDK\PrivateApi\Earn::subscribe()             | YES            | https://www.kucoin.com/docs/rest/earn/general/subscribe-to-earn-fixed-income-products      |
+| KuCoin\SDK\PrivateApi\Earn::redeemPreview()         | YES            | https://www.kucoin.com/docs/rest/earn/general/get-earn-redeem-preview-by-holding-id        |
+| KuCoin\SDK\PrivateApi\Earn::redeem()                | YES            | https://www.kucoin.com/docs/rest/earn/general/redeem-by-earn-holding-id                    |
+| KuCoin\SDK\PrivateApi\Earn::getHoldAssets()         | YES            | https://www.kucoin.com/docs/rest/earn/kucoin-earn/get-earn-fixed-income-current-holdings   |
 
 </details>
 
