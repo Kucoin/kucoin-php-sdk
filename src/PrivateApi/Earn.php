@@ -64,6 +64,8 @@ class Earn extends KuCoinApi
     }
 
     /**
+     * This endpoint retrieves KCS Staking products. If no KCS Staking products are available, an empty list is returned.
+     *
      * @return mixed|null
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
