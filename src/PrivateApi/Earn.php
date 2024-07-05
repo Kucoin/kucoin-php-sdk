@@ -89,12 +89,7 @@ class Earn extends KuCoinApi
      */
     public function subscribe($productId, $amount, $accountType = AccountType::MAIN)
     {
-        $parameters = [
-            'productId'   => $productId,
-            'amount'      => $amount,
-            'accountType' => $accountType,
-        ];
-
+        $parameters = compact('productId', 'amount', 'accountType');
         return $this->call(Request::METHOD_POST, '/api/v1/earn/orders', $parameters)->getApiData();
     }
 
@@ -112,13 +107,7 @@ class Earn extends KuCoinApi
      */
     public function redeem($orderId, $amount, $fromAccountType = AccountType::MAIN, $confirmPunishRedeem = 0)
     {
-        $parameters = [
-            'orderId'             => $orderId,
-            'amount'              => $amount,
-            'fromAccountType'     => $fromAccountType,
-            'confirmPunishRedeem' => $confirmPunishRedeem,
-        ];
-
+        $parameters = compact('orderId', 'amount', 'fromAccountType', 'confirmPunishRedeem');
         return $this->call(Request::METHOD_DELETE, '/api/v1/earn/orders', $parameters)->getApiData();
     }
 
@@ -134,11 +123,7 @@ class Earn extends KuCoinApi
      */
     public function redeemPreview($orderId, $fromAccountType = AccountType::MAIN)
     {
-        $parameters = [
-            'orderId'         => $orderId,
-            'fromAccountType' => $fromAccountType,
-        ];
-
+        $parameters = compact('orderId', 'fromAccountType');
         return $this->call(Request::METHOD_GET, '/api/v1/earn/redeem-preview', $parameters)->getApiData();
     }
 

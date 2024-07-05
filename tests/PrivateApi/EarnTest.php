@@ -240,7 +240,6 @@ class EarnTest extends TestCase
         $timeSubscribeOptions = $this->timeProductsSubscribeOption($earn);
         $timeOrder = $earn->subscribe($timeSubscribeOptions['productId'], $timeSubscribeOptions['amount']);
         $earlyRedeem = $earn->redeem($timeOrder['orderId'], $timeSubscribeOptions['amount'], AccountType::MAIN, 1);
-        var_dump($earlyRedeem);
         $assertCallback($earlyRedeem);
     }
 
