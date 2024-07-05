@@ -2,7 +2,7 @@
 
 namespace KuCoin\SDK\Tests\PrivateApi;
 
-use KuCoin\SDK\Enums\AccountTypeEnum;
+use KuCoin\SDK\Enums\AccountType;
 use KuCoin\SDK\PrivateApi\Earn;
 
 class EarnTest extends TestCase
@@ -239,7 +239,7 @@ class EarnTest extends TestCase
         $assertCallback($redeem);
         $timeSubscribeOptions = $this->timeProductsSubscribeOption($earn);
         $timeOrder = $earn->subscribe($timeSubscribeOptions['productId'], $timeSubscribeOptions['amount']);
-        $earlyRedeem = $earn->redeem($timeOrder['orderId'], $timeSubscribeOptions['amount'], AccountTypeEnum::MAIN, 1);
+        $earlyRedeem = $earn->redeem($timeOrder['orderId'], $timeSubscribeOptions['amount'], AccountType::MAIN, 1);
         var_dump($earlyRedeem);
         $assertCallback($earlyRedeem);
     }

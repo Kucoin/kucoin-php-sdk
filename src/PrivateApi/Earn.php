@@ -2,7 +2,7 @@
 
 namespace KuCoin\SDK\PrivateApi;
 
-use KuCoin\SDK\Enums\AccountTypeEnum;
+use KuCoin\SDK\Enums\AccountType;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
 
@@ -87,7 +87,7 @@ class Earn extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function subscribe($productId, $amount, $accountType = AccountTypeEnum::MAIN)
+    public function subscribe($productId, $amount, $accountType = AccountType::MAIN)
     {
         $parameters = [
             'productId'   => $productId,
@@ -110,7 +110,7 @@ class Earn extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function redeem($orderId, $amount, $fromAccountType = AccountTypeEnum::MAIN, $confirmPunishRedeem = 0)
+    public function redeem($orderId, $amount, $fromAccountType = AccountType::MAIN, $confirmPunishRedeem = 0)
     {
         $parameters = [
             'orderId'             => $orderId,
@@ -132,7 +132,7 @@ class Earn extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
      */
-    public function redeemPreview($orderId, $fromAccountType = AccountTypeEnum::MAIN)
+    public function redeemPreview($orderId, $fromAccountType = AccountType::MAIN)
     {
         $parameters = [
             'orderId'         => $orderId,

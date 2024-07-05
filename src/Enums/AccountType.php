@@ -2,7 +2,7 @@
 
 namespace KuCoin\SDK\Enums;
 
-class AccountTypeEnum
+class AccountType
 {
     const MAIN = 'MAIN';
 
