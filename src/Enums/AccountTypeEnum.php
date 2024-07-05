@@ -1,6 +1,6 @@
 <?php
 
-namespace KuCoin\SDK;
+namespace KuCoin\SDK\Enums;
 
 class AccountTypeEnum
 {

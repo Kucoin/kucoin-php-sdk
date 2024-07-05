@@ -2,7 +2,7 @@
 
 namespace KuCoin\SDK\PrivateApi;
 
-use KuCoin\SDK\AccountTypeEnum;
+use KuCoin\SDK\Enums\AccountTypeEnum;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
 
@@ -19,7 +19,7 @@ class Earn extends KuCoinApi
      */
     public function getSavingProducts($currency = '')
     {
-        return $this->call(Request::METHOD_GET, '/api/v1/earn/saving/products', ['currency' => $currency,])->getApiData();
+        return $this->call(Request::METHOD_GET, '/api/v1/earn/saving/products', compact('currency'))->getApiData();
     }
 
     /**
@@ -33,7 +33,7 @@ class Earn extends KuCoinApi
      */
     public function getPromotionProducts($currency = '')
     {
-        return $this->call(Request::METHOD_GET, '/api/v1/earn/promotion/products', ['currency' => $currency,])->getApiData();
+        return $this->call(Request::METHOD_GET, '/api/v1/earn/promotion/products', compact('currency'))->getApiData();
     }
 
     /**
@@ -47,7 +47,7 @@ class Earn extends KuCoinApi
      */
     public function getStakingProducts($currency = '')
     {
-        return $this->call(Request::METHOD_GET, '/api/v1/earn/staking/products', ['currency' => $currency,])->getApiData();
+        return $this->call(Request::METHOD_GET, '/api/v1/earn/staking/products', compact('currency'))->getApiData();
     }
 
     /**

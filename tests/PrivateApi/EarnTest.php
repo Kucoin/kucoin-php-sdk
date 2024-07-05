@@ -2,7 +2,7 @@
 
 namespace KuCoin\SDK\Tests\PrivateApi;
 
-use KuCoin\SDK\AccountTypeEnum;
+use KuCoin\SDK\Enums\AccountTypeEnum;
 use KuCoin\SDK\PrivateApi\Earn;
 
 class EarnTest extends TestCase
