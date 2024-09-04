@@ -100,9 +100,10 @@ try {
 
 ```php
 use KuCoin\SDK\Auth;
+use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 
 $auth = null;
@@ -111,7 +112,7 @@ $auth = null;
 $api = new WebSocketFeed($auth);
 
 // Use a custom event loop instance if you like
-//$loop = Factory::create();
+//$loop = Loop::get();
 //$loop->addPeriodicTimer(1, function () {
 //    var_dump(date('Y-m-d H:i:s'));
 //});
@@ -123,7 +124,7 @@ $channels = [
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
-$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);
 
     // Subscribe another channel
@@ -134,8 +135,8 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
 
     // Stop loop
     // $loop->stop();
-}, function ($code, $reason) {
-    echo "OnClose: {$code} {$reason}\n";
+}, function ($code, $reason, array $connectInfo) {
+    echo "OnClose: code={$code} reason={$reason} connectId={$connectInfo['connectId']} connectToken={$connectInfo['token']}\n";
 });
 ```
 
@@ -178,10 +179,10 @@ $channels = [
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 $options = ['tcp' => ['tcp_nodelay' => true]]; // Custom socket context options: https://www.php.net/manual/zh/context.socket
-$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);
-}, function ($code, $reason) {
-    echo "OnClose: {$code} {$reason}\n";
+}, function ($code, $reason, array $connectInfo) {
+    echo "OnClose: code={$code} reason={$reason} connectId={$connectInfo['connectId']} connectToken={$connectInfo['token']}\n";
 }, $options);
 ```
 

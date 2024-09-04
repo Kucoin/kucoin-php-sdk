@@ -85,7 +85,7 @@ class WebSocketFeed extends KuCoinApi
             throw new NoAvailableWebSocketServerException();
         }
         $server = $bullet['instanceServers'][array_rand($bullet['instanceServers'])];
-        $params['token'] = $bullet['token'];
+        $server['token'] = $params['token'] = $bullet['token'];
         $url = sprintf('%s%s%s', $server['endpoint'], strpos($server['endpoint'], '?') === false ? '?' : '&', http_build_query($params));
         $server['connectUrl'] = $url;
         return $server;
@@ -177,15 +177,15 @@ class WebSocketFeed extends KuCoinApi
                         $loop->cancelTimer($pingTimer);
                         throw new BusinessException('Error: ' . $msg);
                     case 'message':
-                        call_user_func($onMessage, $msgArray, $ws, $loop);
+                        $onMessage($msgArray, $ws, $loop, $server);
                         break;
                     default:
                         throw new BusinessException('Unknown type: ' . $msgArray['type']);
                 }
             });
-            $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer) {
+            $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer, $server) {
                 if (is_callable($onClose)) {
-                    call_user_func($onClose, $code, $reason);
+                    $onClose($code, $reason, $server);
                 }
                 $loop->cancelTimer($pingTimer);
             });
