@@ -61,6 +61,8 @@ class IsolatedMargin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call Margin::borrowV3 instead.
      */
     public function borrow(array $params)
     {
@@ -76,6 +78,8 @@ class IsolatedMargin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call getAccountDetail instead.
      */
     public function getOutstanding(array $params)
     {
@@ -90,6 +94,8 @@ class IsolatedMargin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated
      */
     public function getRepaid(array $params)
     {
@@ -104,6 +110,8 @@ class IsolatedMargin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call Margin::repayV3 instead.
      */
     public function repayAll(array $params)
     {
@@ -118,6 +126,8 @@ class IsolatedMargin extends KuCoinApi
      * @throws \KuCoin\SDK\Exceptions\BusinessException
      * @throws \KuCoin\SDK\Exceptions\HttpException
      * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     *
+     * @deprecated Call Margin::repayV3 instead.
      */
     public function repaySingle(array $params)
     {
