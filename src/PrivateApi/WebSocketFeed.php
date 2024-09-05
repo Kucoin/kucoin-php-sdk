@@ -9,7 +9,7 @@ use KuCoin\SDK\KuCoinApi;
 use Ratchet\Client\Connector as RatchetConnector;
 use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use React\Socket\Connector as SocketConnector;
 
@@ -24,13 +24,13 @@ class WebSocketFeed extends KuCoinApi
     protected $loop;
 
     /**
-     * Get the event loop instance, default return Factory::create()
+     * Get the event loop instance, default return Loop::get()
      * @return LoopInterface
      */
     public function getLoop()
     {
         if ($this->loop === null) {
-            $this->loop = Factory::create();
+            $this->loop = Loop::get();
         }
         return $this->loop;
     }
