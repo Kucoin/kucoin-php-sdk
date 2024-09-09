@@ -9,6 +9,10 @@ use React\Socket\Connection;
 use React\Socket\ConnectorInterface;
 use React\Socket\SocketServer;
 
+/**
+ * Copy React\Socket\TcpConnector and modify the method connect() to support custom socket options.
+ * React\Socket\TcpConnector: https://github.com/reactphp/socket/blob/3.x/src/TcpConnector.php
+ */
 final class TcpConnector implements ConnectorInterface
 {
     private $loop;
