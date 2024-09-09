@@ -139,7 +139,7 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
 });
 ```
 
-#### Add custom options
+#### Support custom options
 
 ```php
 use KuCoin\SDK\PublicApi\Time;
@@ -177,7 +177,14 @@ $channels = [
     ['topic' => '/market/ticker:KCS-BTC'],
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
-$options = ['tcp' => ['tcp_nodelay' => true]]; // Custom socket context options: https://www.php.net/manual/zh/context.socket
+$options = [
+    'tcp' => [
+        'tcp_nodelay'    => true, // Socket context options: https://www.php.net/manual/en/context.socket.php
+        'socket_options' => [     // Socket options: https://www.php.net/manual/en/function.socket-set-option.php
+            SO_RCVBUF => 1048576, // Example: set SO_RCVBUF=1MB
+        ],
+    ],
+];
 $api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);
 }, function ($code, $reason, array $connectInfo) {

@@ -29,6 +29,14 @@ $channels = [
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
+$options = [
+    'tcp' => [
+        'tcp_nodelay'    => true, // Socket context options: https://www.php.net/manual/en/context.socket.php
+        'socket_options' => [     // Socket options: https://www.php.net/manual/en/function.socket-set-option.php
+            SO_RCVBUF => 1048576, // Example: set SO_RCVBUF=1MB
+        ],
+    ],
+];
 $api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);
 
@@ -42,4 +50,4 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
     // $loop->stop();
 }, function ($code, $reason, array $connectInfo) {
     echo "OnClose: code={$code} reason={$reason} connectId={$connectInfo['connectId']} connectToken={$connectInfo['token']}\n";
-});
+}, $options);

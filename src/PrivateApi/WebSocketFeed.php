@@ -6,12 +6,14 @@ use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\Exceptions\NoAvailableWebSocketServerException;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
+use KuCoin\SDK\Socket\TcpConnector;
 use Ratchet\Client\Connector as RatchetConnector;
 use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use React\Socket\Connector as SocketConnector;
+use React\Socket\ConnectorInterface;
 
 /**
  * Class WebSocketFeed
@@ -129,6 +131,14 @@ class WebSocketFeed extends KuCoinApi
         }
 
         $loop = $this->getLoop();
+
+        if (!isset($options['tcp']) || !($options['tcp'] instanceof ConnectorInterface)) {
+            $options['tcp'] = new TcpConnector(
+                $loop,
+                is_array($options['tcp']) ? $options['tcp'] : []
+            );
+        }
+
         $reactConnector = new SocketConnector($loop, $options);
         $connector = new RatchetConnector($loop, $reactConnector);
         /**
