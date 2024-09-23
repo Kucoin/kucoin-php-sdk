@@ -2,8 +2,11 @@
 
 namespace KuCoin\SDK\PrivateApi;
 
+use GuzzleHttp\Exception\GuzzleException;
 use KuCoin\SDK\Exceptions\BusinessException;
+use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\NoAvailableWebSocketServerException;
+use KuCoin\SDK\Exceptions\WebSocketCloseException;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\Socket\TcpConnector;
@@ -145,7 +148,7 @@ class WebSocketFeed extends KuCoinApi
          * @var \Exception|\Throwable $exception
          */
         $exception = null;
-        $connector($server['connectUrl'])->then(function (WebSocket $ws) use ($server, $channels, $onMessage, $onClose, $loop) {
+        $connector($server['connectUrl'])->then(function (WebSocket $ws) use ($server, $channels, $onMessage, $onClose, $loop, $options) {
             // Add timer to send ping message
             $pingTimer = $loop->addPeriodicTimer($server['pingInterval'] / 1000 - 1, function () use ($ws) {
                 try {
@@ -193,13 +196,17 @@ class WebSocketFeed extends KuCoinApi
                         throw new BusinessException('Unknown type: ' . $msgArray['type']);
                 }
             });
-            $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer, $server) {
+            $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer, $server, $options) {
+                $loop->cancelTimer($pingTimer);
                 if (is_callable($onClose)) {
                     $onClose($code, $reason, $server);
                 }
-                $loop->cancelTimer($pingTimer);
+                if ($options['enable_reconnect']) {
+                    // To support reconnection
+                    throw new WebSocketCloseException($reason, $code);
+                }
             });
-        }, function ($e) use ($loop, &$exception) {
+        }, function ($e) use (&$exception) {
             $exception = $e;
         });
 
@@ -221,22 +228,7 @@ class WebSocketFeed extends KuCoinApi
      */
     public function subscribePublicChannels(array $query, array $channels, callable $onMessage, callable $onClose = null, array $options = [])
     {
-        if (!isset($channels[0])) {
-            $channels = [$channels];
-        }
-        array_walk($channels, function (&$channel) {
-            if (!isset($channel['id'])) {
-                $channel['id'] = uniqid('', true);
-            }
-            $channel['type'] = 'subscribe';
-            $channel['privateChannel'] = false;
-        });
-        if (!isset($query['connectId'])) {
-            $query['connectId'] = uniqid('', true);
-        }
-        $server = $this->getPublicServer($query);
-        $server['connectId'] = $query['connectId'];
-        $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
+        $this->subscribeChannelsInternal(false, $query, $channels, $onMessage, $onClose, $options);
     }
 
     /**
@@ -250,22 +242,72 @@ class WebSocketFeed extends KuCoinApi
      */
     public function subscribePrivateChannels(array $query, array $channels, callable $onMessage, callable $onClose = null, array $options = [])
     {
+        $this->subscribeChannelsInternal(true, $query, $channels, $onMessage, $onClose, $options);
+    }
+
+    /**
+     * Subscribe multiple channels for internal calls
+     * @param bool $private
+     * @param array $query The query of websocket url
+     * @param array $channels
+     * @param callable $onMessage
+     * @param callable|null $onClose
+     * @param array $options
+     * @throws GuzzleException
+     * @throws \Throwable
+     */
+    protected function subscribeChannelsInternal($private, array $query, array $channels, callable $onMessage, callable $onClose = null, array $options = [])
+    {
         if (!isset($channels[0])) {
             $channels = [$channels];
         }
-        array_walk($channels, function (&$channel) {
+        array_walk($channels, static function (&$channel) use ($private) {
             if (!isset($channel['id'])) {
                 $channel['id'] = uniqid('', true);
             }
             $channel['type'] = 'subscribe';
-            $channel['privateChannel'] = true;
+            $channel['privateChannel'] = $private;
         });
         if (!isset($query['connectId'])) {
             $query['connectId'] = uniqid('', true);
         }
-        $server = $this->getPrivateServer($query);
-        $server['connectId'] = $query['connectId'];
-        $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
+        if (!isset($options['enable_reconnect'])) {
+            $options['enable_reconnect'] = false;
+        }
+        if (!isset($options['max_reconnects'])) {
+            $options['max_reconnects'] = 10;
+        }
+        if (!isset($options['reconnect_delay'])) {
+            $options['reconnect_delay'] = 1000;
+        }
+        $connectTimes = 1;
+        do {
+            $lastException = null;
+
+            try {
+                $server = $private ? $this->getPrivateServer($query) : $this->getPublicServer($query);
+                $server['connectId'] = $query['connectId'];
+                $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
+            } catch (\Exception $e) {
+                if (self::isDebugMode()) {
+                    static::getLogger()->debug(sprintf('[%d]Failed to subscribe to the channels: %s', $connectTimes, $e->getMessage()));
+                }
+                $lastException = $e;
+                if (!($e instanceof GuzzleException || $e instanceof HttpException || $e instanceof NoAvailableWebSocketServerException || $e instanceof WebSocketCloseException)) {
+                    throw $e;
+                }
+            }
+
+            $connectTimes++;
+
+            if ($options['reconnect_delay'] > 0) {
+                usleep($options['reconnect_delay'] * 1000);
+            }
+        } while ($options['enable_reconnect'] && (!$options['max_reconnects'] || $connectTimes <= $options['max_reconnects'] + 1));
+
+        if ($lastException) {
+            throw $lastException;
+        }
     }
 
     /**

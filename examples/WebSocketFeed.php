@@ -29,13 +29,18 @@ $channels = [
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
+// Optional Configuration
 $options = [
-    'tcp' => [
-        'tcp_nodelay'    => true, // Socket context options: https://www.php.net/manual/en/context.socket.php
-        'socket_options' => [     // Socket options: https://www.php.net/manual/en/function.socket-set-option.php
-            SO_RCVBUF => 1048576, // Example: set SO_RCVBUF=1MB
+    'tcp'              => [
+        'tcp_nodelay'    => true,   // Socket context options: https://www.php.net/manual/en/context.socket.php
+        'socket_options' => [       // Socket options: https://www.php.net/manual/en/function.socket-set-option.php
+              SO_RCVBUF => 1048576, // Example: set SO_RCVBUF=1MB
+                                    // ...
         ],
     ],
+    'enable_reconnect' => true, // Enable automatic reconnection, default false.
+    'max_reconnects'   => 3,    // Maximum number of reconnections. The total number of connections is max_reconnects+1, default 3.
+    'reconnect_delay'  => 1000, // How many milliseconds to wait before reconnecting, default 1000ms.
 ];
 $api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);
