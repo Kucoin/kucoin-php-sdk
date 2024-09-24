@@ -38,9 +38,9 @@ $options = [
                                     // ...
         ],
     ],
-    'enable_reconnect' => true, // Enable automatic reconnection, default false.
-    'max_reconnects'   => 3,    // Maximum number of reconnections. The total number of connections is max_reconnects+1, default 3.
-    'reconnect_delay'  => 1000, // How many milliseconds to wait before reconnecting, default 1000ms.
+    'enable_reconnect' => true, // Enable automatic reconnection, true or false, default false.
+    'max_reconnects'   => 10,    // Maximum number of reconnections, >=0, default 10. The total number of connections is max_reconnects+1, 0 means infinite reconnection.
+    'reconnect_delay'  => 1000, // How many milliseconds to wait before reconnecting, >=0, default 1000ms. 0 means no delay.
 ];
 $api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);

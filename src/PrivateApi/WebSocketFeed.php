@@ -3,10 +3,10 @@
 namespace KuCoin\SDK\PrivateApi;
 
 use GuzzleHttp\Exception\GuzzleException;
-use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\Exceptions\HttpException;
 use KuCoin\SDK\Exceptions\NoAvailableWebSocketServerException;
 use KuCoin\SDK\Exceptions\WebSocketCloseException;
+use KuCoin\SDK\Exceptions\WebSocketMessageErrorException;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\Socket\TcpConnector;
@@ -170,7 +170,7 @@ class WebSocketFeed extends KuCoinApi
                 }
                 $msgArray = json_decode($msgStr, true);
                 if (!isset($msgArray['type'])) {
-                    throw new BusinessException('Invalid format of message without type: ' . $msgStr);
+                    throw new \RuntimeException('Invalid format of message without type: ' . $msgStr);
                 }
                 switch ($msgArray['type']) {
                     case 'welcome':
@@ -188,12 +188,12 @@ class WebSocketFeed extends KuCoinApi
                         break;
                     case 'error':
                         $loop->cancelTimer($pingTimer);
-                        throw new BusinessException('Error: ' . $msg);
+                        throw new WebSocketMessageErrorException($msg);
                     case 'message':
                         $onMessage($msgArray, $ws, $loop, $server);
                         break;
                     default:
-                        throw new BusinessException('Unknown type: ' . $msgArray['type']);
+                        throw new \RuntimeException('Unknown type: ' . $msgArray['type']);
                 }
             });
             $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer, $server, $options) {
@@ -293,7 +293,12 @@ class WebSocketFeed extends KuCoinApi
                     static::getLogger()->debug(sprintf('[%d]Failed to subscribe to the channels: %s', $connectTimes, $e->getMessage()));
                 }
                 $lastException = $e;
-                if (!($e instanceof GuzzleException || $e instanceof HttpException || $e instanceof NoAvailableWebSocketServerException || $e instanceof WebSocketCloseException)) {
+                if (!($e instanceof GuzzleException ||
+                    $e instanceof HttpException ||
+                    $e instanceof NoAvailableWebSocketServerException ||
+                    $e instanceof WebSocketMessageErrorException ||
+                    $e instanceof WebSocketCloseException
+                )) {
                     throw $e;
                 }
             }
