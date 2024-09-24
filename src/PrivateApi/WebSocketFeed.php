@@ -138,7 +138,7 @@ class WebSocketFeed extends KuCoinApi
         if (!isset($options['tcp']) || !($options['tcp'] instanceof ConnectorInterface)) {
             $options['tcp'] = new TcpConnector(
                 $loop,
-                is_array($options['tcp']) ? $options['tcp'] : []
+                isset($options['tcp']) && is_array($options['tcp']) ? $options['tcp'] : []
             );
         }
 
