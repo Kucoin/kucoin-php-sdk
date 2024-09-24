@@ -154,11 +154,11 @@ class WebSocketFeed extends KuCoinApi
                 try {
                     $ping = $this->createPingMessage();
                     $pingStr = json_encode($ping);
+                    $ws->send($pingStr);
                     if (self::isDebugMode()) {
                         static::getLogger()->debug(sprintf('Sent a WebSocket message: %s', $pingStr));
                     }
-                    // fputs(STDIN, print_r($ping, true));
-                    $ws->send($pingStr);
+                    // fwrite(STDIN, print_r($ping, true));
                 } catch (\Exception $e) {
                     // Ignore this exception
                 }
@@ -177,14 +177,18 @@ class WebSocketFeed extends KuCoinApi
                         // Do subscribe
                         if (!isset($msgArray['id']) || $msgArray['id'] === $server['connectId']) {
                             foreach ($channels as $channel) {
-                                $ws->send(json_encode($channel));
+                                $subscribeMsg = json_encode($channel);
+                                $ws->send($subscribeMsg);
+                                if (self::isDebugMode()) {
+                                    static::getLogger()->debug(sprintf('Sent a WebSocket message: %s', $subscribeMsg));
+                                }
                             }
                         }
                         break;
                     case 'ack':
                     case 'ping':
                     case 'pong':
-                        // fputs(STDIN, print_r($msgArray, true));
+                        // fwrite(STDIN, print_r($msgArray, true));
                         break;
                     case 'error':
                         $loop->cancelTimer($pingTimer);
@@ -290,7 +294,7 @@ class WebSocketFeed extends KuCoinApi
                 $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
             } catch (\Exception $e) {
                 if (self::isDebugMode()) {
-                    static::getLogger()->debug(sprintf('[%d]Failed to subscribe to the channels: %s', $connectTimes, $e->getMessage()));
+                    static::getLogger()->error(sprintf('[%d]Failed to subscribe to the channels: %s', $connectTimes, $e->getMessage()));
                 }
                 $lastException = $e;
                 if (!($e instanceof GuzzleException ||
