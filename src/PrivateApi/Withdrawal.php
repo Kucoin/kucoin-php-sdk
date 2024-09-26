@@ -23,7 +23,7 @@ class Withdrawal extends KuCoinApi
      */
     public function getQuotas($currency, $chain = null)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/withdrawals/quotas', compact('currency', 'chain'));
+        $response = $this->call(Request::METHOD_GET, 'api/v1/withdrawals/quotas', compact('currency', 'chain'));
         return $response->getApiData();
     }
 
@@ -38,7 +38,7 @@ class Withdrawal extends KuCoinApi
      */
     public function getList(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/withdrawals', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/withdrawals', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -53,7 +53,7 @@ class Withdrawal extends KuCoinApi
      */
     public function getV1List(array $params, array $pagination = [])
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/hist-withdrawals', $params + $pagination);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/hist-withdrawals', $params + $pagination);
         return $response->getApiData();
     }
 
@@ -67,7 +67,7 @@ class Withdrawal extends KuCoinApi
      */
     public function apply(array $params)
     {
-        $response = $this->call(Request::METHOD_POST, '/api/v1/withdrawals', $params);
+        $response = $this->call(Request::METHOD_POST, 'api/v1/withdrawals', $params);
         return $response->getApiData();
     }
 
@@ -81,7 +81,7 @@ class Withdrawal extends KuCoinApi
      */
     public function cancel($withdrawId)
     {
-        $response = $this->call(Request::METHOD_DELETE, '/api/v1/withdrawals/' . $withdrawId);
+        $response = $this->call(Request::METHOD_DELETE, 'api/v1/withdrawals/' . $withdrawId);
         return $response->getApiData();
     }
 }

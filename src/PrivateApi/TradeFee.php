@@ -22,7 +22,7 @@ class TradeFee extends KuCoinApi
      */
     public function getBaseFee()
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/base-fee');
+        $response = $this->call(Request::METHOD_GET, 'api/v1/base-fee');
         return $response->getApiData();
     }
 
@@ -37,7 +37,7 @@ class TradeFee extends KuCoinApi
      */
     public function getTradeFees(array $symbols)
     {
-        $response = $this->call(Request::METHOD_GET, '/api/v1/trade-fees', ['symbols' => implode(',', $symbols)]);
+        $response = $this->call(Request::METHOD_GET, 'api/v1/trade-fees', ['symbols' => implode(',', $symbols)]);
         return $response->getApiData();
     }
 }
