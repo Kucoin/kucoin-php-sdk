@@ -5,7 +5,7 @@ use KuCoin\SDK\Auth;
 use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 
 // Set the base uri, default "https://api.kucoin.com" for production environment.
@@ -17,7 +17,7 @@ $auth = null;
 $api = new WebSocketFeed($auth);
 
 // Use a custom event loop instance if you like
-//$loop = Factory::create();
+//$loop = Loop::get();
 //$loop->addPeriodicTimer(1, function () {
 //    var_dump(date('Y-m-d H:i:s'));
 //});
@@ -29,7 +29,20 @@ $channels = [
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
-$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
+// Optional Configuration
+$options = [
+    'tcp'              => [
+        'tcp_nodelay'    => true,   // Socket context options: https://www.php.net/manual/en/context.socket.php
+        'socket_options' => [       // Socket options: https://www.php.net/manual/en/function.socket-set-option.php
+              SO_RCVBUF => 1048576, // Example: set SO_RCVBUF=1MB
+                                    // ...
+        ],
+    ],
+    'enable_reconnect' => true, // Enable automatic reconnection, true or false, default false.
+    'max_reconnects'   => 10,   // Maximum number of reconnections, >=0, default 10. The total number of connections is max_reconnects+1, 0 means infinite reconnection.
+    'reconnect_delay'  => 1000, // How many milliseconds to wait before reconnecting, >=0, default 1000ms. 0 means no delay.
+];
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
     var_dump($message);
 
     // Subscribe another channel
@@ -40,6 +53,6 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
 
     // Stop loop
     // $loop->stop();
-}, function ($code, $reason) {
-    echo "OnClose: {$code} {$reason}\n";
-});
+}, function ($code, $reason, array $connectInfo) {
+    echo "OnClose: code={$code} reason={$reason} connectId={$connectInfo['connectId']} connectToken={$connectInfo['token']}\n";
+}, $options);
