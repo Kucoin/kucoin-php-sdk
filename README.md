@@ -101,7 +101,7 @@ try {
 use KuCoin\SDK\Auth;
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 
 $auth = null;
@@ -110,7 +110,7 @@ $auth = null;
 $api = new WebSocketFeed($auth);
 
 // Use a custom event loop instance if you like
-//$loop = Factory::create();
+//$loop = Loop::get();
 //$loop->addPeriodicTimer(1, function () {
 //    var_dump(date('Y-m-d H:i:s'));
 //});
