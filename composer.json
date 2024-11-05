@@ -22,7 +22,6 @@
   "require": {
     "php": ">=5.5.0",
     "ext-json": "*",
-    "ext-sockets": "*",
     "guzzlehttp/guzzle": "^6.0|^7.0",
     "ratchet/pawl": "^0.4.1",
     "monolog/monolog": "~1.0|~2.0|~3.0"

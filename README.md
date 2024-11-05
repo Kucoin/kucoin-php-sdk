@@ -99,7 +99,6 @@ try {
 
 ```php
 use KuCoin\SDK\Auth;
-use KuCoin\SDK\KuCoinApi;
 use KuCoin\SDK\PrivateApi\WebSocketFeed;
 use Ratchet\Client\WebSocket;
 use React\EventLoop\Loop;
@@ -123,7 +122,7 @@ $channels = [
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
 
-$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     var_dump($message);
 
     // Subscribe another channel
@@ -134,12 +133,12 @@ $api->subscribePublicChannels($query, $channels, function (array $message, WebSo
 
     // Stop loop
     // $loop->stop();
-}, function ($code, $reason, array $connectInfo) {
-    echo "OnClose: code={$code} reason={$reason} connectId={$connectInfo['connectId']} connectToken={$connectInfo['token']}\n";
+}, function ($code, $reason) {
+    echo "OnClose: {$code} {$reason}\n";
 });
 ```
 
-#### Support custom options
+#### Add custom options
 
 ```php
 use KuCoin\SDK\PublicApi\Time;
@@ -177,22 +176,11 @@ $channels = [
     ['topic' => '/market/ticker:KCS-BTC'],
     ['topic' => '/market/ticker:ETH-BTC'],
 ];
-$options = [
-    'tcp'              => [
-        'tcp_nodelay'    => true,   // Socket context options: https://www.php.net/manual/en/context.socket.php
-        'socket_options' => [       // Socket options: https://www.php.net/manual/en/function.socket-set-option.php
-              SO_RCVBUF => 1048576, // Example: set SO_RCVBUF=1MB
-                                    // ...
-        ],
-    ],
-    'enable_reconnect' => true, // Enable automatic reconnection, true or false, default false.
-    'max_reconnects'   => 10,   // Maximum number of reconnections, >=0, default 10. The total number of connections is max_reconnects+1, 0 means infinite reconnection.
-    'reconnect_delay'  => 1000, // How many milliseconds to wait before reconnecting, >=0, default 1000ms. 0 means no delay.
-];
-$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop, array $connectInfo) use ($api) {
+$options = ['tcp' => ['tcp_nodelay' => true]]; // Custom socket context options: https://www.php.net/manual/zh/context.socket
+$api->subscribePublicChannels($query, $channels, function (array $message, WebSocket $ws, LoopInterface $loop) use ($api) {
     var_dump($message);
-}, function ($code, $reason, array $connectInfo) {
-    echo "OnClose: code={$code} reason={$reason} connectId={$connectInfo['connectId']} connectToken={$connectInfo['token']}\n";
+}, function ($code, $reason) {
+    echo "OnClose: {$code} {$reason}\n";
 }, $options);
 ```
 

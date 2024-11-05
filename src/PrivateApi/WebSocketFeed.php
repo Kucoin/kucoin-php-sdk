@@ -2,21 +2,16 @@
 
 namespace KuCoin\SDK\PrivateApi;
 
-use GuzzleHttp\Exception\GuzzleException;
-use KuCoin\SDK\Exceptions\HttpException;
+use KuCoin\SDK\Exceptions\BusinessException;
 use KuCoin\SDK\Exceptions\NoAvailableWebSocketServerException;
-use KuCoin\SDK\Exceptions\WebSocketCloseException;
-use KuCoin\SDK\Exceptions\WebSocketMessageErrorException;
 use KuCoin\SDK\Http\Request;
 use KuCoin\SDK\KuCoinApi;
-use KuCoin\SDK\Socket\TcpConnector;
 use Ratchet\Client\Connector as RatchetConnector;
 use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use React\Socket\Connector as SocketConnector;
-use React\Socket\ConnectorInterface;
 
 /**
  * Class WebSocketFeed
@@ -90,7 +85,7 @@ class WebSocketFeed extends KuCoinApi
             throw new NoAvailableWebSocketServerException();
         }
         $server = $bullet['instanceServers'][array_rand($bullet['instanceServers'])];
-        $server['token'] = $params['token'] = $bullet['token'];
+        $params['token'] = $bullet['token'];
         $url = sprintf('%s%s%s', $server['endpoint'], strpos($server['endpoint'], '?') === false ? '?' : '&', http_build_query($params));
         $server['connectUrl'] = $url;
         return $server;
@@ -134,31 +129,23 @@ class WebSocketFeed extends KuCoinApi
         }
 
         $loop = $this->getLoop();
-
-        if (!isset($options['tcp']) || !($options['tcp'] instanceof ConnectorInterface)) {
-            $options['tcp'] = new TcpConnector(
-                $loop,
-                isset($options['tcp']) && is_array($options['tcp']) ? $options['tcp'] : []
-            );
-        }
-
         $reactConnector = new SocketConnector($loop, $options);
         $connector = new RatchetConnector($loop, $reactConnector);
         /**
          * @var \Exception|\Throwable $exception
          */
         $exception = null;
-        $connector($server['connectUrl'])->then(function (WebSocket $ws) use ($server, $channels, $onMessage, $onClose, $loop, $options) {
+        $connector($server['connectUrl'])->then(function (WebSocket $ws) use ($server, $channels, $onMessage, $onClose, $loop) {
             // Add timer to send ping message
             $pingTimer = $loop->addPeriodicTimer($server['pingInterval'] / 1000 - 1, function () use ($ws) {
                 try {
                     $ping = $this->createPingMessage();
                     $pingStr = json_encode($ping);
-                    $ws->send($pingStr);
                     if (self::isDebugMode()) {
                         static::getLogger()->debug(sprintf('Sent a WebSocket message: %s', $pingStr));
                     }
-                    // fwrite(STDIN, print_r($ping, true));
+                    // fputs(STDIN, print_r($ping, true));
+                    $ws->send($pingStr);
                 } catch (\Exception $e) {
                     // Ignore this exception
                 }
@@ -170,47 +157,39 @@ class WebSocketFeed extends KuCoinApi
                 }
                 $msgArray = json_decode($msgStr, true);
                 if (!isset($msgArray['type'])) {
-                    throw new \RuntimeException('Invalid format of message without type: ' . $msgStr);
+                    throw new BusinessException('Invalid format of message without type: ' . $msgStr);
                 }
                 switch ($msgArray['type']) {
                     case 'welcome':
                         // Do subscribe
                         if (!isset($msgArray['id']) || $msgArray['id'] === $server['connectId']) {
                             foreach ($channels as $channel) {
-                                $subscribeMsg = json_encode($channel);
-                                $ws->send($subscribeMsg);
-                                if (self::isDebugMode()) {
-                                    static::getLogger()->debug(sprintf('Sent a WebSocket message: %s', $subscribeMsg));
-                                }
+                                $ws->send(json_encode($channel));
                             }
                         }
                         break;
                     case 'ack':
                     case 'ping':
                     case 'pong':
-                        // fwrite(STDIN, print_r($msgArray, true));
+                        // fputs(STDIN, print_r($msgArray, true));
                         break;
                     case 'error':
                         $loop->cancelTimer($pingTimer);
-                        throw new WebSocketMessageErrorException($msg);
+                        throw new BusinessException('Error: ' . $msg);
                     case 'message':
-                        $onMessage($msgArray, $ws, $loop, $server);
+                        call_user_func($onMessage, $msgArray, $ws, $loop);
                         break;
                     default:
-                        throw new \RuntimeException('Unknown type: ' . $msgArray['type']);
+                        throw new BusinessException('Unknown type: ' . $msgArray['type']);
                 }
             });
-            $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer, $server, $options) {
-                $loop->cancelTimer($pingTimer);
+            $ws->on('close', function ($code = null, $reason = null) use ($onClose, $loop, $pingTimer) {
                 if (is_callable($onClose)) {
-                    $onClose($code, $reason, $server);
+                    call_user_func($onClose, $code, $reason);
                 }
-                if ($options['enable_reconnect']) {
-                    // To support reconnection
-                    throw new WebSocketCloseException($reason, $code);
-                }
+                $loop->cancelTimer($pingTimer);
             });
-        }, function ($e) use (&$exception) {
+        }, function ($e) use ($loop, &$exception) {
             $exception = $e;
         });
 
@@ -232,7 +211,22 @@ class WebSocketFeed extends KuCoinApi
      */
     public function subscribePublicChannels(array $query, array $channels, callable $onMessage, callable $onClose = null, array $options = [])
     {
-        $this->subscribeChannelsInternal(false, $query, $channels, $onMessage, $onClose, $options);
+        if (!isset($channels[0])) {
+            $channels = [$channels];
+        }
+        array_walk($channels, function (&$channel) {
+            if (!isset($channel['id'])) {
+                $channel['id'] = uniqid('', true);
+            }
+            $channel['type'] = 'subscribe';
+            $channel['privateChannel'] = false;
+        });
+        if (!isset($query['connectId'])) {
+            $query['connectId'] = uniqid('', true);
+        }
+        $server = $this->getPublicServer($query);
+        $server['connectId'] = $query['connectId'];
+        $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
     }
 
     /**
@@ -246,77 +240,22 @@ class WebSocketFeed extends KuCoinApi
      */
     public function subscribePrivateChannels(array $query, array $channels, callable $onMessage, callable $onClose = null, array $options = [])
     {
-        $this->subscribeChannelsInternal(true, $query, $channels, $onMessage, $onClose, $options);
-    }
-
-    /**
-     * Subscribe multiple channels for internal calls
-     * @param bool $private
-     * @param array $query The query of websocket url
-     * @param array $channels
-     * @param callable $onMessage
-     * @param callable|null $onClose
-     * @param array $options
-     * @throws GuzzleException
-     * @throws \Throwable
-     */
-    protected function subscribeChannelsInternal($private, array $query, array $channels, callable $onMessage, callable $onClose = null, array $options = [])
-    {
         if (!isset($channels[0])) {
             $channels = [$channels];
         }
-        array_walk($channels, static function (&$channel) use ($private) {
+        array_walk($channels, function (&$channel) {
             if (!isset($channel['id'])) {
                 $channel['id'] = uniqid('', true);
             }
             $channel['type'] = 'subscribe';
-            $channel['privateChannel'] = $private;
+            $channel['privateChannel'] = true;
         });
         if (!isset($query['connectId'])) {
             $query['connectId'] = uniqid('', true);
         }
-        if (!isset($options['enable_reconnect'])) {
-            $options['enable_reconnect'] = false;
-        }
-        if (!isset($options['max_reconnects'])) {
-            $options['max_reconnects'] = 10;
-        }
-        if (!isset($options['reconnect_delay'])) {
-            $options['reconnect_delay'] = 1000;
-        }
-        $connectTimes = 1;
-        do {
-            $lastException = null;
-
-            try {
-                $server = $private ? $this->getPrivateServer($query) : $this->getPublicServer($query);
-                $server['connectId'] = $query['connectId'];
-                $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
-            } catch (\Exception $e) {
-                if (self::isDebugMode()) {
-                    static::getLogger()->error(sprintf('[%d]Failed to subscribe to the channels: %s', $connectTimes, $e->getMessage()));
-                }
-                $lastException = $e;
-                if (!($e instanceof GuzzleException ||
-                    $e instanceof HttpException ||
-                    $e instanceof NoAvailableWebSocketServerException ||
-                    $e instanceof WebSocketMessageErrorException ||
-                    $e instanceof WebSocketCloseException
-                )) {
-                    throw $e;
-                }
-            }
-
-            $connectTimes++;
-
-            if ($options['reconnect_delay'] > 0) {
-                usleep($options['reconnect_delay'] * 1000);
-            }
-        } while ($options['enable_reconnect'] && (!$options['max_reconnects'] || $connectTimes <= $options['max_reconnects'] + 1));
-
-        if ($lastException) {
-            throw $lastException;
-        }
+        $server = $this->getPrivateServer($query);
+        $server['connectId'] = $query['connectId'];
+        $this->subscribeChannels($server, $channels, $onMessage, $onClose, $options);
     }
 
     /**
