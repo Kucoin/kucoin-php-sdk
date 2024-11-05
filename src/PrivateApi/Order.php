@@ -648,4 +648,19 @@ class Order extends KuCoinApi
         $response = $this->call(Request::METHOD_POST, '/api/v3/hf/margin/order/test', $order);
         return $response->getApiData();
     }
+
+    /**
+     * This endpoint allows users to query all trading pairs with active orders.
+     *
+     * @param $tradeType
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getMarginHfActiveSymbols($tradeType)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/hf/margin/order/active/symbols', ['tradeType' => $tradeType]);
+        return $response->getApiData();
+    }
 }

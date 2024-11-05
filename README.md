@@ -360,6 +360,7 @@ go(function () {
 | KuCoin\SDK\PrivateApi\Order::getMarginHfDetail()              | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-orderid   |
 | KuCoin\SDK\PrivateApi\Order::getMarginHfDetailByClientOid()   | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-order-details-by-clientoid |
 | KuCoin\SDK\PrivateApi\Order::getMarginHfFills()               | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-hf-transaction-records        |
+| KuCoin\SDK\PrivateApi\Order::getMarginHfActiveSymbols()       | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-hf-trade/get-active-hf-order-symbols       |
 
 </details>
 
@@ -475,50 +476,53 @@ go(function () {
 <details>
 <summary>KuCoin\SDK\PublicApi\Symbol</summary>
 
-| API                                                       | Authentication | Description                                                       |
-|-----------------------------------------------------------|----------------|-------------------------------------------------------------------|
-| KuCoin\SDK\PublicApi\Symbol::getList()                    | NO             | `DEPRECATED` https://docs.kucoin.com/#get-symbols-list-deprecated |
-| KuCoin\SDK\PublicApi\Symbol::getTicker()                  | NO             | https://docs.kucoin.com/#get-ticker                               |
-| KuCoin\SDK\PublicApi\Symbol::getAllTickers()              | NO             | https://docs.kucoin.com/#get-all-tickers                          |
-| KuCoin\SDK\PublicApi\Symbol::getAggregatedPartOrderBook() | NO             | https://docs.kucoin.com/#get-part-order-book-aggregated           |
-| KuCoin\SDK\PublicApi\Symbol::getTradeHistories()          | NO             | https://docs.kucoin.com/#get-trade-histories                      |
-| KuCoin\SDK\PublicApi\Symbol::getKLines()                  | NO             | https://docs.kucoin.com/#get-klines                               |
-| KuCoin\SDK\PublicApi\Symbol::get24HStats()                | NO             | https://docs.kucoin.com/#get-24hr-stats                           |
-| KuCoin\SDK\PublicApi\Symbol::getMarkets()                 | NO             | https://docs.kucoin.com/#get-market-list                          |
-| KuCoin\SDK\PublicApi\Symbol::getListV2()                  | NO             | https://docs.kucoin.com/#get-symbols-list                         |
+| API                                                       | Authentication | Description                                                                 |
+|-----------------------------------------------------------|----------------|-----------------------------------------------------------------------------|
+| KuCoin\SDK\PublicApi\Symbol::getList()                    | NO             | `DEPRECATED` https://docs.kucoin.com/#get-symbols-list-deprecated           |
+| KuCoin\SDK\PublicApi\Symbol::getTicker()                  | NO             | https://docs.kucoin.com/#get-ticker                                         |
+| KuCoin\SDK\PublicApi\Symbol::getAllTickers()              | NO             | https://docs.kucoin.com/#get-all-tickers                                    |
+| KuCoin\SDK\PublicApi\Symbol::getAggregatedPartOrderBook() | NO             | https://docs.kucoin.com/#get-part-order-book-aggregated                     |
+| KuCoin\SDK\PublicApi\Symbol::getTradeHistories()          | NO             | https://docs.kucoin.com/#get-trade-histories                                |
+| KuCoin\SDK\PublicApi\Symbol::getKLines()                  | NO             | https://docs.kucoin.com/#get-klines                                         |
+| KuCoin\SDK\PublicApi\Symbol::get24HStats()                | NO             | https://docs.kucoin.com/#get-24hr-stats                                     |
+| KuCoin\SDK\PublicApi\Symbol::getMarkets()                 | NO             | https://docs.kucoin.com/#get-market-list                                    |
+| KuCoin\SDK\PublicApi\Symbol::getListV2()                  | NO             | https://docs.kucoin.com/#get-symbols-list                                   |
+| KuCoin\SDK\PublicApi\Symbol::getV2SymbolDetail()          | NO             | https://www.kucoin.com/docs/rest/spot-trading/market-data/get-symbol-detail |
 
 </details>
 
 <details>
 <summary>KuCoin\SDK\PrivateApi\Margin</summary>
 
-| API                                            | Authentication | Description                                                                                                   |
-|------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------|
-| KuCoin\SDK\PrivateApi\Margin::getMarkPrice()   | YES            | https://docs.kucoin.com/#margin-info                                                                          |
-| KuCoin\SDK\PrivateApi\Margin::getConfig()      | YES            | https://docs.kucoin.com/#get-margin-configuration-info                                                        |
-| KuCoin\SDK\PrivateApi\Margin::getAccount()     | YES            | https://docs.kucoin.com/#get-margin-account                                                                   |
-| KuCoin\SDK\PrivateApi\Margin::borrow()         | YES            | `DEPRECATED` https://docs.kucoin.com/#post-borrow-order                                                       |
-| KuCoin\SDK\PrivateApi\Margin::getBorrow()      | YES            | `DEPRECATED` https://docs.kucoin.com/#get-borrow-order                                                        |
-| KuCoin\SDK\PrivateApi\Margin::getOutstanding() | YES            | `DEPRECATED` https://docs.kucoin.com/#get-repay-record                                                        |
-| KuCoin\SDK\PrivateApi\Margin::getRepayRecord() | YES            | `DEPRECATED` https://docs.kucoin.com/#get-repayment-record                                                    |
-| KuCoin\SDK\PrivateApi\Margin::repayAll()       | YES            | `DEPRECATED` https://docs.kucoin.com/#one-click-repayment                                                     |
-| KuCoin\SDK\PrivateApi\Margin::repaySingle()    | YES            | `DEPRECATED` https://docs.kucoin.com/#repay-a-single-order                                                    |
-| KuCoin\SDK\PrivateApi\Margin::lend()           | YES            | `DEPRECATED` https://docs.kucoin.com/#post-lend-order                                                         |
-| KuCoin\SDK\PrivateApi\Margin::cancelLend()     | YES            | `DEPRECATED` https://docs.kucoin.com/#cancel-lend-order                                                       |
-| KuCoin\SDK\PrivateApi\Margin::setAutoLend()    | YES            | `DEPRECATED` https://docs.kucoin.com/#set-auto-lend                                                           |
-| KuCoin\SDK\PrivateApi\Margin::getLendActive()  | YES            | `DEPRECATED` https://docs.kucoin.com/#get-active-order                                                        |
-| KuCoin\SDK\PrivateApi\Margin::getLendDone()    | YES            | `DEPRECATED` https://docs.kucoin.com/#get-lent-history                                                        |
-| KuCoin\SDK\PrivateApi\Margin::getUnsettled()   | YES            | `DEPRECATED` https://docs.kucoin.com/#get-active-lend-order-list                                              |
-| KuCoin\SDK\PrivateApi\Margin::getSettled()     | YES            | `DEPRECATED` https://docs.kucoin.com/#get-settled-lend-order-history                                          |
-| KuCoin\SDK\PrivateApi\Margin::getLendAssets()  | YES            | `DEPRECATED` https://docs.kucoin.com/#get-account-lend-record                                                 |
-| KuCoin\SDK\PrivateApi\Margin::getMarket()      | YES            | `DEPRECATED` https://docs.kucoin.com/#lending-market-data                                                     |
-| KuCoin\SDK\PrivateApi\Margin::getTradeLast()   | YES            | `DEPRECATED` https://docs.kucoin.com/#margin-trade-data                                                       |
-| KuCoin\SDK\PrivateApi\Margin::getEtfInfo()     | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-info/get-leveraged-token-info                          |
-| KuCoin\SDK\PrivateApi\Margin::borrowV3()       | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/margin-borrowing                           |
-| KuCoin\SDK\PrivateApi\Margin::repayV3()        | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/repayment                                  |
-| KuCoin\SDK\PrivateApi\Margin::getBorrowV3()    | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-margin-borrowing-history               |
-| KuCoin\SDK\PrivateApi\Margin::getRepayV3()     | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-repayment-history                      |
-| KuCoin\SDK\PrivateApi\Margin::getInterestV3()  | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-cross-isolated-margin-interest-records |
+| API                                                        | Authentication | Description                                                                                                     |
+|------------------------------------------------------------|----------------|-----------------------------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Margin::getMarkPrice()               | YES            | https://docs.kucoin.com/#margin-info                                                                            |
+| KuCoin\SDK\PrivateApi\Margin::getConfig()                  | YES            | https://docs.kucoin.com/#get-margin-configuration-info                                                          |
+| KuCoin\SDK\PrivateApi\Margin::getAccount()                 | YES            | https://docs.kucoin.com/#get-margin-account                                                                     |
+| KuCoin\SDK\PrivateApi\Margin::borrow()                     | YES            | `DEPRECATED` https://docs.kucoin.com/#post-borrow-order                                                         |
+| KuCoin\SDK\PrivateApi\Margin::getBorrow()                  | YES            | `DEPRECATED` https://docs.kucoin.com/#get-borrow-order                                                          |
+| KuCoin\SDK\PrivateApi\Margin::getOutstanding()             | YES            | `DEPRECATED` https://docs.kucoin.com/#get-repay-record                                                          |
+| KuCoin\SDK\PrivateApi\Margin::getRepayRecord()             | YES            | `DEPRECATED` https://docs.kucoin.com/#get-repayment-record                                                      |
+| KuCoin\SDK\PrivateApi\Margin::repayAll()                   | YES            | `DEPRECATED` https://docs.kucoin.com/#one-click-repayment                                                       |
+| KuCoin\SDK\PrivateApi\Margin::repaySingle()                | YES            | `DEPRECATED` https://docs.kucoin.com/#repay-a-single-order                                                      |
+| KuCoin\SDK\PrivateApi\Margin::lend()                       | YES            | `DEPRECATED` https://docs.kucoin.com/#post-lend-order                                                           |
+| KuCoin\SDK\PrivateApi\Margin::cancelLend()                 | YES            | `DEPRECATED` https://docs.kucoin.com/#cancel-lend-order                                                         |
+| KuCoin\SDK\PrivateApi\Margin::setAutoLend()                | YES            | `DEPRECATED` https://docs.kucoin.com/#set-auto-lend                                                             |
+| KuCoin\SDK\PrivateApi\Margin::getLendActive()              | YES            | `DEPRECATED` https://docs.kucoin.com/#get-active-order                                                          |
+| KuCoin\SDK\PrivateApi\Margin::getLendDone()                | YES            | `DEPRECATED` https://docs.kucoin.com/#get-lent-history                                                          |
+| KuCoin\SDK\PrivateApi\Margin::getUnsettled()               | YES            | `DEPRECATED` https://docs.kucoin.com/#get-active-lend-order-list                                                |
+| KuCoin\SDK\PrivateApi\Margin::getSettled()                 | YES            | `DEPRECATED` https://docs.kucoin.com/#get-settled-lend-order-history                                            |
+| KuCoin\SDK\PrivateApi\Margin::getLendAssets()              | YES            | `DEPRECATED` https://docs.kucoin.com/#get-account-lend-record                                                   |
+| KuCoin\SDK\PrivateApi\Margin::getMarket()                  | YES            | `DEPRECATED` https://docs.kucoin.com/#lending-market-data                                                       |
+| KuCoin\SDK\PrivateApi\Margin::getTradeLast()               | YES            | `DEPRECATED` https://docs.kucoin.com/#margin-trade-data                                                         |
+| KuCoin\SDK\PrivateApi\Margin::getEtfInfo()                 | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-info/get-leveraged-token-info                            |
+| KuCoin\SDK\PrivateApi\Margin::borrowV3()                   | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/margin-borrowing                             |
+| KuCoin\SDK\PrivateApi\Margin::repayV3()                    | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/repayment                                    |
+| KuCoin\SDK\PrivateApi\Margin::getBorrowV3()                | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-margin-borrowing-history                 |
+| KuCoin\SDK\PrivateApi\Margin::getRepayV3()                 | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-repayment-history                        |
+| KuCoin\SDK\PrivateApi\Margin::getInterestV3()              | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-cross-isolated-margin-interest-records   |
+| KuCoin\SDK\PrivateApi\Margin::getSymbolV3()                | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/get-cross-margin-trading-pairs-configuration |
+| KuCoin\SDK\PrivateApi\Margin::modifyLeverageMultiplierV3() | YES            | https://www.kucoin.com/docs/rest/margin-trading/margin-trading-v3-/modify-leverage-multiplier                   |
 
 </details>
 
@@ -554,11 +558,18 @@ go(function () {
 </details>
 
 <details>
+<summary>KuCoin\SDK\PrivateApi\Affiliate</summary>
+| API                                                      | Authentication | Description                                                               |
+|----------------------------------------------------------|----------------|---------------------------------------------------------------------------|
+| KuCoin\SDK\PrivateApi\Affiliate::getInviterStatistics()       | YES            | https://docs.kucoin.com/#query-isolated-margin-trading-pair-configuration |
+</details>
+
+<details>
 <summary>KuCoin\SDK\PublicApi\Time</summary>
 
-| API                                    | Authentication | Description                          |
-|----------------------------------------|----------------|--------------------------------------|
-| KuCoin\SDK\PublicApi\Time::timestamp() | NO             | https://docs.kucoin.com/#server-time |
+| API                                    | Authentication | Description                                                                      |
+|----------------------------------------|----------------|----------------------------------------------------------------------------------|
+| KuCoin\SDK\PublicApi\Time::timestamp() | NO             | https://www.kucoin.com/docs/rest/affiliate/get-affiliate-user-rebate-information |
 
 </details>
 
@@ -568,6 +579,15 @@ go(function () {
 | API                                             | Authentication | Description                             |
 |-------------------------------------------------|----------------|-----------------------------------------|
 | KuCoin\SDK\PublicApi\ServiceStatus::getStatus() | NO             | https://docs.kucoin.com/#service-status |
+
+</details>
+
+<details>
+<summary>KuCoin\SDK\PublicApi\Margin</summary>
+
+| API                                                | Authentication | Description                                                                                          |
+|----------------------------------------------------|----------------|------------------------------------------------------------------------------------------------------|
+| KuCoin\SDK\PublicApi\Margin::getSymbolsMarkPrice() | NO             | https://www.kucoin.com/docs/rest/margin-trading/margin-info/get-all-margin-trading-pairs-mark-prices |
 
 </details>
 

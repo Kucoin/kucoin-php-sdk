@@ -441,4 +441,39 @@ class Margin extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v3/margin/interest', $params + $pagination);
         return $response->getApiData();
     }
+
+    /**
+     * This endpoint allows querying the configuration of cross margin trading pairs.
+     *
+     * @param $symbol
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getSymbolV3($symbol = '')
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v3/margin/symbols', ['symbol' => $symbol]);
+        return $response->getApiData();
+    }
+
+    /**
+     * This endpoint allows modifying the leverage multiplier for cross margin or isolated margin.
+     *
+     * @param $leverage
+     * @param $symbol
+     * @param $isIsolated
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function modifyLeverageMultiplierV3($leverage, $symbol = '', $isIsolated = false)
+    {
+        $response = $this->call(Request::METHOD_POST,
+            '/api/v3/position/update-user-leverage',
+           compact('leverage', 'symbol', 'isIsolated')
+        );
+        return $response->getApiData();
+    }
 }
