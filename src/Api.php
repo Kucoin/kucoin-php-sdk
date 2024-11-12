@@ -16,7 +16,7 @@ abstract class Api
     /**
      * @var string SDK Version
      */
-    const VERSION = '1.1.35';
+    const VERSION = '1.1.33';
 
     /**
      * @var string SDK update date
