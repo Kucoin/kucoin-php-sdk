@@ -547,9 +547,11 @@ go(function () {
 
 <details>
 <summary>KuCoin\SDK\PrivateApi\Affiliate</summary>
-| API                                                      | Authentication | Description                                                               |
-|----------------------------------------------------------|----------------|---------------------------------------------------------------------------|
-| KuCoin\SDK\PrivateApi\Affiliate::getInviterStatistics()       | YES            | https://docs.kucoin.com/#query-isolated-margin-trading-pair-configuration |
+
+| API                                    | Authentication | Description                                                                      |
+|----------------------------------------|----------------|----------------------------------------------------------------------------------|
+| KuCoin\SDK\PublicApi\Time::timestamp() | NO             | https://www.kucoin.com/docs/rest/affiliate/get-affiliate-user-rebate-information |
+
 </details>
 
 <details>
