@@ -189,4 +189,18 @@ class Symbol extends KuCoinApi
         $response = $this->call(Request::METHOD_GET, '/api/v2/symbols', compact('market'));
         return $response->getApiData();
     }
+
+    /**
+     * Request via this endpoint to get detail currency pairs for trading. If you want to get the market information of the trading symbol, please use Get All Tickers.
+     *
+     * @param $symbol
+     * @return mixed|null
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getV2SymbolDetail($symbol)
+    {
+        return $this->call(Request::METHOD_GET, '/api/v2/symbols/' . $symbol)->getApiData();
+    }
 }

@@ -265,4 +265,37 @@ class SymbolTest extends TestCase
             $this->assertArrayHasKey('minFunds', $item);
         }
     }
+
+    /**
+     * @dataProvider apiProvider
+     *
+     * @param Symbol $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetV2SymbolDetail(Symbol $api)
+    {
+        $symbol = 'BTC-USDT';
+        $data = $api->getV2SymbolDetail($symbol);
+        $this->assertInternalType('array', $data);
+        $this->assertArrayHasKey('symbol', $data);
+        $this->assertArrayHasKey('name', $data);
+        $this->assertArrayHasKey('baseCurrency', $data);
+        $this->assertArrayHasKey('quoteCurrency', $data);
+        $this->assertArrayHasKey('market', $data);
+        $this->assertArrayHasKey('baseMinSize', $data);
+        $this->assertArrayHasKey('quoteMinSize', $data);
+        $this->assertArrayHasKey('baseMaxSize', $data);
+        $this->assertArrayHasKey('quoteMaxSize', $data);
+        $this->assertArrayHasKey('baseIncrement', $data);
+        $this->assertArrayHasKey('quoteIncrement', $data);
+        $this->assertArrayHasKey('priceIncrement', $data);
+        $this->assertArrayHasKey('feeCurrency', $data);
+        $this->assertArrayHasKey('enableTrading', $data);
+        $this->assertArrayHasKey('isMarginEnabled', $data);
+        $this->assertArrayHasKey('priceLimitRate', $data);
+        $this->assertArrayHasKey('minFunds', $data);
+    }
 }

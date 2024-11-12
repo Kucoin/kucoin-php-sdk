@@ -555,4 +555,65 @@ class MarginTest extends TestCase
             $this->assertArrayHasKey('createdTime', $item);
         }
     }
+
+    /**
+     * @dataProvider apiProvider
+     *
+     * @param Margin $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetSymbolV3(Margin $api)
+    {
+        $symbols = $api->getSymbolV3();
+        $this->assertInternalType('array', $symbols);
+        $this->assertArrayHasKey('items', $symbols);
+        $assertCallable = function ($item) {
+            $this->assertArrayHasKey('symbol', $item);
+            $this->assertArrayHasKey('name', $item);
+            $this->assertArrayHasKey('enableTrading', $item);
+            $this->assertArrayHasKey('market', $item);
+            $this->assertArrayHasKey('baseCurrency', $item);
+            $this->assertArrayHasKey('quoteCurrency', $item);
+            $this->assertArrayHasKey('baseIncrement', $item);
+            $this->assertArrayHasKey('baseMinSize', $item);
+            $this->assertArrayHasKey('quoteIncrement', $item);
+            $this->assertArrayHasKey('quoteMinSize', $item);
+            $this->assertArrayHasKey('baseMaxSize', $item);
+            $this->assertArrayHasKey('quoteMaxSize', $item);
+            $this->assertArrayHasKey('priceIncrement', $item);
+            $this->assertArrayHasKey('feeCurrency', $item);
+            $this->assertArrayHasKey('priceLimitRate', $item);
+            $this->assertArrayHasKey('minFunds', $item);
+        };
+        foreach ($symbols['items'] as $item) {
+            $assertCallable($item);
+        }
+
+        $symbol = $symbols['items'][0]['symbol'];
+        $singleSymbol = $api->getSymbolV3($symbol);
+        foreach ($singleSymbol['items'] as $item) {
+            $assertCallable($item);
+        }
+    }
+
+    /**
+     * @dataProvider apiProvider
+     *
+     * @param Margin $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testModifyLeverageMultiplierV3(Margin $api)
+    {
+        $symbol = $api->getSymbolV3()['items'][0]['symbol'];
+        $result = $api->modifyLeverageMultiplierV3(2, $symbol, true);
+        $this->assertNull($result);
+        $api->modifyLeverageMultiplierV3(3);
+        $this->assertNull($result);
+    }
 }

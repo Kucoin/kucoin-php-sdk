@@ -2,6 +2,7 @@
 
 namespace KuCoin\SDK\Tests\PrivateApi;
 
+use KuCoin\SDK\Enums\AccountType;
 use KuCoin\SDK\PrivateApi\Order;
 use KuCoin\SDK\PublicApi\Symbol;
 
@@ -1346,5 +1347,24 @@ class OrderTest extends TestCase
         $data = $api->createMarginTestOrder($order);
         $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('orderId', $data);
+    }
+
+    /**
+     * @dataProvider apiProvider
+     *
+     * @param Order $api
+     * @return void
+     * @throws \KuCoin\SDK\Exceptions\BusinessException
+     * @throws \KuCoin\SDK\Exceptions\HttpException
+     * @throws \KuCoin\SDK\Exceptions\InvalidApiUriException
+     */
+    public function testGetMarginHfActiveSymbols(Order $api)
+    {
+        $activeIsolatedSymbols = $api->getMarginHfActiveSymbols(AccountType::MARGIN_ISOLATED_TRADE);
+        $this->assertArrayHasKey('symbolSize', $activeIsolatedSymbols);
+        $this->assertArrayHasKey('symbols', $activeIsolatedSymbols);
+        $activeSymbols = $api->getMarginHfActiveSymbols(AccountType::MARGIN_TRADE);
+        $this->assertArrayHasKey('symbolSize', $activeSymbols);
+        $this->assertArrayHasKey('symbols', $activeSymbols);
     }
 }
