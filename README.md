@@ -559,7 +559,7 @@ go(function () {
 
 | API                                    | Authentication | Description                                                                      |
 |----------------------------------------|----------------|----------------------------------------------------------------------------------|
-| KuCoin\SDK\PublicApi\Time::timestamp() | NO             | https://www.kucoin.com/docs/rest/affiliate/get-affiliate-user-rebate-information |
+| KuCoin\SDK\PublicApi\Time::timestamp() | NO             | https://www.kucoin.com/docs/rest/spot-trading/market-data/get-server-time  |
 
 </details>
 
