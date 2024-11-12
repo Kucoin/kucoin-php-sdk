@@ -16,7 +16,7 @@ use KuCoin\SDK\KuCoinApi;
 class VipLend extends KuCoinApi
 {
     /**
-     * (the following information is only applicable to loans) This endpoint is only for querying accounts that are currently involved in loans.
+     * This endpoint is only for querying accounts that are currently involved in loans.
      *
      * @return mixed|null
      * @throws \KuCoin\SDK\Exceptions\BusinessException
